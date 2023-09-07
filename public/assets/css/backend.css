@@ -1,0 +1,79 @@
+.header-top-red{ border-top: 5px solid red;  }
+.header-top-primary{ border-top: 5px solid #206bc4;  }
+
+#dataTbl{width: 100% !important;}
+#dataTbl_paginate .pagination li{padding: 0px 4px;}
+
+.scrollable_box {
+  height:250px;
+  overflow-y: scroll;
+}
+
+.hr, hr {
+  margin: 1rem 0;
+}
+/* Bs5 Form Inline - Multi Select Fix */
+.form-inline{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-flow:row wrap;flex-flow:row wrap;-webkit-box-align:center;-ms-flex-align:center;align-items:center}
+.form-inline .multiselect-container span.form-check {
+  padding: 3px 10px 3px 10px;
+}
+.form-inline .form-check{
+	justify-content : start;
+}
+
+.form-inline .form-control {
+  display: inline-block;
+  width: auto;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+.form-inline .form-group {
+  margin-right: 10px;
+}
+
+.form-inline label{
+	padding-right: 10px;
+}
+.multiselect-container .multiselect-option, .multiselect-container .multiselect-group, .multiselect-container .multiselect-all {
+  padding: 0.25rem 0.25rem 0.25rem 1.75rem;
+}
+/*
+
+.logo-lg h1{
+	color: #afafaf;
+}
+
+:is(.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6) {
+  color : #1E3D72  !important;
+}
+
+table.dataTable td.dataTables_empty,
+table.dataTable th.dataTables_empty {
+ text-align:center;
+ padding:10px;
+ font-weight:600;
+ --vz-table-accent-bg: var(--vz-card-bg-custom)
+}
+
+.nav hr{
+	margin: 1px;
+}
+@media print {
+   .noPrint {display:none;}
+   .page-content {
+	  margin-top: 10px;
+	  padding: 0px;
+	}
+}
+*/
