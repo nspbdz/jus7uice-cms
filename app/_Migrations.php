@@ -9,11 +9,14 @@ class _Migrations {
 	function __construct() {	
 		$this->_check_db_exists();
 		
+		
 		$this->_create_table_admin();
 		$this->_create_table_admin_group();
 		
 		$this->_create_table_user();
-		
+		#article
+		$this->_create_table_articles();
+
 		# Media
 		$this->_create_table_media_album();
 		$this->_create_table_media();
@@ -31,7 +34,7 @@ class _Migrations {
 
 	/* Check DB */
 	function _check_db_exists()
-	{
+	{	
 		try{
 			DB::connection()->getPdo();
 		} catch(\Exception $e){
@@ -39,6 +42,25 @@ class _Migrations {
 		}
 	}
 	
+	/* Tbl article */
+
+	function _create_table_articles(){
+		$table = "articles";
+		$r = "
+		CREATE TABLE ".$table." (
+			`id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+			`title` varchar(100) NULL DEFAULT NULL,
+			`thumbnail` varchar(100) NULL DEFAULT NULL,
+			`author_id` int(10) unsigned NULL DEFAULT '0',
+			`created_at` datetime DEFAULT NULL,
+			`updated_at` datetime DEFAULT NULL,
+			`status` tinyint(1) unsigned NOT NULL DEFAULT '1',
+			PRIMARY KEY (`id`)
+		) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+		";
+		if(!Schema::hasTable($table)){	DB::statement($r);	}
+	}
+
 	/* Tbl Admin */
 	function _create_table_admin()
 	{

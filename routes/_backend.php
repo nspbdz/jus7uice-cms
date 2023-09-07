@@ -8,6 +8,7 @@ use App\Http\Controllers\Backend\AdministratorGroupCtr;
 use App\Http\Controllers\Backend\AdministratorCtr;
 use App\Http\Controllers\Backend\MediaAlbumCtr;
 use App\Http\Controllers\Backend\MediaCtr;
+use App\Http\Controllers\Backend\ArticleController;
 
 
 Route::prefix(BACKEND_PATH)->middleware(['backend.check.auth.exists'])->controller(LoginCtr::class)->group(function(){
@@ -20,6 +21,8 @@ Route::group(['prefix'=>BACKEND_PATH, 'namespace'=> 'Backend\\','middleware' => 
 	
 	Route::get('/', [MainCtr::class, 'index']);
 	Route::get('tester', [TesterCtr::class, 'getTester']);
+
+	Route::get('article', [ArticleController::class, 'index']);
 	
 	Route::get('backend.log', [BackendLogsCtr::class, 'index']);
 	Route::get('backend.log.data', [BackendLogsCtr::class, 'getData']);

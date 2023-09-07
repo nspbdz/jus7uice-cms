@@ -253,6 +253,13 @@
 				  </a>
 				</li>
 
+
+				<li class="nav-item">
+				  <a class="nav-link" href="{{url(BACKEND_PATH.'article')}}" target="_tester">
+					<span class="nav-link-title"> Article </span>
+				  </a>
+				</li>
+
 				
 			  </ul>
 			  
