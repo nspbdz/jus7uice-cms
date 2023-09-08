@@ -8,7 +8,7 @@ use App\Http\Controllers\Backend\AdministratorGroupCtr;
 use App\Http\Controllers\Backend\AdministratorCtr;
 use App\Http\Controllers\Backend\MediaAlbumCtr;
 use App\Http\Controllers\Backend\MediaCtr;
-use App\Http\Controllers\Backend\ArticleController;
+use App\Http\Controllers\Backend\ArticleCtr;
 
 
 Route::prefix(BACKEND_PATH)->middleware(['backend.check.auth.exists'])->controller(LoginCtr::class)->group(function(){
@@ -22,8 +22,16 @@ Route::group(['prefix'=>BACKEND_PATH, 'namespace'=> 'Backend\\','middleware' => 
 	Route::get('/', [MainCtr::class, 'index']);
 	Route::get('tester', [TesterCtr::class, 'getTester']);
 
-	Route::get('article', [ArticleController::class, 'index']);
-	
+	Route::get('article', [ArticleCtr::class, 'index']);
+	Route::get('article.data',[ArticleCtr::class, 'getData']);
+	Route::get('article.create',[ArticleCtr::class, 'getCreate']);
+	Route::post('article.create',[ArticleCtr::class, 'store']);
+	Route::get('article.edit',[ArticleCtr::class, 'getEdit']);
+	Route::put('article.update',[ArticleCtr::class, 'update']);
+	Route::post('article.delete',[ArticleCtr::class, 'postDelete']);
+	Route::get('article.delete',[ArticleCtr::class, 'getDelete']);
+
+
 	Route::get('backend.log', [BackendLogsCtr::class, 'index']);
 	Route::get('backend.log.data', [BackendLogsCtr::class, 'getData']);
 	Route::get('backend.log.report.export', [BackendLogsCtr::class, 'getExport']);
@@ -36,6 +44,7 @@ Route::group(['prefix'=>BACKEND_PATH, 'namespace'=> 'Backend\\','middleware' => 
 	Route::post('user.edit',[UserCtr::class, 'postEdit']);
 	Route::get('user.delete',[UserCtr::class, 'getDelete']);
 	Route::post('user.delete',[UserCtr::class, 'postDelete']);
+
 	
 	Route::get('administrator.group',[AdministratorGroupCtr::class, 'index']);
 	Route::get('administrator.group.data',[AdministratorGroupCtr::class, 'getData']);

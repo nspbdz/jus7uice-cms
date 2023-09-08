@@ -51,6 +51,7 @@ class _Migrations {
 			`id` int(10) unsigned NOT NULL AUTO_INCREMENT,
 			`title` varchar(100) NULL DEFAULT NULL,
 			`thumbnail` varchar(100) NULL DEFAULT NULL,
+			`content` text,
 			`author_id` int(10) unsigned NULL DEFAULT '0',
 			`created_at` datetime DEFAULT NULL,
 			`updated_at` datetime DEFAULT NULL,

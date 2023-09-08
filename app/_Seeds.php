@@ -9,8 +9,28 @@ class _Seeds {
 	function __construct() {
 		$this->_insert_table_admin();
 		$this->_insert_table_admin_group();
+		$this->_insert_table_admin_article();
 	}
 
+	/* Admin article */
+
+	function _insert_table_admin_article()
+	{
+		if(Schema::hasTable('articles')){
+			if(DB::table('articles')->count() <= 0){
+				DB::table('articles')->insert([
+					"id" => 1,
+                    "title" => 'test article',
+                    "thumbnail" => 'test.jpg', // Gantilah dengan nama file thumbnail yang sesuai
+                    "author_id" => 1, // Gantilah dengan ID penulis yang sesuai
+					"created_at" =>	date("Y-m-d H:i:s"),
+					"updated_at" =>	date("Y-m-d H:i:s"),
+					"status" => 1,
+				]);
+			}
+		}
+	}
+	
 	/* Admin */
 	function _insert_table_admin()
 	{
