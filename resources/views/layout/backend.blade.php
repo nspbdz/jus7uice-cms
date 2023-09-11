@@ -37,7 +37,10 @@
 	@yield('css')
 	<link href="https://cdn.datatables.net/v/bs5/dt-1.13.4/datatables.min.css" rel="stylesheet"/> 
     <link href="{{asset('assets/css/backend.css')}}" rel="stylesheet"/>
-  </head>
+	  <!-- #tinymce wysiwyg editor -->
+<script src="{{ asset('template/tabler/dist/libs/tinymce/tinymce.min.js') }}" referrerpolicy="origin"></script>
+
+</head>
 <body class="antialiased @yield('body_class')">
 @section('body')
 	<div class="page">
@@ -260,6 +263,15 @@
 				  </a>
 				</li>
 
+				<li class="nav-item">
+				  <a class="nav-link" href="{{url(BACKEND_PATH.'navbar')}}" target="_tester">
+					<span class="nav-link-title"> Navbar </span>
+				  </a>
+				</li>
+
+				<!-- <a class="dropdown-item" href="{{url(BACKEND_PATH.'administrator.group')}}" >Adm Group</a> -->
+
+
 				
 			  </ul>
 			  
@@ -409,6 +421,6 @@
 	
 	@yield('js')
     <script src="{{asset('assets/js/backend.js')}}"></script>
-   
+   @stack('js')
   </body>
 </html>

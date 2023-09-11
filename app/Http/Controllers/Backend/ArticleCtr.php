@@ -18,7 +18,7 @@ class ArticleCtr extends Controller
     }
     function getData(Request $request)
     {
-		$rows = Article::with('user')->where('status', '=' ,1);
+        $rows = Article::with('user')->where('status', '=', 1);
 
         return Datatables::of($rows)
             ->addColumn('chkbox', function ($row) {
@@ -71,17 +71,16 @@ class ArticleCtr extends Controller
         $article->status = 1;
         $article->save();
 
-		return redirect()->back()->with('msg',"Berhasil tersimpan");
-
+        return redirect()->back()->with('msg', "Berhasil tersimpan");
     }
 
-	function getEdit(Request $request)
+    function getEdit(Request $request)
     {
-		$data = Article::find($request->id);
+        $data = Article::find($request->id);
         return view('backend.article.edit', compact('data'));
     }
 
-	function update(Request $request)
+    function update(Request $request)
     {
 
         $photoPath = $this->storePhoto($request->thumbnail);
@@ -96,7 +95,6 @@ class ArticleCtr extends Controller
         $article->save();
 
         return view('backend.article.index');
-
     }
 
     private function storePhoto(UploadedFile $photo)
@@ -107,29 +105,34 @@ class ArticleCtr extends Controller
         return $photoPath;
     }
 
-	function getView(Request $request){}
+    function getView(Request $request)
+    {
+    }
 
-	function postDelete(Request $request){
+    function postDelete(Request $request)
+    {
         // dd('aa');
-		# Validate
-		// $validator = Validator::make($request->all(), [
-		// 	'deleteItems' => 'required',
-		// ]);
-		
-		// if (!$validator->passes()) {
-		// 	if($request->ajax()){
-		// 		return response()->json(['error'=>$validator->errors()->all()]);
-		// 	}
-		// 	return redirect()->back()->withErrors($validator->errors()->all());	
-		// }
-		
-		# Upd DB
-		Article::whereIn('id',$request->deleteItems)->update(['status'=>2]);
-		// dd('masuk');
-		# Redirect
-		if($request->ajax()){
-			return response()->json(['message'=>["Berhasil diperbarui"]]);
-		}
-		return redirect()->back()->with('msg',"Berhasil diperbarui");
-	}
+        # Validate
+        // $validator = Validator::make($request->all(), [
+        // 	'deleteItems' => 'required',
+        // ]);
+
+        // if (!$validator->passes()) {
+        // 	if($request->ajax()){
+        // 		return response()->json(['error'=>$validator->errors()->all()]);
+        // 	}
+        // 	return redirect()->back()->withErrors($validator->errors()->all());	
+        // }
+
+        # Upd DB
+        Article::whereIn('id', $request->deleteItems)->update(['status' => 2]);
+        // dd('masuk');
+        # Redirect
+        if ($request->ajax()) {
+            return response()->json(['message' => ["Berhasil diperbarui"]]);
+        }
+        return redirect()->back()->with('msg', "Berhasil diperbarui");
+    }
+
+
 }

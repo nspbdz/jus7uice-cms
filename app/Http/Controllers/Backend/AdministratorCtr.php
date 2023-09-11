@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Auth;
 use DB;
-use Validator;
 use Illuminate\Validation\Rule;
 use Datatables;
 use Route;

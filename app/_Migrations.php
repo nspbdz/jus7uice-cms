@@ -6,16 +6,19 @@ use Hash;
 
 class _Migrations {
 
-	function __construct() {	
+	function __construct() {
 		$this->_check_db_exists();
-		
-		
+
+
 		$this->_create_table_admin();
 		$this->_create_table_admin_group();
-		
+
 		$this->_create_table_user();
 		#article
 		$this->_create_table_articles();
+
+        #navbar
+		$this->_create_table_navbars();
 
 		# Media
 		$this->_create_table_media_album();
@@ -25,23 +28,42 @@ class _Migrations {
 		$this->_create_table_backendlog();
 		$this->_create_table_frontendlog();
 		$this->_create_table_activitylog();
-		
-		
-		
-		
-		
+
+
+
+
+
 	}
 
 	/* Check DB */
 	function _check_db_exists()
-	{	
+	{
 		try{
 			DB::connection()->getPdo();
 		} catch(\Exception $e){
 			die("Failed to establish connection to the server");
 		}
 	}
-	
+
+    	/* Tbl navbar */
+
+	function _create_table_navbars(){
+		$table = "navbars";
+		$r = "
+		CREATE TABLE ".$table." (
+			`id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+			`title` varchar(100) NOT NULL,
+			`url` varchar(100) NOT NULL,
+			`position` int(10) NOT NULL,
+			`created_at` datetime DEFAULT NULL,
+			`updated_at` datetime DEFAULT NULL,
+			`status` tinyint(1) unsigned NOT NULL DEFAULT '1',
+			PRIMARY KEY (`id`)
+		) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+		";
+		if(!Schema::hasTable($table)){	DB::statement($r);	}
+	}
+
 	/* Tbl article */
 
 	function _create_table_articles(){
@@ -88,7 +110,7 @@ class _Migrations {
 		";
 		if(!Schema::hasTable($table)){	DB::statement($r);	}
 	}
-	
+
 	function _create_table_admin_group(){
 		$table = "admin_group";
 		$r = "
@@ -107,7 +129,7 @@ class _Migrations {
 		";
 		if(!Schema::hasTable($table)){	DB::statement($r);	}
 	}
-	
+
 
 	function _create_table_user(){
 		$table = "users";
@@ -115,12 +137,12 @@ class _Migrations {
 		CREATE TABLE ".$table." (
 			`id` bigint(21) unsigned NOT NULL AUTO_INCREMENT,
 			`uuid` varchar(50) DEFAULT NULL,
-			
+
 			`name` varchar(200) NULL DEFAULT NULL,
 			`username` varchar(200) NULL DEFAULT NULL,
 			`email` varchar(200) NULL DEFAULT NULL,
 			`password` varchar(255) NULL DEFAULT NULL,
-			
+
 			`cover_image_url` varchar(255) DEFAULT NULL,
 			`photo_url` varchar(255) DEFAULT NULL,
 			`photo_thumb_url` varchar(255) DEFAULT NULL,
@@ -134,7 +156,7 @@ class _Migrations {
 
 			`activation_code` varchar(100) DEFAULT NULL,
 			`activation_at` datetime DEFAULT NULL,
-			
+
 			`created_at` datetime DEFAULT NULL,
 			`deleted_at` datetime DEFAULT NULL,
 			`updated_at` datetime DEFAULT NULL,
@@ -144,7 +166,7 @@ class _Migrations {
 		";
 		if(!Schema::hasTable($table)){	DB::statement($r);	}
 	}
-	
+
 
 	# Media
 	function _create_table_media_album(){
@@ -153,11 +175,11 @@ class _Migrations {
 		CREATE TABLE ".$table." (
 			`id` int(21) unsigned NOT NULL AUTO_INCREMENT,
 			`uuid` varchar(50) DEFAULT NULL,
-			
-			`title` varchar(200) NULL DEFAULT NULL,			
+
+			`title` varchar(200) NULL DEFAULT NULL,
 			`description` varchar(255) DEFAULT NULL,
 			`is_private` tinyint(1) unsigned DEFAULT '0',
-			
+
 			`params` text,
 			`created_at` datetime DEFAULT NULL,
 			`deleted_at` datetime DEFAULT NULL,
@@ -168,7 +190,7 @@ class _Migrations {
 		";
 		if(!Schema::hasTable($table)){	DB::statement($r);	}
 	}
-	
+
 	function _create_table_media(){
 		$table = "media";
 		$r = "
@@ -177,18 +199,18 @@ class _Migrations {
 			`uuid` varchar(50) DEFAULT NULL,
 
 			`media_album_id` int(21) unsigned default '0',
-			
-			`title` varchar(200) NULL DEFAULT NULL,			
+
+			`title` varchar(200) NULL DEFAULT NULL,
 			`description` varchar(255) DEFAULT NULL,
 
 			`short_url` varchar(255) DEFAULT NULL,
 			`media_type` char(25) DEFAULT NULL,
 			`media_url` varchar(255) DEFAULT NULL,
 			`media_thumb_url` varchar(255) DEFAULT NULL,
-			
+
 			`is_private` tinyint(1) unsigned DEFAULT '0',
 			`is_favourite` tinyint(1) unsigned DEFAULT '0',
-			
+
 			`params` text,
 			`created_at` datetime DEFAULT NULL,
 			`deleted_at` datetime DEFAULT NULL,
@@ -199,10 +221,10 @@ class _Migrations {
 		";
 		if(!Schema::hasTable($table)){	DB::statement($r);	}
 	}
-	
 
-	
-	
+
+
+
 	# Logging
 	function _create_table_backendlog($execute = 1, $date = ''){
 		$table = 'backend_logs_' . ($date ? $date : date("Ymd"));
@@ -225,7 +247,7 @@ class _Migrations {
 			DB::connection('logs')->statement($r);
 		}
 	}
-	
+
 	function _create_table_frontendlog($execute = 1, $date = ''){
 		$table = 'frontend_logs_' . ($date ? $date : date("Ymd"));
 		$r = "CREATE TABLE IF NOT EXISTS `$table` (
@@ -247,7 +269,7 @@ class _Migrations {
 			DB::connection('logs')->statement($r);
 		}
 	}
-	
+
 	function _create_table_activitylog($execute = 1, $date = ''){
 		$table = 'activity_logs_' . ($date ? $date : date("Ymd"));
 		$r = "CREATE TABLE IF NOT EXISTS `$table` (
@@ -269,5 +291,5 @@ class _Migrations {
 			DB::connection('logs')->statement($r);
 		}
 	}
-		
+
 }
