@@ -20,33 +20,32 @@ class NavbarCtr extends Controller
 
     function getData(Request $request)
     {
-        $users = Navbar::where('status', 1);
-        return Datatables::of($users)
 
-            ->addColumn('title', function ($row) {
-                return $row->title;
-            })
-            ->addColumn('url', function ($row) {
-                return $row->url;
-            })
-            ->addColumn('chkbox', function ($row) {
-                if ($row->is_superadmin <= 0) return '<input class="form-check-input" type="checkbox" name="deleteItems[]" value="' . $row->id . '" />';
-                else return '';
-            })
-            ->addColumn('status', function ($row) {
-                $string = '';
-                if ($row->status == "1") $string = '<span class="badge bg-green">Active</span>';
-                else $string = '<span class="badge">Not Actived</span>';
-                return $string;
-            })
-            ->addColumn('action', function ($row) {
-                $action = '
+
+        if ($request->ajax()) {
+
+            $data = Navbar::select('*')->where('status', 1);
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('sort', function ($row) {
+                    return '<i class="fa fa-sort"></i>'; // Replace 'fa fa-sort' with your desired icon class
+                })
+
+                ->addColumn('status', function ($row) {
+                    $string = '';
+                    if ($row->status == "1") $string = '<span class="badge bg-green">Active</span>';
+                    else $string = '<span class="badge">Not Actived</span>';
+                    return $string;
+                })
+                ->addColumn('action', function ($row) {
+                    $action = '
 				<a href="' . url(BACKEND_PATH . 'navbar.edit?id=' . $row->id) . '" data-toggle="ajaxModal" data-title="Administrator Account | Edit" data-class="modal-lg">Edit</a>
 			';
-                return $action;
-            })
-            ->rawColumns(['chkbox', 'title', 'url', 'status', 'action'])
-            ->make();
+                    return $action;
+                })
+                ->rawColumns(['sort', 'status', 'action'])
+                ->make(true);
+        }
     }
 
     public function getCreate()
@@ -133,9 +132,7 @@ class NavbarCtr extends Controller
                 }
             }
         }
-
+        return 1;
         return response('Update Successfully.', 200);
     }
-
-
 }

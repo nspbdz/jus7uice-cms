@@ -43,7 +43,7 @@ Route::group(['prefix' => BACKEND_PATH, 'namespace' => 'Backend\\', 'middleware'
 	Route::post('navbar.delete', [NavbarCtr::class, 'postDelete']);
 
 	Route::get('post', [NavbarCtr::class, 'indexTest']);
-	Route::post('post-sortable', [NavbarCtr::class, 'updatePosition']);
+	Route::post('navbar.post-sortable', [NavbarCtr::class, 'updatePosition']);
 
 
 
