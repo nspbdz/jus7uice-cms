@@ -8,6 +8,13 @@
 Navbar
 @endsection
 
+
+@section('page_nav_button')
+<a href="{{url(BACKEND_PATH.'navbar.create')}}" class="btn btn-primary d-none d-sm-inline-block" data-toggle="ajaxModal" data-title="Administrator Group | Add New" data-class="modal-lg">
+	Add New
+</a>
+@endsection
+
 @section('content')
 
 <div class="row">
@@ -19,6 +26,8 @@ Navbar
             <!-- Your table header -->
             <thead>
               <tr>
+								<th data-data="chkbox" data-orderable="false"><input class="form-check-input" type="checkbox" id="select-all" /></th>						
+
                 <th width="30px"></th>
                 <th>Title</th>
                 <th>URL</th>
@@ -32,7 +41,10 @@ Navbar
           </table>
         </div>
       </div>
-
+      <div class="card-footer">
+					<button type="submit" class="btn btn-danger">Disabled</button>
+					@csrf
+				</div>
       <hr>
     </form>
 
@@ -40,6 +52,7 @@ Navbar
 </div>
 
 @endsection
+<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
@@ -52,13 +65,19 @@ Navbar
       ajax: {
         url: "{{ url(BACKEND_PATH.'navbar.data') }}",
       },
-      columns: [{
-          data: 'DT_Row_Index',
-          name: 'DT_Row_Index',
+      columns: [
+        {
+          data: 'chkbox',
+          name: 'chkbox',
           orderable: false,
           searchable: false
         },
-
+        {
+          data: 'sort',
+          name: 'sort',
+          orderable: false,
+          searchable: false
+        },
         {
           data: 'title',
           name: 'title'
@@ -80,23 +99,28 @@ Navbar
         }
       ],
       // Callback function after the DataTable is initialized
-      initComplete: function() {
-        // Make the table rows sortable
-        $('#dokumen tbody').sortable({
-          items: 'tr',
-          cursor: 'move',
-          opacity: 0.6,
-          update: function() {
-            sendOrderToServer();
-          }
-        }).disableSelection();
-      }
+      initComplete: function () {
+            // Make the table rows sortable
+            $('#dokumen tbody').sortable({
+                items: 'tr',
+                cursor: 'move',
+                opacity: 0.6,
+                update: function() {
+                    sendOrderToServer();
+                }
+            }).disableSelection();
+        },
+        // Callback function to add class and data-id attribute to each row
+        createdRow: function (row, data, dataIndex) {
+            $(row).addClass('row1');
+            $(row).attr('data-id', data.id);
+        }
     });
 
     function sendOrderToServer() {
       var order = [];
       var token = $('meta[name="csrf-token"]').attr('content');
-      $('tr').each(function(index, element) {
+      $('tr.row1').each(function(index, element) {
         order.push({
           id: $(this).attr('data-id'),
           position: index + 1
@@ -106,7 +130,7 @@ Navbar
       $.ajax({
         type: "POST",
         dataType: "json",
-        url: "{{url(BACKEND_PATH.'navbar.post-sortable')}}",
+        url: "{{url(BACKEND_PATH.'post-sortable')}}",
         data: {
           order: order,
           _token: token

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-
+use App\Models\Article;
 use Illuminate\Http\Request;
 use App\Models\Navbar;
 use Datatables;
@@ -15,7 +15,10 @@ class NavbarCtr extends Controller
 {
     public function index()
     {
-        return view('backend.navbar.index');
+        $posts = Navbar::orderBy('id', 'desc')->get();
+
+        return view('backend.navbar.index', compact('posts'));
+        // return view('backend.navbar.index');
     }
 
     function getData(Request $request)
@@ -24,9 +27,12 @@ class NavbarCtr extends Controller
 
         if ($request->ajax()) {
 
-            $data = Navbar::select('*')->where('status', 1);
+            $data = Navbar::select('*')->where('status', 1)->orderBy('position', 'ASC')->get();
             return Datatables::of($data)
                 ->addIndexColumn()
+                ->addColumn('chkbox', function ($row) {
+                    return '<input class="form-check-input" type="checkbox" name="deleteItems[]" value="' . $row->id . '" />';
+                })
                 ->addColumn('sort', function ($row) {
                     return '<i class="fa fa-sort"></i>'; // Replace 'fa fa-sort' with your desired icon class
                 })
@@ -43,7 +49,7 @@ class NavbarCtr extends Controller
 			';
                     return $action;
                 })
-                ->rawColumns(['sort', 'status', 'action'])
+                ->rawColumns(['chkbox','sort', 'status', 'action'])
                 ->make(true);
         }
     }
@@ -57,9 +63,13 @@ class NavbarCtr extends Controller
     {
         // DD($request->thumbnail);
 
+
         $article = new Navbar();
+        $lastArticle=$article::orderBy('position', 'DESC')->first();
+        // dd($lastArticle->position);
+
         $article->title = $request->title;
-        $article->position = 1;
+        $article->position = $lastArticle->position+1;
         $article->url = $request->url;
         $article->save();
 
@@ -104,7 +114,7 @@ class NavbarCtr extends Controller
 
         # Upd DB
         Navbar::whereIn('id', $request->deleteItems)->update(['status' => 2]);
-
+        
         # Redirect
         if ($request->ajax()) {
             return response()->json(['message' => ["Berhasil diperbarui"]]);
@@ -120,9 +130,25 @@ class NavbarCtr extends Controller
         return view('backend.navbar.post', compact('posts'));
     }
 
-    public function updatePosition(Request $request)
+    // public function updatePosition(Request $request)
+    // {
+    //     dd($request);
+    //     $posts = Navbar::all();
+
+    //     foreach ($posts as $post) {
+    //         foreach ($request->order as $order) {
+    //             if ($order['id'] == $post->id) {
+    //                 $post->update(['position' => $order['position']]);
+    //             }
+    //         }
+    //     }
+    //     return 1;
+    //     return response('Update Successfully.', 200);
+    // }
+
+    public function position(Request $request)
     {
-        // dd($request);
+        // return 1;
         $posts = Navbar::all();
 
         foreach ($posts as $post) {
@@ -132,7 +158,9 @@ class NavbarCtr extends Controller
                 }
             }
         }
-        return 1;
-        return response('Update Successfully.', 200);
+
+
+        return response()->json('success', 200);
+
     }
 }

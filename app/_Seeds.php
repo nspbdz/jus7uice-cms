@@ -23,14 +23,18 @@ class _Seeds
     {
         if (Schema::hasTable('navbars')) {
             if (DB::table('navbars')->count() <= 0) {
-                DB::table('navbars')->insert([
-                    "id" => 1,
-                    "title" => 'home',
-                    "url" => '/home',
-                    "position" => 1,
-                    "created_at" =>    date("Y-m-d H:i:s"),
-                    "updated_at" =>    date("Y-m-d H:i:s"),
-                ]);
+                for ($i = 1; $i <= 5; $i++) {
+                    DB::table('navbars')->insert([
+                        "id" => $i,
+                        "title" => 'Title ' . $i,
+                        "url" => '/url-' . $i,
+                        "position" => $i,
+                        "created_at" => now(),
+                        "updated_at" => now(),
+                    ]);
+                }
+        
+                
             }
         }
     }
