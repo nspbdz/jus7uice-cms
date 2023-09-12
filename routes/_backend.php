@@ -9,6 +9,7 @@ use App\Http\Controllers\Backend\AdministratorCtr;
 use App\Http\Controllers\Backend\MediaAlbumCtr;
 use App\Http\Controllers\Backend\MediaCtr;
 use App\Http\Controllers\Backend\ArticleCtr;
+use App\Http\Controllers\Backend\NavbarCtr; 
 
 
 Route::prefix(BACKEND_PATH)->middleware(['backend.check.auth.exists'])->controller(LoginCtr::class)->group(function(){
@@ -18,7 +19,7 @@ Route::prefix(BACKEND_PATH)->middleware(['backend.check.auth.exists'])->controll
 Route::get(BACKEND_PATH.'logout', [App\Http\Controllers\Backend\LoginCtr::class, 'getLogout']);
 
 Route::group(['prefix'=>BACKEND_PATH, 'namespace'=> 'Backend\\','middleware' => ['backend']], function () {
-	
+
 	Route::get('/', [MainCtr::class, 'index']);
 	Route::get('tester', [TesterCtr::class, 'getTester']);
 
@@ -30,6 +31,19 @@ Route::group(['prefix'=>BACKEND_PATH, 'namespace'=> 'Backend\\','middleware' => 
 	Route::put('article.update',[ArticleCtr::class, 'update']);
 	Route::post('article.delete',[ArticleCtr::class, 'postDelete']);
 	Route::get('article.delete',[ArticleCtr::class, 'getDelete']);
+
+	Route::get('navbar', [NavbarCtr::class, 'index']);
+	Route::get('navbar.data',[NavbarCtr::class, 'getData']);
+	Route::get('navbar.create',[NavbarCtr::class, 'getCreate']);
+	Route::post('navbar.create',[NavbarCtr::class, 'store']);
+	Route::get('navbar.edit',[NavbarCtr::class, 'getEdit']);
+	Route::post('navbar.update',[NavbarCtr::class, 'update']);
+    Route::get('navbar.delete',[NavbarCtr::class, 'getDelete']);
+	Route::post('navbar.delete',[NavbarCtr::class, 'postDelete']);
+
+
+
+
 
 
 	Route::get('backend.log', [BackendLogsCtr::class, 'index']);
@@ -45,7 +59,7 @@ Route::group(['prefix'=>BACKEND_PATH, 'namespace'=> 'Backend\\','middleware' => 
 	Route::get('user.delete',[UserCtr::class, 'getDelete']);
 	Route::post('user.delete',[UserCtr::class, 'postDelete']);
 
-	
+
 	Route::get('administrator.group',[AdministratorGroupCtr::class, 'index']);
 	Route::get('administrator.group.data',[AdministratorGroupCtr::class, 'getData']);
 	Route::get('administrator.group.create',[AdministratorGroupCtr::class, 'getCreate']);
@@ -54,7 +68,7 @@ Route::group(['prefix'=>BACKEND_PATH, 'namespace'=> 'Backend\\','middleware' => 
 	Route::post('administrator.group.edit',[AdministratorGroupCtr::class, 'postEdit']);
 	Route::get('administrator.group.delete',[AdministratorGroupCtr::class, 'getDelete']);
 	Route::post('administrator.group.delete',[AdministratorGroupCtr::class, 'postDelete']);
-	
+
 	Route::get('administrator.account',[AdministratorCtr::class, 'index']);
 	Route::get('administrator.account.data',[AdministratorCtr::class, 'getData']);
 	Route::get('administrator.account.create',[AdministratorCtr::class, 'getCreate']);
@@ -64,7 +78,7 @@ Route::group(['prefix'=>BACKEND_PATH, 'namespace'=> 'Backend\\','middleware' => 
 	Route::get('administrator.account.view',[AdministratorCtr::class, 'getView']);
 	Route::get('administrator.account.delete',[AdministratorCtr::class, 'getDelete']);
 	Route::post('administrator.account.delete',[AdministratorCtr::class, 'postDelete']);
-	
+
 	Route::get('media.album',[MediaAlbumCtr::class, 'index']);
 	Route::get('media.album.data',[MediaAlbumCtr::class, 'getData']);
 	Route::get('media.album.create',[MediaAlbumCtr::class, 'getCreate']);
@@ -73,7 +87,7 @@ Route::group(['prefix'=>BACKEND_PATH, 'namespace'=> 'Backend\\','middleware' => 
 	Route::post('media.album.edit',[MediaAlbumCtr::class, 'postEdit']);
 	Route::get('media.album.delete',[MediaAlbumCtr::class, 'getDelete']);
 	Route::post('media.album.delete',[MediaAlbumCtr::class, 'postDelete']);
-	
+
 	Route::get('media',[MediaCtr::class, 'index']);
 	Route::get('media.data',[MediaCtr::class, 'getData']);
 	Route::get('media.create',[MediaCtr::class, 'getCreate']);

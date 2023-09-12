@@ -8,7 +8,7 @@
 * Licensed under MIT (https://github.com/tabler/tabler/blob/master/LICENSE)
 -->
 <?php
-	$path = str_replace(BACKEND_PATH,'',Request()->path()); 
+	$path = str_replace(BACKEND_PATH,'',Request()->path());
 	// debug(Request()->path());
 	// debug($path);
 ?>
@@ -35,13 +35,13 @@
       }
     </style>
 	@yield('css')
-	<link href="https://cdn.datatables.net/v/bs5/dt-1.13.4/datatables.min.css" rel="stylesheet"/> 
+	<link href="https://cdn.datatables.net/v/bs5/dt-1.13.4/datatables.min.css" rel="stylesheet"/>
     <link href="{{asset('assets/css/backend.css')}}" rel="stylesheet"/>
   </head>
 <body class="antialiased @yield('body_class')">
 @section('body')
 	<div class="page">
-		
+
 		<!-- Header -->
 		<header class="navbar navbar-expand-md d-print-none header-top-primary">
 		<div class="container-fluid">
@@ -53,7 +53,7 @@
 			{{BACKEND_TITLE}}
 			</a>
 		  </h1>
-		 
+
 		 <div class="navbar-nav flex-row order-md-last">
 			<div class="d-none d-md-flex">
 			  <a href="?theme=dark" class="nav-link px-0 hide-theme-dark" title="Enable dark mode" data-bs-toggle="tooltip"
@@ -169,12 +169,12 @@
 			  </div>
 			</div>
 		  </div>
-		  
-		  
+
+
 		  <div class="collapse navbar-collapse" id="navbar-menu">
 			<div class="d-flex flex-column flex-md-row flex-fill align-items-stretch align-items-md-center">
 			 <ul class="navbar-nav">
-				
+
 				<li class="nav-item  @if(in_array($path,['','/'])) active @endif ">
 				  <a class="nav-link" href="{{url(BACKEND_PATH)}}" >
 					<span class="nav-link-icon d-md-none d-lg-inline-block"><svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><polyline points="5 12 3 12 12 3 21 12 19 12" /><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" /><path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" /></svg>
@@ -184,7 +184,7 @@
 					</span>
 				  </a>
 				</li>
-				
+
 				<li class="nav-item dropdown  @if(in_array($path,['users'])) active @endif ">
 				  <a class="nav-link dropdown-toggle" href="#navbar-extra" data-bs-toggle="dropdown" role="button" aria-expanded="false" >
 					<span class="nav-link-icon d-md-none d-lg-inline-block">
@@ -200,7 +200,7 @@
 					</a>
 				  </div>
 				</li>
-				
+
 				<li class="nav-item dropdown @if(in_array($path,['media','media.album'])) active @endif">
 				  <a class="nav-link dropdown-toggle" href="#navbar-extra" data-bs-toggle="dropdown" role="button" aria-expanded="false" >
 					<span class="nav-link-icon d-md-none d-lg-inline-block">
@@ -215,7 +215,7 @@
 					<a class="dropdown-item" href="{{url(BACKEND_PATH.'media')}}" >Media</a>
 				  </div>
 				</li>
-				
+
 				<li class="nav-item dropdown @if(in_array($path,['administrator.group','administrator.account'])) active @endif">
 				  <a class="nav-link dropdown-toggle" href="#navbar-extra" data-bs-toggle="dropdown" role="button" aria-expanded="false" >
 					<span class="nav-link-icon d-md-none d-lg-inline-block">
@@ -230,7 +230,7 @@
 					<a class="dropdown-item" href="{{url(BACKEND_PATH.'administrator.account')}}" >Adm Accounts</a>
 				  </div>
 				</li>
-				
+
 				<li class="nav-item dropdown @if(in_array($path,['activity.log','backend.log','frontend.log'])) active @endif ">
 				  <a class="nav-link dropdown-toggle" href="#navbar-extra" data-bs-toggle="dropdown" role="button" aria-expanded="false" >
 					<span class="nav-link-icon d-md-none d-lg-inline-block">
@@ -246,7 +246,7 @@
 					<a class="dropdown-item" href="{{url(BACKEND_PATH.'frontend.log')}}" >FrontEnd</a>
 				  </div>
 				</li>
-				
+
 				<li class="nav-item">
 				  <a class="nav-link" href="{{url(BACKEND_PATH.'tester')}}" target="_tester">
 					<span class="nav-link-title"> Tester </span>
@@ -260,21 +260,27 @@
 				  </a>
 				</li>
 
-				
+                <li class="nav-item">
+				  <a class="nav-link" href="{{url(BACKEND_PATH.'navbar')}}" target="_tester">
+					<span class="nav-link-title"> Navbar </span>
+				  </a>
+				</li>
+
+
 			  </ul>
-			  
-				
+
+
 		   </div>
 		  </div>
 		</div>
 		</header>
 		<!-- End: Header -->
-		
-		
-		
-		
+
+
+
+
 		 <div class="page-wrapper">
-		   
+
 		   <!-- Page header -->
 		   @section('page_header')
 			<div class="page-header d-print-none">
@@ -288,7 +294,7 @@
 					  @yield('page_title')
 					</h2>
 				  </div>
-				  
+
 					<!-- Page title actions -->
 					<div class="col-auto ms-auto d-print-none">
 						<div class="btn-list">
@@ -296,17 +302,17 @@
 						</div>
 					</div>
 					<!-- End: Page title actions -->
-					  
+
 				</div>
 			  </div>
 			</div>
 			@show
-			
+
 			<!-- Page body -->
 			<div class="page-body">
 			  <div class="container-fluid">
 				<!-- Content here -->
-				
+
 					<!-- Show/Error message -->
 					<div id="ajxForm_message"></div>
 					@if (isset($errors) && $errors->any())
@@ -317,29 +323,29 @@
 							@endforeach
 						</ul>
 					</div>
-					@endif				
-					
-					@if (session()->has('msg'))	<div class="alert alert-success">{{ session()->get('msg') }}</div>@endif					
+					@endif
+
+					@if (session()->has('msg'))	<div class="alert alert-success">{{ session()->get('msg') }}</div>@endif
 					@if (session()->has('msgError'))<div class="alert alert-danger">{{ session()->get('msgError') }}</div>@endif
-					
+
 					@section('content')
-					 
+
 					@show
-				
-						
-				
+
+
+
 				<!-- End:Content here -->
 			  </div>
 			</div>
 			<!-- End:Page body -->
-			
+
 			<!-- Footer -->
 			<footer class="footer d-print-none">
 				 <div class="container-fluid">
 				<div class="row text-center align-items-center flex-row-reverse">
 				  <div class="col-lg-auto ms-lg-auto">
 					<ul class="list-inline list-inline-dots mb-0">
-					<li class="list-inline-item">	
+					<li class="list-inline-item">
 						<b>Domain</b> {{ request()->getHost() }} &nbsp;
 						<b>/ App. Level</b> {{ env('APP_ENV') }} &nbsp;
 						<b>/ Version</b> {{(config('app.app_version')?config('app.app_version'):' - ') }} &nbsp;
@@ -347,8 +353,8 @@
 						<b>/ Your IP</b> {{request()->ip()}}
 
 					</li>
-					  
-					  
+
+
 					<?php /*
 					  <li class="list-inline-item"><a href="#license.html" class="link-secondary">License</a></li>
 					  <li class="list-inline-item"><a href="https://github.com/tabler/tabler" target="_blank" class="link-secondary" rel="noopener">Source code</a></li>
@@ -373,42 +379,42 @@
 			  </div>
 			</footer>
 			<!-- End:Footer -->
-		
+
 		</div>
-		<!-- End:page-wrapper -->	
-	
+		<!-- End:page-wrapper -->
+
 	</div>
-	<!-- End:page -->	
+	<!-- End:page -->
 
 	<!-- Modal -->
 	<div class="modal fade" id="ajaxModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
 	  <div class="modal-dialog" role="document">
-		<div class="modal-content">		  		  
+		<div class="modal-content">
 		  <div class="modal-header">
 			<h5 class="modal-title">@yield('modal_title')</h5>
 			<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-		  </div>		  
+		  </div>
 		  <div class="modal-body">
 			<div id="modal-message"></div>
 			<div class="modal_content">
 				<center><img id="img-loader" src="{{url('assets/svg/loading.svg')}}" height="40" alt="Loading.." /></center>
 			</div>
-		  </div>		  
+		  </div>
 		</div>
 	  </div>
 	</div>
-	
+
 	@show
 	<script src="{{asset('assets/js/jquery_3.6.0.min.js')}}"></script>
 	<script src="{{asset('assets/js/popper.min.js')}}"></script>
     <!-- Tabler Core -->
     <script src="{{asset('template/tabler/dist/js/tabler.min.js')}}"></script>
-    <script src="{{asset('assets/js/jquery.form.min.js')}}"></script>	
+    <script src="{{asset('assets/js/jquery.form.min.js')}}"></script>
 	<script src="{{asset('addons/bootstrap-multiselect/js/bootstrap-multiselect.js')}}"></script>
 	<script src="https://cdn.datatables.net/v/bs5/dt-1.13.4/datatables.min.js"></script>
-	
+
 	@yield('js')
     <script src="{{asset('assets/js/backend.js')}}"></script>
-   
+
   </body>
 </html>
