@@ -15,6 +15,7 @@
 
 <html lang="en">
   <head>
+  <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
@@ -37,7 +38,10 @@
 	@yield('css')
 	<link href="https://cdn.datatables.net/v/bs5/dt-1.13.4/datatables.min.css" rel="stylesheet"/>
     <link href="{{asset('assets/css/backend.css')}}" rel="stylesheet"/>
-  </head>
+	  <!-- #tinymce wysiwyg editor -->
+<script src="{{ asset('template/tabler/dist/libs/tinymce/tinymce.min.js') }}" referrerpolicy="origin"></script>
+
+</head>
 <body class="antialiased @yield('body_class')">
 @section('body')
 	<div class="page">
@@ -266,6 +270,9 @@
 				  </a>
 				</li>
 
+				<!-- <a class="dropdown-item" href="{{url(BACKEND_PATH.'administrator.group')}}" >Adm Group</a> -->
+
+
 
 			  </ul>
 
@@ -412,9 +419,10 @@
     <script src="{{asset('assets/js/jquery.form.min.js')}}"></script>
 	<script src="{{asset('addons/bootstrap-multiselect/js/bootstrap-multiselect.js')}}"></script>
 	<script src="https://cdn.datatables.net/v/bs5/dt-1.13.4/datatables.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 
 	@yield('js')
     <script src="{{asset('assets/js/backend.js')}}"></script>
-
+@stack('js')
   </body>
 </html>
