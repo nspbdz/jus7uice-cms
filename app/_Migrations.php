@@ -14,6 +14,9 @@ class _Migrations {
 		$this->_create_table_admin_group();
 
 		$this->_create_table_user();
+		#content
+		$this->_create_table_contents();
+
 		#article
 		$this->_create_table_articles();
 
@@ -44,6 +47,26 @@ class _Migrations {
 			die("Failed to establish connection to the server");
 		}
 	}
+
+
+		/* Tbl content */
+
+		function _create_table_contents(){
+			$table = "contents";
+			$r = "
+			CREATE TABLE ".$table." (
+				`id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+				`title` varchar(100) NULL DEFAULT NULL,
+				`content` text,
+				`author_id` int(10) unsigned NULL DEFAULT '0',
+				`created_at` datetime DEFAULT NULL,
+				`updated_at` datetime DEFAULT NULL,
+				`status` tinyint(1) unsigned NOT NULL DEFAULT '1',
+				PRIMARY KEY (`id`)
+			) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+			";
+			if(!Schema::hasTable($table)){	DB::statement($r);	}
+		}
 
     	/* Tbl navbar */
 

@@ -10,6 +10,7 @@ use App\Http\Controllers\Backend\AdministratorCtr;
 use App\Http\Controllers\Backend\MediaAlbumCtr;
 use App\Http\Controllers\Backend\MediaCtr;
 use App\Http\Controllers\Backend\ArticleCtr;
+use App\Http\Controllers\backend\ContentController;
 use App\Http\Controllers\Backend\NavbarCtr;
 
 
@@ -23,6 +24,16 @@ Route::group(['prefix' => BACKEND_PATH, 'namespace' => 'Backend\\', 'middleware'
 
 	Route::get('/', [MainCtr::class, 'index']);
 	Route::get('tester', [TesterCtr::class, 'getTester']);
+
+	Route::get('content', [ContentController::class, 'index']);
+	Route::get('content.data', [ContentController::class, 'getData']);
+	Route::get('content.create', [ContentController::class, 'getCreate']);
+	Route::post('content.create', [ContentController::class, 'store']);
+	Route::get('content.edit/{id?}', [ContentController::class, 'getEdit']);
+	Route::put('content.update/{id?}', [ContentController::class, 'update']);
+	Route::post('content.delete', [ContentController::class, 'postDelete']);
+	Route::get('content.delete', [ContentController::class, 'getDelete']);
+
 
 	Route::get('article', [ArticleCtr::class, 'index']);
 	Route::get('article.data', [ArticleCtr::class, 'getData']);
@@ -44,7 +55,7 @@ Route::group(['prefix' => BACKEND_PATH, 'namespace' => 'Backend\\', 'middleware'
 	Route::post('navbar.post-sortable', [NavbarCtr::class, 'position']);
 	
 	
-	Route::get('post', [NavbarCtr::class, 'indexTest']);
+	// Route::get('post', [NavbarCtr::class, 'indexTest']);
 
 	Route::get('backend.log', [BackendLogsCtr::class, 'index']);
 	Route::get('backend.log.data', [BackendLogsCtr::class, 'getData']);

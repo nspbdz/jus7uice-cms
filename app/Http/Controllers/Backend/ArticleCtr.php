@@ -10,7 +10,8 @@ use Datatables;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
-
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Validator;
 
 class ArticleCtr extends Controller
 {
@@ -56,13 +57,6 @@ class ArticleCtr extends Controller
 
     public function store(StoreArticleRequest $request)
     {
-        // DD($request->thumbnail);
-
-        // $user = Auth();
-        // $user = auth()->user();
-
-        // $user = Auth::backend();
-        // dd($user);
 
         $photoPath = $this->storePhoto($request->thumbnail);
 
@@ -135,16 +129,16 @@ class ArticleCtr extends Controller
     {
         // dd('aa');
         # Validate
-        // $validator = Validator::make($request->all(), [
-        // 	'deleteItems' => 'required',
-        // ]);
+        $validator = Validator::make($request->all(), [
+        	'deleteItems' => 'required',
+        ]);
 
-        // if (!$validator->passes()) {
-        // 	if($request->ajax()){
-        // 		return response()->json(['error'=>$validator->errors()->all()]);
-        // 	}
-        // 	return redirect()->back()->withErrors($validator->errors()->all());	
-        // }
+        if (!$validator->passes()) {
+        	if($request->ajax()){
+        		return response()->json(['error'=>$validator->errors()->all()]);
+        	}
+        	return redirect()->back()->withErrors($validator->errors()->all());	
+        }
 
         # Upd DB
         Article::whereIn('id', $request->deleteItems)->update(['status' => 2]);

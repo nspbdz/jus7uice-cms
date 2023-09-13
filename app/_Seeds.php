@@ -15,6 +15,7 @@ class _Seeds
         $this->_insert_table_admin_group();
         $this->_insert_table_admin_article();
         $this->_insert_table_admin_navbar();
+        $this->_insert_table_admin_content();
     }
 
     /* Admin article */
@@ -35,6 +36,25 @@ class _Seeds
                 }
 
 
+            }
+        }
+    }
+
+    /* Admin content */
+
+    function _insert_table_admin_content()
+    {
+        if (Schema::hasTable('contents')) {
+            if (DB::table('contents')->count() <= 0) {
+                DB::table('contents')->insert([
+                    "id" => 1,
+                    "title" => 'test content',
+                    "content" => 'test content',
+                    "author_id" => 1, // Gantilah dengan ID penulis yang sesuai
+                    "created_at" =>    date("Y-m-d H:i:s"),
+                    "updated_at" =>    date("Y-m-d H:i:s"),
+                    "status" => 1,
+                ]);
             }
         }
     }
