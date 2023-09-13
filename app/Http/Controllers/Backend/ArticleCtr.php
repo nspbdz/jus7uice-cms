@@ -38,7 +38,7 @@ class ArticleCtr extends Controller
             })
             ->addColumn('action', function ($row) {
                 $action = '
-				<a href="' . url(BACKEND_PATH . 'article.edit/' . $row->id) . '" >Edit</a>			
+				<a href="' . url(BACKEND_PATH . 'article.edit/' . $row->id) . '" >Edit</a>
 			';
                 return $action;
             })
@@ -73,7 +73,7 @@ class ArticleCtr extends Controller
 
         // return redirect()->back()->with('msg', "Berhasil tersimpan");
     }
-
+g
     function getEdit(Request $request)
     {
         $data = Article::find($request->id);
@@ -108,7 +108,7 @@ class ArticleCtr extends Controller
 
         // Save the changes
         $article->save();
-        
+
         return view('backend.article.index')->with('success', 'Article updated successfully.');
 
     }
@@ -137,7 +137,7 @@ class ArticleCtr extends Controller
         	if($request->ajax()){
         		return response()->json(['error'=>$validator->errors()->all()]);
         	}
-        	return redirect()->back()->withErrors($validator->errors()->all());	
+        	return redirect()->back()->withErrors($validator->errors()->all());
         }
 
         # Upd DB

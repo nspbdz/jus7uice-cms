@@ -24,18 +24,22 @@ class _Seeds
     {
         if (Schema::hasTable('navbars')) {
             if (DB::table('navbars')->count() <= 0) {
-                for ($i = 1; $i <= 5; $i++) {
+
+                $data = ['Home', 'About', 'Services', 'Portfolio', 'Team', 'Contact'];
+                $dataSlug = ['', 'about', 'services', 'portfolio', 'team', 'contact'];
+                $dataUrl = ['/', '/about', '/services', '/portfolio', '/team', '/contact'];
+                // dd($data[0]);
+                for ($i = 0; $i < 6; $i++) {
                     DB::table('navbars')->insert([
-                        "id" => $i,
-                        "title" => 'Title ' . $i,
-                        "url" => '/url-' . $i,
+                        "id" => $i + 1,
+                        "title" => $data[$i],
+                        "slug" => $dataSlug[$i],
+                        "url" => $dataUrl[$i],
                         "position" => $i,
                         "created_at" => now(),
                         "updated_at" => now(),
                     ]);
                 }
-
-
             }
         }
     }
@@ -46,15 +50,19 @@ class _Seeds
     {
         if (Schema::hasTable('contents')) {
             if (DB::table('contents')->count() <= 0) {
-                DB::table('contents')->insert([
-                    "id" => 1,
-                    "title" => 'test content',
-                    "content" => 'test content',
-                    "author_id" => 1, // Gantilah dengan ID penulis yang sesuai
-                    "created_at" =>    date("Y-m-d H:i:s"),
-                    "updated_at" =>    date("Y-m-d H:i:s"),
-                    "status" => 1,
-                ]);
+                $dataSlug = ['', 'about', 'services', 'portfolio', 'team', 'contact'];
+                for ($i = 0; $i < 6; $i++) {
+                    DB::table('contents')->insert([
+                        "id" => $i + 1,
+                        "title" => 'title' . $i,
+                        "content" => 'content' . $i,
+                        "slug" => $dataSlug[$i],
+                        "author_id" => 1, // Gantilah dengan ID penulis yang sesuai
+                        "created_at" => now(),
+                        "updated_at" => now(),
+                        "status" => 1,
+                    ]);
+                }
             }
         }
     }

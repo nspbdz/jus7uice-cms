@@ -14,6 +14,15 @@ use DB;
 
 class NavbarCtr extends Controller
 {
+
+    public function all()
+    {
+        $posts = Navbar::orderBy('position', 'asc')->get();
+
+        return view('backend.navbar.index', compact('posts'));
+        // return view('backend.navbar.index');
+    }
+
     public function index()
     {
         $posts = Navbar::orderBy('id', 'desc')->get();

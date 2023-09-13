@@ -167,6 +167,9 @@ return [
         /*
          * Application Service Providers...
          */
+        // contentHelper
+        App\Providers\ContentServiceProvider::class,
+
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
@@ -191,6 +194,7 @@ return [
 		'Datatables' => Yajra\DataTables\Facades\DataTables::class,
 		'Widget' => Arrilot\Widgets\Facade::class,
 		'Curl' => Ixudra\Curl\Facades\Curl::class,
+        'ContentHelp' => App\Helpers\ContentHelper::class,
     ])->toArray(),
 
 ];

@@ -11,8 +11,13 @@
             <h2>About Us</h2>
         </div>
 
-        <div class="row content">
-            <div class="col-lg-6">
+        <div>
+            {{$data->content}}
+        </div>
+        <!-- <div class="row content"> -->
+
+        <!-- {{$data->content}} -->
+        <!-- <div class="col-lg-6">
                 <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
                     magna aliqua.
@@ -32,12 +37,13 @@
                 <a href="#" class="btn-learn-more">Learn More</a>
             </div>
         </div>
+    -->
 
     </div>
 </section><!-- End About Us Section -->
 
 <!-- ======= Why Us Section ======= -->
-<section id="why-us" class="why-us section-bg">
+<!-- <section id="why-us" class="why-us section-bg">
     <div class="container-fluid" data-aos="fade-up">
 
         <div class="row">
@@ -88,10 +94,11 @@
         </div>
 
     </div>
-</section><!-- End Why Us Section -->
+</section> -->
+<!-- End Why Us Section -->
 
 <!-- ======= Skills Section ======= -->
-<section id="skills" class="skills">
+<!-- <section id="skills" class="skills">
     <div class="container" data-aos="fade-up">
 
         <div class="row">
@@ -141,6 +148,7 @@
         </div>
 
     </div>
-</section><!-- End Skills Section -->
+</section> -->
+<!-- End Skills Section -->
 
 @endsection

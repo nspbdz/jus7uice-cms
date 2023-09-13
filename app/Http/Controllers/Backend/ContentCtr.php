@@ -11,7 +11,7 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
-class ContentController extends Controller
+class ContentCtr extends Controller
 {
     public function index()
     {
@@ -36,7 +36,7 @@ class ContentController extends Controller
             })
             ->addColumn('action', function ($row) {
                 $action = '
-				<a href="' . url(BACKEND_PATH . 'content.edit/' . $row->id) . '" >Edit</a>			
+				<a href="' . url(BACKEND_PATH . 'content.edit/' . $row->id) . '" >Edit</a>
 			';
                 return $action;
             })
@@ -82,9 +82,8 @@ class ContentController extends Controller
 
         // Save the changes
         $content->save();
-        
-        return view('backend.content.index')->with('success', 'Content updated successfully.');
 
+        return view('backend.content.index')->with('success', 'Content updated successfully.');
     }
 
     function getView(Request $request)
@@ -96,14 +95,14 @@ class ContentController extends Controller
         // dd('aa');
         # Validate
         $validator = Validator::make($request->all(), [
-        	'deleteItems' => 'required',
+            'deleteItems' => 'required',
         ]);
 
         if (!$validator->passes()) {
-        	if($request->ajax()){
-        		return response()->json(['error'=>$validator->errors()->all()]);
-        	}
-        	return redirect()->back()->withErrors($validator->errors()->all());	
+            if ($request->ajax()) {
+                return response()->json(['error' => $validator->errors()->all()]);
+            }
+            return redirect()->back()->withErrors($validator->errors()->all());
         }
 
         # Upd DB
