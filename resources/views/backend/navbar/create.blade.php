@@ -3,7 +3,7 @@
     <div class="form-group mb-3 row">
         <label class="form-label col-3 col-form-label">Title</label>
         <div class="col">
-            <input type="text" class="form-control" placeholder="Enter Title" name="title" required />
+            <input type="text" class="form-control" placeholder="Enter Title" name="title" required  />
         </div>
         @error('title')
         <span class="text-danger">{{$message}}</span>

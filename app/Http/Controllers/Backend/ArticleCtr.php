@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreArticleRequest;
 use App\Models\Article;
 use Illuminate\Http\Request;
 use Datatables;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 
 
 class ArticleCtr extends Controller
@@ -18,7 +20,7 @@ class ArticleCtr extends Controller
     }
     function getData(Request $request)
     {
-        $rows = Article::with('user')->where('status', '=', 1);
+        $rows = Article::with('user');
 
         return Datatables::of($rows)
             ->addColumn('chkbox', function ($row) {
@@ -35,7 +37,7 @@ class ArticleCtr extends Controller
             })
             ->addColumn('action', function ($row) {
                 $action = '
-				<a href="' . url(BACKEND_PATH . 'article.edit?id=' . $row->id) . '" >Edit</a>			
+				<a href="' . url(BACKEND_PATH . 'article.edit/' . $row->id) . '" >Edit</a>			
 			';
                 return $action;
             })
@@ -45,12 +47,14 @@ class ArticleCtr extends Controller
 
     function getCreate(Request $request)
     {
+
         // $groupList = [''=>'Select Group:'] + AdminGroup::where('status',1)->pluck('name','id')->toArray();
-        // return view('backend.article.create',compact('groupList'));
-        return view('backend.article.create');
+        $data = Article::find($request->id);
+        return view('backend.article.create', compact('data'));
+        // return view('backend.article.create');
     }
 
-    public function store(Request $request)
+    public function store(StoreArticleRequest $request)
     {
         // DD($request->thumbnail);
 
@@ -68,10 +72,12 @@ class ArticleCtr extends Controller
         $article->content = $request->content;
         // $article->author_id = $request->author_id;
         $article->author_id = 1;
-        $article->status = 1;
+        $article->status = $request->status;
         $article->save();
 
-        return redirect()->back()->with('msg', "Berhasil tersimpan");
+        return redirect('/admin/article')->with('msg', "Berhasil tersimpan");
+
+        // return redirect()->back()->with('msg', "Berhasil tersimpan");
     }
 
     function getEdit(Request $request)
@@ -82,19 +88,35 @@ class ArticleCtr extends Controller
 
     function update(Request $request)
     {
+        // dd($request);
+        $article = Article::find($request->id);
+        // dd($article);
 
-        $photoPath = $this->storePhoto($request->thumbnail);
+        // Handle the file upload
+        if ($request->hasFile('thumbnail')) {
+            // Upload the new photo
+            // $newPhotoPath = $request->file('thumbnail')->store('photos', 'public'); // Adjust the storage path as needed
+            $photoPath = $this->storePhoto($request->thumbnail);
 
-        $article = new Article();
+            // Delete the old photo if it exists
+            if ($article->thumbnail) {
+               unlink(public_path($article->thumbnail));
+            }
+
+            // Update the article's thumbnail column with the new file path
+            $article->thumbnail = $photoPath;
+        }
+
+        // Update the article with the new data
         $article->title = $request->title;
-        $article->thumbnail = $photoPath;
         $article->content = $request->content;
-        // $article->author_id = $request->author_id;
-        $article->author_id = 1;
-        $article->status = 1;
-        $article->save();
+        $article->status = $request->status;
 
-        return view('backend.article.index');
+        // Save the changes
+        $article->save();
+        
+        return view('backend.article.index')->with('success', 'Article updated successfully.');
+
     }
 
     private function storePhoto(UploadedFile $photo)
@@ -133,6 +155,4 @@ class ArticleCtr extends Controller
         }
         return redirect()->back()->with('msg', "Berhasil diperbarui");
     }
-
-
 }

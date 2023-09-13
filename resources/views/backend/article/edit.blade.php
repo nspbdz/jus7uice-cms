@@ -12,7 +12,8 @@ Article Edit
 @section('content')
 
 <div class="container-fluid">
-	<form action="{{url(BACKEND_PATH.'article.update')}}" method="post" enctype=multipart/form-data>
+
+	<form action="{{url(BACKEND_PATH.'article.update', $data->id)}}" method="post" enctype=multipart/form-data>
 		@csrf
 		@method('PUT')
 		<div class="mb-3">
@@ -26,7 +27,7 @@ Article Edit
 		<div class="mb-3">
 			<div class="form-label">Preview Thumbnail</div>
 			@if ($data->thumbnail)
-			<img id="newThumbnailImage" src="{{ asset($data->thumbnail) }}" alt="Thumbnail" height="70px" width="100px">
+			<img id="newThumbnailImage" src="{{ asset($data->thumbnail) }}" alt="Thumbnail" height="70px" width="100px" required >
 			@else
 			<p>Tidak ada thumbnail yang tersedia.</p>
 			@endif
@@ -45,15 +46,23 @@ Article Edit
 		<div class="mb-3">
 
 			<textarea name="content" class="tinymce" id="mytextarea">{{ $data->content }}</textarea>
-			@error('title')
+			@error('tcontentitle')
 			<span class="text-danger">{{$message}}</span>
 			@enderror
 		</div>
-		<div class="card-footer text-end">
-			<div class="d-flex">
-				<a href="#" class="btn btn-link">Cancel</a>
-				<button type="submit" class="btn btn-primary ms-auto">Send data</button>
+
+			<div class="mb-3">
+			<label class="form-label col-3 col-form-label pt-0">Status</label>
+			{{html()->hidden('status',0)}}
+			<div class="col">
+				<label class="form-check">
+					<input class="form-check-input" type="checkbox" name="status" value="1" {{(($data->status==1)?"checked":"")}}><span class="form-check-label">Active</span>
+				</label>
 			</div>
+		</div>
+		<div class="card-footer text-end">
+				<a href="{{url(BACKEND_PATH.'article')}}" class="btn btn-danger">Back</a>
+				<button type="submit" class="btn btn-primary ms-auto">Send data</button>
 		</div>
 	</form>
 

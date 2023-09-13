@@ -113,7 +113,7 @@ class NavbarCtr extends Controller
         return view('backend.navbar.edit', compact('data'));
     }
 
-    public function update(Request $request)
+    public function update(StoreNavbarRequest $request)
     {
 
         $article = Navbar::findOrFail($request->id);

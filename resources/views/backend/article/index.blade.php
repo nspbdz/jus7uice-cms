@@ -10,7 +10,7 @@ Article
 @endsection
 
 @section('page_nav_button')
-<a href="{{url(BACKEND_PATH.'article.create')}}" class="btn btn-primary d-none d-sm-inline-block" data-toggle="ajaxModal" data-title="Administrator Group | Add New" data-class="modal-lg">
+<a href="{{url(BACKEND_PATH.'article.create')}}" class="btn btn-primary d-none d-sm-inline-block" data-toggle="" data-title="Administrator Group | Add New" data-class="modal-lg">
 	Add New
 </a>
 @endsection
@@ -50,43 +50,3 @@ Article
 </div>
 
 @endsection
-
-@push('scripts')
-<script>
-	$(document).ready(function() {
-		$('#dokumen').DataTable({
-			processing: true,
-			serverside: true,
-			// responsive: true,
-			ajax: {
-				url: "{{url(BACKEND_PATH.'article.data')}}"
-			},
-
-			columns: [{
-					data: 'DT_RowIndex',
-					name: 'DT_RowIndex',
-					orderable: false,
-					searchable: false
-				},
-				{
-					data: 'tanggal',
-					name: 'tanggal'
-				},
-				{
-					data: 'title',
-					name: 'title'
-				},
-				{
-					data: 'status',
-					name: 'status'
-				},
-				{
-					data: 'action',
-					name: 'action'
-				}
-			]
-		})
-	});
-
-
-	@endpush

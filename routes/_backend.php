@@ -28,8 +28,8 @@ Route::group(['prefix' => BACKEND_PATH, 'namespace' => 'Backend\\', 'middleware'
 	Route::get('article.data', [ArticleCtr::class, 'getData']);
 	Route::get('article.create', [ArticleCtr::class, 'getCreate']);
 	Route::post('article.create', [ArticleCtr::class, 'store']);
-	Route::get('article.edit', [ArticleCtr::class, 'getEdit']);
-	Route::put('article.update', [ArticleCtr::class, 'update']);
+	Route::get('article.edit/{id?}', [ArticleCtr::class, 'getEdit']);
+	Route::put('article.update/{id?}', [ArticleCtr::class, 'update']);
 	Route::post('article.delete', [ArticleCtr::class, 'postDelete']);
 	Route::get('article.delete', [ArticleCtr::class, 'getDelete']);
 
