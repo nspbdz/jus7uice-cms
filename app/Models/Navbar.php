@@ -24,8 +24,9 @@ class Navbar extends Model
                 'navbars.id as id',
                 'navbars.title as title',
                 'navbars.url as url',
-            )
-            ->where('status', 1);
+                'navbars.status as status',
+                'navbars.position as position',
+            );
         if ($orderCol != null && $orderDir !=  null) {
             $query->orderBy('navbars.' . $orderCol, $orderDir);
         } else {

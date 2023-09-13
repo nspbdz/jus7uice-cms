@@ -181,7 +181,16 @@ function showResponse(data) {
 		}
 		
 		/* Bila ada datatables */
-		if($("#dataTbl").length != 0){		
+		if($("#dataNav").length != 0){	
+			console.log('masuk nav')	
+			var dataTable = $('#dataNav').DataTable();
+			dataTable.ajax.reload();
+			// $('#dataTbl').DataTable({"bDestroy":true });
+			// _reload_datatables();
+		}	
+			
+		if($("#dataTbl").length != 0){	
+			console.log('masuk sini')	
 			// $('#dataTbl').DataTable({"bDestroy":true });
 			_reload_datatables();
 		}		

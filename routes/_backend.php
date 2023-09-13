@@ -41,11 +41,10 @@ Route::group(['prefix' => BACKEND_PATH, 'namespace' => 'Backend\\', 'middleware'
 	Route::post('navbar.update', [NavbarCtr::class, 'update']);
 	Route::get('navbar.delete', [NavbarCtr::class, 'getDelete']);
 	Route::post('navbar.delete', [NavbarCtr::class, 'postDelete']);
-
+	Route::post('navbar.post-sortable', [NavbarCtr::class, 'position']);
+	
+	
 	Route::get('post', [NavbarCtr::class, 'indexTest']);
-	Route::post('post-sortable', [NavbarCtr::class, 'position']);
-
-
 
 	Route::get('backend.log', [BackendLogsCtr::class, 'index']);
 	Route::get('backend.log.data', [BackendLogsCtr::class, 'getData']);

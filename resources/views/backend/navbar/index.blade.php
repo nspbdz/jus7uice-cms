@@ -22,7 +22,7 @@ Navbar
         <form role="form" action="{{url(BACKEND_PATH.'navbar.delete')}}" method="post" id="ajxFormDelete">
             <div class="card">
                 <div class="card-body">
-                    <table id="dokumen" class="table table-striped card-table table-vcenter text-nowrap datatable" data-processing="true" data-server-side="true" data-length-menu="[10,50,100,250]" data-ordering="true" data-col-reorder="true">
+                    <table id="dataNav" class="table table-striped card-table table-vcenter text-nowrap datatable" data-processing="true" data-server-side="true" data-length-menu="[10,50,100,250]" data-ordering="true" data-col-reorder="true">
                         <!-- Your table header -->
                         <thead>
                             <tr>
@@ -59,7 +59,7 @@ Navbar
 <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.12/datatables.min.js"></script>
 <script>
     $(document).ready(function() {
-        var table = $('#dokumen').DataTable({
+        var table = $('#dataNav').DataTable({
             processing: true,
             serverSide: true,
             ajax: {
@@ -85,18 +85,7 @@ Navbar
                         return `<i class="fa fa-sort"></i>`
                     }
                 },
-                // {
-                //     data: 'chkbox',
-                //     name: 'chkbox',
-                //     orderable: false,
-                //     searchable: false
-                // },
-                // {
-                //     data: 'sort',
-                //     name: 'sort',
-                //     orderable: false,
-                //     searchable: false
-                // },
+            
                 {
                     data: 'title',
                     name: 'title'
@@ -130,7 +119,7 @@ Navbar
                     "render": function(data, type, row) {
                         var id = row.id;
                         var editUrl = "{{url(BACKEND_PATH.'navbar.edit')}}";
-                        return `<a href="${editUrl}?id=${id}" data-toggle="ajaxModal" data-title="Administrator Account | Edit" data-class="modal-lg">Edit</a>`;
+                        return `<a href="${editUrl}?id=${id}" data-toggle="ajaxModal" data-title="Navbar | Edit" data-class="modal-lg">Edit</a>`;
 
                     }
                 }
@@ -138,7 +127,7 @@ Navbar
             // Callback function after the DataTable is initialized
             initComplete: function() {
                 // Make the table rows sortable
-                $('#dokumen tbody').sortable({
+                $('#dataNav tbody').sortable({
                     items: 'tr',
                     cursor: 'move',
                     opacity: 0.6,
@@ -167,7 +156,7 @@ Navbar
             $.ajax({
                 type: "POST",
                 dataType: "json",
-                url: "{{url(BACKEND_PATH.'post-sortable')}}",
+                url: "{{url(BACKEND_PATH.'navbar.post-sortable')}}",
                 data: {
                     order: order,
                     _token: token

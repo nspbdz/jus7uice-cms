@@ -25,7 +25,7 @@ Administrator Account
 				<div class="card-body">
 				
 					<div class="table">
-						<table id="dataTbl" class="table table-striped card-table table-vcenter text-nowrap datatable" data-ajax="{{url(BACKEND_PATH.'administrator.account.data')}}" data-processing="true" data-server-side="true" data-length-menu="[50,100,250]" data-ordering="true" data-col-reorder="true">
+						<table id="dataTbl" class="table table-striped card-table table-vcenter text-nowrap datatable" data-ajax="{{url(BACKEND_PATH.'administrator.account.data')}}" data-processing="true" data-server-side="true" data-length-menu="[2,50,100,250]" data-ordering="true" data-col-reorder="true">
 							<thead>
 							<tr>
 								<th data-data="chkbox" data-orderable="false"><input class="form-check-input" type="checkbox" id="select-all" /></th>						

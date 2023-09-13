@@ -22,59 +22,65 @@ class NavbarCtr extends Controller
         // return view('backend.navbar.index');
     }
 
-    function getData(Request $request)
-    {
-        $orderColumn = $request['order'][0]['column'] ?? null;
-        $orderCol = $request['columns'][(int)$orderColumn]['name'] ?? null;
-        $orderDir = $request['order'][0]['dir'] ?? null;
-        $search = $request['search']['value'] ?? null;
-        $limit = request('length');
-        $start = request('start');
-        $campaigns = new Navbar();
-        $recordsFiltered = $campaigns->countCampaign($search);
-        $data = $campaigns->datatables($limit, $start, $search, $orderCol, $orderDir);
-        $recordsTotal = $campaigns->countCampaign();
-
-        return response()->json([
-            'draw' => intval(request('draw')),
-            'recordsTotal' => intval($recordsTotal),
-            'recordsFiltered' => $recordsFiltered,
-            'data' => $data,
-        ]);
-    }
-
     // function getData(Request $request)
     // {
+    //     $orderColumn = $request['order'][0]['column'] ?? null;
+    //     $orderCol = $request['columns'][(int)$orderColumn]['name'] ?? null;
+    //     $orderDir = $request['order'][0]['dir'] ?? null;
+    //     $search = $request['search']['value'] ?? null;
+    //     $limit = request('length');
+    //     $start = request('start');
+    //     $navbars = new Navbar();
+    //     $recordsFiltered = $navbars->countCampaign($search);
+    //     $data = $navbars->datatables($limit, $start, $search, $orderCol, $orderDir);
+    //     $recordsTotal = $navbars->countCampaign();
 
-
-    //     if ($request->ajax()) {
-
-    //         $data = Navbar::select('*')->where('status', 1)->orderBy('position', 'ASC')->simplePaginate(10);            ;
-    //         return Datatables::of($data)
-    //             ->addIndexColumn()
-    //             ->addColumn('chkbox', function ($row) {
-    //                 return '<input class="form-check-input" type="checkbox" name="deleteItems[]" value="' . $row->id . '" />';
-    //             })
-    //             ->addColumn('sort', function ($row) {
-    //                 return '<i class="fa fa-sort"></i>'; // Replace 'fa fa-sort' with your desired icon class
-    //             })
-
-    //             ->addColumn('status', function ($row) {
-    //                 $string = '';
-    //                 if ($row->status == "1") $string = '<span class="badge bg-green">Active</span>';
-    //                 else $string = '<span class="badge">Not Actived</span>';
-    //                 return $string;
-    //             })
-    //             ->addColumn('action', function ($row) {
-    //                 $action = '
-    // 			<a href="' . url(BACKEND_PATH . 'navbar.edit?id=' . $row->id) . '" data-toggle="ajaxModal" data-title="Administrator Account | Edit" data-class="modal-lg">Edit</a>
-    // 		';
-    //                 return $action;
-    //             })
-    //             ->rawColumns(['chkbox','sort', 'status', 'action'])
-    //             ->make(true);
-    //     }
+    //     return response()->json([
+    //         'draw' => intval(request('draw')),
+    //         'recordsTotal' => intval($recordsTotal),
+    //         'recordsFiltered' => $recordsFiltered,
+    //         'data' => $data,
+    //     ]);
     // }
+
+    function getData(Request $request)
+    {
+
+
+        if ($request->ajax()) {
+
+            $data = Navbar::select('*')->where('status', 1)->orderBy('position', 'ASC')->get();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('chkbox', function ($row) {
+                    return '<input class="form-check-input" type="checkbox" name="deleteItems[]" value="' . $row->id . '" />';
+                })
+                ->addColumn('sort', function ($row) {
+                    return '<i class="fa fa-sort"></i>'; // Replace 'fa fa-sort' with your desired icon class
+                })
+                ->addColumn('title', function ($row) {
+                    return $row->title;
+                })
+                ->addColumn('url', function ($row) {
+                    return $row->url;
+                })
+
+                ->addColumn('status', function ($row) {
+                    $string = '';
+                    if ($row->status == "1") $string = '<span class="badge bg-green">Active</span>';
+                    else $string = '<span class="badge">Not Actived</span>';
+                    return $string;
+                })
+                ->addColumn('action', function ($row) {
+                    $action = '
+    			<a href="' . url(BACKEND_PATH . 'navbar.edit?id=' . $row->id) . '" data-toggle="ajaxModal" data-title="Navbar | Edit" data-class="modal-lg">Edit</a>
+    		';
+                    return $action;
+                })
+                ->rawColumns(['chkbox','url','title','sort', 'status', 'action'])
+                ->make(true);
+        }
+    }
 
     public function getCreate()
     {
@@ -101,7 +107,7 @@ class NavbarCtr extends Controller
         return redirect()->back()->with('msg', "Berhasil tersimpan");
     }
 
-    function getEdit(StoreNavbarRequest $request)
+    function getEdit(Request $request)
     {
         $data = Navbar::find($request->id);
         return view('backend.navbar.edit', compact('data'));
@@ -138,11 +144,13 @@ class NavbarCtr extends Controller
         }
 
         # Upd DB
-        $data = Navbar::whereIn('id', $request->deleteItems)->update(['status' => 2]);
+        $data = Navbar::whereIn('id', $request->deleteItems)->update(['status' => 0]);
         // dd($data);
         # Redirect
         if ($request->ajax()) {
-            return response()->json(['message' => ["Berhasil diperbarui"]]);
+        // return response()->json('success', 200);
+
+            return response()->json(['message' => ["Berhasil diperbarui"] , 'status' => 'success'] );
         }
         return redirect()->back()->with('msg', "Berhasil diperbarui");
     }
