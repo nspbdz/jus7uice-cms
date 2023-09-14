@@ -65,6 +65,7 @@
             <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
             <?php
+            // dd($widget);
             // dd(Request::is(''));
             ?>
             <nav id="navbar" class="navbar">
@@ -125,7 +126,7 @@
 
             </div>
             <br><br>
-            
+
             <div>
                 @widget('news')
             </div>
