@@ -11,6 +11,7 @@ use App\Http\Controllers\frontend\FeContentCtr;
 
 Route::get('/', [FeContentCtr::class, 'index']);
 
+Route::get('/test', [FeContentCtr::class, 'test']);
 
 Route::get('/about', [FeContentCtr::class, 'about']);
 Route::get('/services', [FeContentCtr::class, 'services']);

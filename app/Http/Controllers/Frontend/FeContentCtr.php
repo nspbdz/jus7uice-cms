@@ -8,12 +8,21 @@ use Illuminate\Http\Request;
 
 class FeContentCtr extends Controller
 {
+
+    public function test()
+    {
+        $data = Content::where('slug', '=', 'test')->first();
+        return view('frontend.test', compact('data'));
+    }
+
     public function index()
     {
         $data = Content::where('slug', '=', '')->first();
 
         return view('frontend.index', compact('data'));
     }
+
+
 
     public function about()
     {

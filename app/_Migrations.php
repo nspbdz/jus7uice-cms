@@ -9,51 +9,77 @@ use Hash;
 class _Migrations
 {
 
-    function __construct()
-    {
-        $this->_check_db_exists();
+	function __construct()
+	{
+		$this->_check_db_exists();
 
 
-        $this->_create_table_admin();
-        $this->_create_table_admin_group();
+		$this->_create_table_admin();
+		$this->_create_table_admin_group();
 
-        $this->_create_table_user();
-        #content
-        $this->_create_table_contents();
+		$this->_create_table_user();
 
-        #article
-        $this->_create_table_articles();
+		#widget
+		$this->_create_table_widgets();
 
-        #navbar
-        $this->_create_table_navbars();
+		#content
+		$this->_create_table_contents();
 
-        # Media
-        $this->_create_table_media_album();
-        $this->_create_table_media();
+		#article
+		$this->_create_table_articles();
 
-        # Logging
-        $this->_create_table_backendlog();
-        $this->_create_table_frontendlog();
-        $this->_create_table_activitylog();
-    }
+		#navbar
+		$this->_create_table_navbars();
 
-    /* Check DB */
-    function _check_db_exists()
-    {
-        try {
-            DB::connection()->getPdo();
-        } catch (\Exception $e) {
-            die("Failed to establish connection to the server");
-        }
-    }
+		# Media
+		$this->_create_table_media_album();
+		$this->_create_table_media();
+
+		# Logging
+		$this->_create_table_backendlog();
+		$this->_create_table_frontendlog();
+		$this->_create_table_activitylog();
+	}
+
+	/* Check DB */
+	function _check_db_exists()
+	{
+		try {
+			DB::connection()->getPdo();
+		} catch (\Exception $e) {
+			die("Failed to establish connection to the server");
+		}
+	}
+
+	/* Tbl content */
+
+	function _create_table_widgets()
+	{
+		$table = "widgets";
+		$r = "
+			CREATE TABLE " . $table . " (
+				`id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+				`name` varchar(100) NULL DEFAULT NULL,
+				`article_id` int(10) unsigned DEFAULT NULL,
+				`url` JSON,
+				`created_at` datetime DEFAULT NULL,
+				`updated_at` datetime DEFAULT NULL,
+				`status` tinyint(1) unsigned NOT NULL DEFAULT '1',
+				PRIMARY KEY (`id`)
+			) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+			";
+		if (!Schema::hasTable($table)) {
+			DB::statement($r);
+		}
+	}
 
 
-    /* Tbl content */
+	/* Tbl content */
 
-    function _create_table_contents()
-    {
-        $table = "contents";
-        $r = "
+	function _create_table_contents()
+	{
+		$table = "contents";
+		$r = "
 			CREATE TABLE " . $table . " (
 				`id` int(10) unsigned NOT NULL AUTO_INCREMENT,
 				`title` varchar(100) NULL DEFAULT NULL,
@@ -66,17 +92,17 @@ class _Migrations
 				PRIMARY KEY (`id`)
 			) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 			";
-        if (!Schema::hasTable($table)) {
-            DB::statement($r);
-        }
-    }
+		if (!Schema::hasTable($table)) {
+			DB::statement($r);
+		}
+	}
 
-    /* Tbl navbar */
+	/* Tbl navbar */
 
-    function _create_table_navbars()
-    {
-        $table = "navbars";
-        $r = "
+	function _create_table_navbars()
+	{
+		$table = "navbars";
+		$r = "
 		CREATE TABLE " . $table . " (
 			`id` int(10) unsigned NOT NULL AUTO_INCREMENT,
 			`title` varchar(100) NOT NULL,
@@ -89,17 +115,17 @@ class _Migrations
 			PRIMARY KEY (`id`)
 		) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 		";
-        if (!Schema::hasTable($table)) {
-            DB::statement($r);
-        }
-    }
+		if (!Schema::hasTable($table)) {
+			DB::statement($r);
+		}
+	}
 
-    /* Tbl article */
+	/* Tbl article */
 
-    function _create_table_articles()
-    {
-        $table = "articles";
-        $r = "
+	function _create_table_articles()
+	{
+		$table = "articles";
+		$r = "
 		CREATE TABLE " . $table . " (
 			`id` int(10) unsigned NOT NULL AUTO_INCREMENT,
 			`title` varchar(100) NULL DEFAULT NULL,
@@ -112,16 +138,16 @@ class _Migrations
 			PRIMARY KEY (`id`)
 		) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 		";
-        if (!Schema::hasTable($table)) {
-            DB::statement($r);
-        }
-    }
+		if (!Schema::hasTable($table)) {
+			DB::statement($r);
+		}
+	}
 
-    /* Tbl Admin */
-    function _create_table_admin()
-    {
-        $table = "admin";
-        $r = "
+	/* Tbl Admin */
+	function _create_table_admin()
+	{
+		$table = "admin";
+		$r = "
 		CREATE TABLE " . $table . " (
 		  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
 		  `admin_group_id` int(10) unsigned DEFAULT NULL,
@@ -141,15 +167,15 @@ class _Migrations
 		  PRIMARY KEY (`id`)
 		) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 		";
-        if (!Schema::hasTable($table)) {
-            DB::statement($r);
-        }
-    }
+		if (!Schema::hasTable($table)) {
+			DB::statement($r);
+		}
+	}
 
-    function _create_table_admin_group()
-    {
-        $table = "admin_group";
-        $r = "
+	function _create_table_admin_group()
+	{
+		$table = "admin_group";
+		$r = "
 		CREATE TABLE " . $table . " (
 			`id` int(10) unsigned NOT NULL AUTO_INCREMENT,
 			`name` varchar(100) NULL DEFAULT NULL,
@@ -163,16 +189,16 @@ class _Migrations
 			PRIMARY KEY (`id`)
 		) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 		";
-        if (!Schema::hasTable($table)) {
-            DB::statement($r);
-        }
-    }
+		if (!Schema::hasTable($table)) {
+			DB::statement($r);
+		}
+	}
 
 
-    function _create_table_user()
-    {
-        $table = "users";
-        $r = "
+	function _create_table_user()
+	{
+		$table = "users";
+		$r = "
 		CREATE TABLE " . $table . " (
 			`id` bigint(21) unsigned NOT NULL AUTO_INCREMENT,
 			`uuid` varchar(50) DEFAULT NULL,
@@ -203,17 +229,17 @@ class _Migrations
 			PRIMARY KEY (`id`)
 		) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 		";
-        if (!Schema::hasTable($table)) {
-            DB::statement($r);
-        }
-    }
+		if (!Schema::hasTable($table)) {
+			DB::statement($r);
+		}
+	}
 
 
-    # Media
-    function _create_table_media_album()
-    {
-        $table = "media_album";
-        $r = "
+	# Media
+	function _create_table_media_album()
+	{
+		$table = "media_album";
+		$r = "
 		CREATE TABLE " . $table . " (
 			`id` int(21) unsigned NOT NULL AUTO_INCREMENT,
 			`uuid` varchar(50) DEFAULT NULL,
@@ -230,15 +256,15 @@ class _Migrations
 			PRIMARY KEY (`id`)
 		) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 		";
-        if (!Schema::hasTable($table)) {
-            DB::statement($r);
-        }
-    }
+		if (!Schema::hasTable($table)) {
+			DB::statement($r);
+		}
+	}
 
-    function _create_table_media()
-    {
-        $table = "media";
-        $r = "
+	function _create_table_media()
+	{
+		$table = "media";
+		$r = "
 		CREATE TABLE " . $table . " (
 			`id` int(21) unsigned NOT NULL AUTO_INCREMENT,
 			`uuid` varchar(50) DEFAULT NULL,
@@ -264,19 +290,19 @@ class _Migrations
 			PRIMARY KEY (`id`)
 		) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 		";
-        if (!Schema::hasTable($table)) {
-            DB::statement($r);
-        }
-    }
+		if (!Schema::hasTable($table)) {
+			DB::statement($r);
+		}
+	}
 
 
 
 
-    # Logging
-    function _create_table_backendlog($execute = 1, $date = '')
-    {
-        $table = 'backend_logs_' . ($date ? $date : date("Ymd"));
-        $r = "CREATE TABLE IF NOT EXISTS `$table` (
+	# Logging
+	function _create_table_backendlog($execute = 1, $date = '')
+	{
+		$table = 'backend_logs_' . ($date ? $date : date("Ymd"));
+		$r = "CREATE TABLE IF NOT EXISTS `$table` (
 			  `id` bigint(21) unsigned NOT NULL AUTO_INCREMENT,
 			  `user_id` int(10) unsigned NULL DEFAULT '0',
 			  `user_name` varchar(255) NULL DEFAULT NULL,
@@ -291,15 +317,15 @@ class _Migrations
 			  PRIMARY KEY (`id`)
 			) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 		";
-        if (!Schema::connection('logs')->hasTable($table)) {
-            DB::connection('logs')->statement($r);
-        }
-    }
+		if (!Schema::connection('logs')->hasTable($table)) {
+			DB::connection('logs')->statement($r);
+		}
+	}
 
-    function _create_table_frontendlog($execute = 1, $date = '')
-    {
-        $table = 'frontend_logs_' . ($date ? $date : date("Ymd"));
-        $r = "CREATE TABLE IF NOT EXISTS `$table` (
+	function _create_table_frontendlog($execute = 1, $date = '')
+	{
+		$table = 'frontend_logs_' . ($date ? $date : date("Ymd"));
+		$r = "CREATE TABLE IF NOT EXISTS `$table` (
 			  `id` bigint(21) unsigned NOT NULL AUTO_INCREMENT,
 			  `user_id` int(10) unsigned NULL DEFAULT '0',
 			  `user_name` varchar(255) NULL DEFAULT NULL,
@@ -314,15 +340,15 @@ class _Migrations
 			  PRIMARY KEY (`id`)
 			) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 		";
-        if (!Schema::connection('logs')->hasTable($table)) {
-            DB::connection('logs')->statement($r);
-        }
-    }
+		if (!Schema::connection('logs')->hasTable($table)) {
+			DB::connection('logs')->statement($r);
+		}
+	}
 
-    function _create_table_activitylog($execute = 1, $date = '')
-    {
-        $table = 'activity_logs_' . ($date ? $date : date("Ymd"));
-        $r = "CREATE TABLE IF NOT EXISTS `$table` (
+	function _create_table_activitylog($execute = 1, $date = '')
+	{
+		$table = 'activity_logs_' . ($date ? $date : date("Ymd"));
+		$r = "CREATE TABLE IF NOT EXISTS `$table` (
 			  `id` bigint(21) unsigned NOT NULL AUTO_INCREMENT,
 			  `user_id` int(10) unsigned NULL DEFAULT '0',
 			  `user_name` varchar(255) NULL DEFAULT NULL,
@@ -337,8 +363,8 @@ class _Migrations
 			  PRIMARY KEY (`id`)
 			) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 		";
-        if (!Schema::connection('logs')->hasTable($table)) {
-            DB::connection('logs')->statement($r);
-        }
-    }
+		if (!Schema::connection('logs')->hasTable($table)) {
+			DB::connection('logs')->statement($r);
+		}
+	}
 }

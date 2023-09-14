@@ -14,6 +14,8 @@
         <div>
             {{$data->content}}
         </div>
+
+      
         <!-- <div class="row content"> -->
 
         <!-- {{$data->content}} -->

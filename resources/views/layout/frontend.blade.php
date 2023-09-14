@@ -27,101 +27,24 @@
     <link href="{{asset('frontendTemplate/assets/vendor/remixicon/remixicon.css')}}" rel="stylesheet">
     <link href="{{asset('frontendTemplate/assets/vendor/swiper/swiper-bundle.min.css')}}" rel="stylesheet">
 
+    <!-- frontend news -->
+    <link rel="stylesheet" href="{{asset('frontendTemplate/aznews-master/assets/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{asset('frontendTemplate/aznews-master/assets/css/owl.carousel.min.css')}}">
+    <link rel="stylesheet" href="{{asset('frontendTemplate/aznews-master/assets/css/ticker-style.css')}}">
+    <link rel="stylesheet" href="{{asset('frontendTemplate/aznews-master/assets/css/flaticon.css')}}">
+    <link rel="stylesheet" href="{{asset('frontendTemplate/aznews-master/assets/css/slicknav.css')}}">
+    <link rel="stylesheet" href="{{asset('frontendTemplate/aznews-master/assets/css/animate.min.css')}}">
+    <link rel="stylesheet" href="{{asset('frontendTemplate/aznews-master/assets/css/magnific-popup.css')}}">
+    <link rel="stylesheet" href="{{asset('frontendTemplate/aznews-master/assets/css/fontawesome-all.min.css')}}">
+    <link rel="stylesheet" href="{{asset('frontendTemplate/aznews-master/assets/css/themify-icons.css')}}">
+    <link rel="stylesheet" href="{{asset('frontendTemplate/aznews-master/assets/css/slick.css')}}">
+    <link rel="stylesheet" href="{{asset('frontendTemplate/aznews-master/assets/css/nice-select.css')}}">
+    <link rel="stylesheet" href="{{asset('frontendTemplate/aznews-master/assets/css/style.css')}}">
+    <!-- frontend news -->
+
     <!-- Template Main CSS File -->
     <link href="{{asset('frontendTemplate/assets/css/style.css')}}" rel="stylesheet">
 
-    <style>
-        /* Styling untuk Weekly News Area */
-        .weekly-news-area {
-            padding-top: 50px;
-        }
-
-        .weekly-wrapper {
-            background-color: #f9f9f9;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        /* Styling untuk Section Title */
-        .section-tittle {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .section-tittle h3 {
-            font-size: 24px;
-            color: #333;
-        }
-
-        /* Styling untuk Weekly News Items */
-        .weekly-single {
-            margin-right: 20px;
-            margin-bottom: 20px;
-            overflow: hidden;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease-in-out;
-        }
-
-        .weekly-single:hover {
-            transform: translateY(-5px);
-        }
-
-        .weekly-img {
-            overflow: hidden;
-            border-radius: 10px 10px 0 0;
-        }
-
-        .weekly-img img {
-            width: 100%;
-            height: auto;
-            display: block;
-            transition: transform 0.3s ease-in-out;
-        }
-
-        .weekly-img img:hover {
-            transform: scale(1.1);
-        }
-
-        .weekly-caption {
-            padding: 15px;
-            background-color: #fff;
-        }
-
-        .weekly-caption .color1 {
-            color: #f45c77;
-            font-size: 14px;
-            font-weight: 700;
-            text-transform: uppercase;
-        }
-
-        .weekly-caption h4 {
-            font-size: 18px;
-            margin-top: 10px;
-            margin-bottom: 0;
-        }
-
-        /* Styling untuk Dot Navigation */
-        .dot-style {
-            position: relative;
-        }
-
-        .dot-style .owl-dot {
-            background-color: transparent;
-            border: 2px solid #f45c77;
-            display: inline-block;
-            height: 10px;
-            width: 10px;
-            margin-right: 5px;
-            border-radius: 50%;
-        }
-
-        .dot-style .owl-dot.active {
-            background-color: #f45c77;
-            border: none;
-        }
-    </style>
     <!-- =======================================================
   * Template Name: Arsha
   * Updated: Aug 30 2023 with Bootstrap v5.3.1
@@ -142,7 +65,7 @@
             <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
             <?php
-                // dd(Request::is(''));
+            // dd(Request::is(''));
             ?>
             <nav id="navbar" class="navbar">
                 <ul>
@@ -201,66 +124,11 @@
                 @yield('content')
 
             </div>
-            <!--   Weekly-News start -->
-            <div class="weekly-news-area pt-50">
-                <div class="container">
-                    <div class="weekly-wrapper">
-                        <!-- section Tittle -->
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="section-tittle mb-30">
-                                    <h3>Weekly Top News</h3>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="weekly-news-active dot-style d-flex dot-style">
-                                    <div class="weekly-single">
-                                        <div class="weekly-img">
-                                            <img src="{{asset('assets/img/news/weeklyNews2.jpg')}}" alt="">
-                                        </div>
-                                        <div class="weekly-caption">
-                                            <span class="color1">Strike</span>
-                                            <h4><a href="#">Welcome To The Best Model Winner Contest</a></h4>
-                                        </div>
-                                    </div>
-                                    <div class="weekly-single active">
-                                        <div class="weekly-img">
-                                            <img src="{{asset('assets/img/news/weeklyNews1.jpg')}}" alt="">
-                                        </div>
-                                        <div class="weekly-caption">
-                                            <span class="color1">Strike</span>
-                                            <h4><a href="#">Welcome To The Best Model Winner Contest</a></h4>
-                                        </div>
-                                    </div>
-                                    <div class="weekly-single">
-                                        <div class="weekly-img">
-                                            <img src="{{asset('assets/img/news/weeklyNews3.jpg')}}" alt="">
-                                        </div>
-                                        <div class="weekly-caption">
-                                            <span class="color1">Strike</span>
-                                            <h4><a href="#">Welcome To The Best Model Winner Contest</a></h4>
-                                        </div>
-                                    </div>
-                                    <div class="weekly-single">
-                                        <div class="weekly-img">
-                                            <img src="{{asset('assets/img/news/weeklyNews1.jpg')}}" alt="">
-                                        </div>
-                                        <div class="weekly-caption">
-                                            <span class="color1">Strike</span>
-                                            <h4><a href="#">Welcome To The Best Model Winner Contest</a></h4>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <br><br>
+            
+            <div>
+                @widget('news')
             </div>
-            <!-- End Weekly-News -->
-            <br>
-
 
             <footer id="footer">
 
@@ -359,6 +227,52 @@
 
             <!-- Template Main JS File -->
             <script src="{{asset('frontendTemplate/assets/js/main.js')}}"></script>
+
+
+
+            <!-- frontend news -->
+            <!-- JS here -->
+
+            <!-- All JS Custom Plugins Link Here here -->
+            <script src="{{asset('frontendTemplate/aznews-master/assets/js/vendor/modernizr-3.5.0.min.js')}}"></script>
+            <!-- Jquery, Popper, Bootstrap -->
+            <script src="{{asset('frontendTemplate/aznews-master/assets/js/vendor/jquery-1.12.4.min.js')}}"></script>
+            <script src="{{asset('frontendTemplate/aznews-master/assets/js/popper.min.js')}}"></script>
+            <script src="{{asset('frontendTemplate/aznews-master/assets/js/bootstrap.min.js')}}"></script>
+            <!-- Jquery Mobile Menu -->
+            <script src="{{asset('frontendTemplate/aznews-master/assets/js/jquery.slicknav.min.js')}}"></script>
+
+            <!-- Jquery Slick , Owl-Carousel Plugins -->
+            <script src="{{asset('frontendTemplate/aznews-master/assets/js/owl.carousel.min.js')}}"></script>
+            <script src="{{asset('frontendTemplate/aznews-master/assets/js/slick.min.js')}}"></script>
+            <!-- Date Picker -->
+            <script src="{{asset('frontendTemplate/aznews-master/assets/js/gijgo.min.js')}}"></script>
+            <!-- One Page, Animated-HeadLin -->
+            <script src="{{asset('frontendTemplate/aznews-master/assets/js/wow.min.js')}}"></script>
+            <script src="{{asset('frontendTemplate/aznews-master/assets/js/animated.headline.js')}}"></script>
+            <script src="{{asset('frontendTemplate/aznews-master/assets/js/jquery.magnific-popup.js')}}"></script>
+
+            <!-- Breaking New Pluging -->
+            <script src="{{asset('frontendTemplate/aznews-master/assets/js/jquery.ticker.js')}}"></script>
+            <script src="{{asset('frontendTemplate/aznews-master/assets/js/site.js')}}"></script>
+
+            <!-- Scrollup, nice-select, sticky -->
+            <script src="{{asset('frontendTemplate/aznews-master/assets/js/jquery.scrollUp.min.js"></script>
+        <script src="{{asset('frontendTemplate/aznews-master/assets/js/jquery.nice-select.min.js"></script>
+		<script src="{{asset('frontendTemplate/aznews-master/assets/js/jquery.sticky.js"></script>
+        
+        <!-- contact js -->
+        <script src="{{asset('frontendTemplate/aznews-master/assets/js/contact.js"></script>
+        <script src="{{asset('frontendTemplate/aznews-master/assets/js/jquery.form.js"></script>
+        <script src="{{asset('frontendTemplate/aznews-master/assets/js/jquery.validate.min.js"></script>
+        <script src="{{asset('frontendTemplate/aznews-master/assets/js/mail-script.js"></script>
+        <script src="{{asset('frontendTemplate/aznews-master/assets/js/jquery.ajaxchimp.min.js"></script>
+        
+		<!-- Jquery Plugins, main Jquery -->	
+        <script src="{{asset('frontendTemplate/aznews-master/assets/js/plugins.js"></script>
+        <script src="{{asset('frontendTemplate/aznews-master/assets/js/main.js"></script>
+        
+            <!-- frontend news -->
 
 </body>
 

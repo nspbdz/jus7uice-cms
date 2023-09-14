@@ -73,7 +73,7 @@ class ArticleCtr extends Controller
 
         // return redirect()->back()->with('msg', "Berhasil tersimpan");
     }
-g
+
     function getEdit(Request $request)
     {
         $data = Article::find($request->id);

@@ -16,7 +16,35 @@ class _Seeds
         $this->_insert_table_admin_article();
         $this->_insert_table_admin_navbar();
         $this->_insert_table_admin_content();
+        $this->_insert_table_admin_widget();
     }
+
+    /* Admin article */
+
+    function _insert_table_admin_widget()
+    {
+        if (Schema::hasTable('widgets')) {
+            if (DB::table('widgets')->count() <= 0) {
+
+                $data = ['weekly_news', 'news', 'banner', 'test1', 'test2', 'test3'];
+                $dataUrl = json_encode(['', 'about', 'services', 'portfolio', 'team', 'contact']);
+                
+                // dd($data[0]);
+                for ($i = 0; $i < 6; $i++) {
+                    DB::table('widgets')->insert([
+                        "id" => $i + 1,
+                        "name" => $data[$i],
+                        "url" => $dataUrl,
+                        "article_id" => $i + 1,
+                        "created_at" => now(),
+                        "updated_at" => now(),
+                        "status" => 1,
+                    ]);
+                }
+            }
+        }
+    }
+
 
     /* Admin article */
 
@@ -38,6 +66,7 @@ class _Seeds
                         "position" => $i,
                         "created_at" => now(),
                         "updated_at" => now(),
+                        "status" => 1,
                     ]);
                 }
             }
