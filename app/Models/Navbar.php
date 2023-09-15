@@ -17,6 +17,12 @@ class Navbar extends Model
         'position',
     ];
 
+    public function widgets()
+    {
+        return $this->belongsToMany(Widget::class, 'widget_navbars', 'navbar_id', 'widget_id');
+    }
+
+
     public function datatables($limit = null, $start = null, $search = null, $orderCol = null, $orderDir = null)
     {
         $query = DB::table('navbars')

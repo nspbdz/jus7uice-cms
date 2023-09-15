@@ -19,6 +19,12 @@ class _Migrations
 
 		$this->_create_table_user();
 
+		#widget_page
+		$this->_create_table_widget_navbars();
+
+		#article_widget
+		$this->_create_table_article_widgets();
+
 		#widget
 		$this->_create_table_widgets();
 
@@ -51,7 +57,49 @@ class _Migrations
 		}
 	}
 
-	/* Tbl content */
+		/* Tbl article_widget */
+
+		function _create_table_widget_navbars()
+		{
+			$table = "widget_navbars";
+			$r = "
+				CREATE TABLE " . $table . " (
+					`id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+					`widget_id` int(10) unsigned NULL DEFAULT '0',
+					`navbar_id` int(10) unsigned NULL DEFAULT '0',
+					`created_at` datetime DEFAULT NULL,
+					`updated_at` datetime DEFAULT NULL,
+					PRIMARY KEY (`id`)
+				) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+				";
+			if (!Schema::hasTable($table)) {
+				DB::statement($r);
+			}
+		}
+	
+
+	/* Tbl article_widget */
+
+	function _create_table_article_widgets()
+	{
+		$table = "article_widgets";
+		$r = "
+			CREATE TABLE " . $table . " (
+				`id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+				`article_id` int(10) unsigned NULL DEFAULT '0',
+				`widget_id` int(10) unsigned NULL DEFAULT '0',
+				`created_at` datetime DEFAULT NULL,
+				`updated_at` datetime DEFAULT NULL,
+				PRIMARY KEY (`id`)
+			) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+			";
+		if (!Schema::hasTable($table)) {
+			DB::statement($r);
+		}
+	}
+
+
+	/* Tbl widget */
 
 	function _create_table_widgets()
 	{
@@ -60,8 +108,8 @@ class _Migrations
 			CREATE TABLE " . $table . " (
 				`id` int(10) unsigned NOT NULL AUTO_INCREMENT,
 				`name` varchar(100) NULL DEFAULT NULL,
-				`article_id` int(10) unsigned DEFAULT NULL,
-				`url` JSON,
+				
+                `slug` varchar(100) NOT NULL,
 				`created_at` datetime DEFAULT NULL,
 				`updated_at` datetime DEFAULT NULL,
 				`status` tinyint(1) unsigned NOT NULL DEFAULT '1',

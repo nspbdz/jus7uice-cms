@@ -2,10 +2,9 @@
 
 namespace App\Widgets;
 
-use App\Models\Article;
 use Arrilot\Widgets\AbstractWidget;
 
-class News extends AbstractWidget
+class BannerNews extends AbstractWidget
 {
     /**
      * The configuration array.
@@ -22,9 +21,7 @@ class News extends AbstractWidget
     {
         //
 
-        $data=Article::get(); 
-        return view('widgets.weekly_news', [
-            'data' => $data,
+        return view('widgets.banner_news', [
             'config' => $this->config,
         ]);
     }

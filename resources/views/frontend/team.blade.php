@@ -3,7 +3,7 @@
 
 @section('content')
 <!-- ======= Team Section ======= -->
-<section id="team" class="team section-bg">
+<section id="team" class="team section-bg" style="height: 100vh;">
     <div class="container" data-aos="fade-up">
 
         <div class="section-title">
@@ -94,7 +94,7 @@
 
 
 <!-- ======= Pricing Section ======= -->
-<section id="pricing" class="pricing">
+<!-- <section id="pricing" class="pricing">
     <div class="container" data-aos="fade-up">
 
         <div class="section-title">
@@ -152,11 +152,11 @@
         </div>
 
     </div>
-</section><!-- End Pricing Section -->
+</section>End Pricing Section -->
 
 
 <!-- ======= Frequently Asked Questions Section ======= -->
-<section id="faq" class="faq section-bg">
+<!-- <section id="faq" class="faq section-bg">
     <div class="container" data-aos="fade-up">
 
         <div class="section-title">
@@ -215,6 +215,7 @@
         </div>
 
     </div>
-</section><!-- End Frequently Asked Questions Section -->
+</section> -->
+<!-- End Frequently Asked Questions Section -->
 
 @endsection

@@ -4,7 +4,7 @@
 @section('content')
 
 <!-- ======= About Us Section ======= -->
-<section id="about" class="about">
+<section id="about" class="about"  style="height: 100vh;">
     <div class="container" data-aos="fade-up">
 
         <div class="section-title">
@@ -15,8 +15,10 @@
             {{$data->content}}
         </div>
 
-      
-        <!-- <div class="row content"> -->
+    </div>
+</section>
+
+  <!-- <div class="row content"> -->
 
         <!-- {{$data->content}} -->
         <!-- <div class="col-lg-6">
@@ -40,9 +42,7 @@
             </div>
         </div>
     -->
-
-    </div>
-</section><!-- End About Us Section -->
+<!-- End About Us Section -->
 
 <!-- ======= Why Us Section ======= -->
 <!-- <section id="why-us" class="why-us section-bg">

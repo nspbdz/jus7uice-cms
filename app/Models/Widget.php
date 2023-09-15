@@ -8,4 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Widget extends Model
 {
     use HasFactory;
+
+    public function articles()
+    {
+        return $this->belongsToMany(Article::class, 'article_widgets', 'widget_id', 'article_id');
+    }
+
+    public function navbars()
+    {
+        return $this->belongsToMany(Navbar::class, 'widget_navbars', 'widget_id', 'navbar_id');
+    }
+
 }

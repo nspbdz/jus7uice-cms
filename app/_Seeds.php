@@ -17,9 +17,59 @@ class _Seeds
         $this->_insert_table_admin_navbar();
         $this->_insert_table_admin_content();
         $this->_insert_table_admin_widget();
+        $this->_insert_table_admin_article_widget();
+        $this->_insert_table_admin_widget_navbar();
     }
 
-    /* Admin article */
+    /* Admin article widget */
+
+    function _insert_table_admin_widget_navbar()
+    {
+        if (Schema::hasTable('widget_navbars')) {
+            if (DB::table('widget_navbars')->count() <= 0) {
+
+                $dataArticle = [1,2,3,4,5,6];
+                $dataWidget = [1,2,3,4,5,6];
+                
+                // dd($data[0]);
+                for ($i = 0; $i < 6; $i++) {
+                    DB::table('widget_navbars')->insert([
+                        "id" => $i + 1,
+                        "navbar_id" => $dataArticle[$i],
+                        "widget_id" => 1,
+                        "created_at" => now(),
+                        "updated_at" => now(),
+                    ]);
+                }
+            }
+        }
+    }
+
+     /* Admin article widget */
+
+     function _insert_table_admin_article_widget()
+     {
+         if (Schema::hasTable('article_widgets')) {
+             if (DB::table('article_widgets')->count() <= 0) {
+ 
+                 $dataArticle = [1,2,3,4,5,6];
+                 $dataWidget = [1,2,3,4,5,6];
+                 
+                 // dd($data[0]);
+                 for ($i = 0; $i < 6; $i++) {
+                     DB::table('article_widgets')->insert([
+                         "id" => $i + 1,
+                         "article_id" => $dataArticle[$i],
+                         "widget_id" => 1,
+                         "created_at" => now(),
+                         "updated_at" => now(),
+                     ]);
+                 }
+             }
+         }
+     }
+
+    /* Admin widget */
 
     function _insert_table_admin_widget()
     {
@@ -28,14 +78,14 @@ class _Seeds
 
                 $data = ['weekly_news', 'news', 'banner', 'test1', 'test2', 'test3'];
                 $dataUrl = json_encode(['', 'about', 'services', 'portfolio', 'team', 'contact']);
+                $dataArticle = json_encode([1,2,3,4,5]);
                 
                 // dd($data[0]);
                 for ($i = 0; $i < 6; $i++) {
                     DB::table('widgets')->insert([
                         "id" => $i + 1,
                         "name" => $data[$i],
-                        "url" => $dataUrl,
-                        "article_id" => $i + 1,
+                        "slug" => $data[$i],
                         "created_at" => now(),
                         "updated_at" => now(),
                         "status" => 1,
@@ -46,7 +96,7 @@ class _Seeds
     }
 
 
-    /* Admin article */
+    /* Admin navbar */
 
     function _insert_table_admin_navbar()
     {

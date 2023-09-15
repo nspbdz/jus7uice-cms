@@ -6,7 +6,7 @@
 
 
 <!-- ======= Contact Section ======= -->
-<section id="contact" class="contact">
+<section id="contact" class="contact" style="height: 100vh;">
     <div class="container" data-aos="fade-up">
 
         <div class="section-title">

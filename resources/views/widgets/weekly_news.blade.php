@@ -14,20 +14,22 @@
              <div class="row">
                  <div class="col-12">
                      <div class="weekly-news-active dot-style d-flex dot-style">
-
-                            @foreach($data as $items)
+                         
+                     @foreach($data as $items)
                          <div class="weekly-single">
                              <div class="weekly-img">
-                                 <!-- <img src="{{asset('frontendTemplate/aznews-master/assets/img/news/weeklyNews2.jpg')}}" width="300px" height="300px" alt=""> -->
+                                 @if(isset($items->thumbnail))
                                  <img src="{{ asset($items->thumbnail) }}" width="300px" height="300px" alt="">
-
-                             </div>
+                                 @else
+                                 <img src="{{ asset('path_to_default_image.jpg') }}" width="300px" height="300px" alt="Default Image">
+                                 @endif
+                                 </div>
                              <div class="weekly-caption">
                                  <span class="color1">{{$items->title}}</span>
-                                 <!-- <h4><a href="#">Welcome To The Best Model Winner Contest</a></h4> -->
                              </div>
                          </div>
-                        @endforeach
+                         @endforeach
+
 
                      </div>
                  </div>

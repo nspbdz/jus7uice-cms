@@ -5,7 +5,7 @@
 
 
 <!-- ======= Portfolio Section ======= -->
-<section id="portfolio" class="portfolio">
+<section id="portfolio" class="portfolio" style="height: 100vh;">
     <div class="container" data-aos="fade-up">
 
         <div class="section-title">
