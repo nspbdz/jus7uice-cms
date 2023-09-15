@@ -1,14 +1,27 @@
 <?php
 
-namespace App\Library;
+namespace App\Helper;
+
 
 use App\Models\Content;
+use App\Models\Widget;
 use Illuminate\Support\Arr;
 
 class ContentHelper
 {
-    public function Data()
+    public static function data()
     {
         return "aaaa";
+    }
+
+    public static function Availibility($widgetSlug, $desiredSegment)
+    {
+        // dd($desiredSegment);
+        // dd($widgetSlug);
+        $dataWidget = Widget::with(['navbars' => function ($query) use ($desiredSegment) {
+            $query->where('slug', '=', $desiredSegment);
+        }])->where('slug', '=', $widgetSlug)->first();
+
+        return $dataWidget;
     }
 }

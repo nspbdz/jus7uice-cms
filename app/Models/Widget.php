@@ -19,4 +19,6 @@ class Widget extends Model
         return $this->belongsToMany(Navbar::class, 'widget_navbars', 'widget_id', 'navbar_id');
     }
 
+    
+
 }

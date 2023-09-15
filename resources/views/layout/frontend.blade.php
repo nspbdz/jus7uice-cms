@@ -99,21 +99,42 @@
 
             <!-- Main Content -->
 
-
             <div class="main-content">
+                @if ($canWidgetBanner == 0)
                 @yield('content')
 
+
+
+                @else
+                <div class="row">
+                    <div class="col-md-8">
+                        @yield('content')
+
+                    </div>
+                    <div class="col-md-4">
+                        <br><br>
+                        <br><br>
+                        @widget('BannerNews')
+
+                    </div>
+                </div>
+
+                @endif
             </div>
+
+
 
             <br><br>
-
-            @if (empty($items))
+            <?php
+            // dd($dataWidget);
+            // dd($canWidgetBanner);
+            ?>
+            @if ($canWidgetWeeklyNews == 0)
+            
+            @else
             <div>
-
                 @widget('WeeklyNews')
             </div>
-            @else
-
             @endif
 
 

@@ -41,6 +41,17 @@ class _Seeds
                         "updated_at" => now(),
                     ]);
                 }
+
+                for ($j = 0; $j < 6; $j++) {
+                    DB::table('widget_navbars')->insert([
+                        "id" => 7 + $j,
+                        "navbar_id" => $dataArticle[$j],
+                        "widget_id" => 3,
+                        "created_at" => now(),
+                        "updated_at" => now(),
+                    ]);
+                }
+
             }
         }
     }
@@ -91,6 +102,7 @@ class _Seeds
                         "status" => 1,
                     ]);
                 }
+                
             }
         }
     }

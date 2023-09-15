@@ -3,7 +3,7 @@
 
 @section('content')
 <!-- ======= Team Section ======= -->
-<section id="team" class="team section-bg" style="height: 100vh;">
+<section id="team" class="team " >
     <div class="container" data-aos="fade-up">
 
         <div class="section-title">

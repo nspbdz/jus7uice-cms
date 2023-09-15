@@ -5,7 +5,7 @@
 
 
 <!-- ======= Services Section ======= -->
-<section id="services" class="services section-bg" style="height: 100vh;">
+<section id="services" class="services " style="height: 100vh;">
     <div class="container" data-aos="fade-up">
         <div class="section-title">
             <h2>Services</h2>

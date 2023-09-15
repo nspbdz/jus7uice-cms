@@ -22,6 +22,9 @@ Route::get(BACKEND_PATH . 'logout', [App\Http\Controllers\Backend\LoginCtr::clas
 
 Route::group(['prefix' => BACKEND_PATH, 'namespace' => 'Backend\\', 'middleware' => ['backend']], function () {
 
+
+	
+
     Route::get('/', [MainCtr::class, 'index']);
     Route::get('tester', [TesterCtr::class, 'getTester']);
 
