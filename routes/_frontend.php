@@ -1,4 +1,6 @@
 <?php
+
+use App\Http\Controllers\Backend\ArticleCtr;
 use App\Http\Controllers\Backend\LoginCtr;
 use App\Http\Controllers\frontend\FeContentCtr;
 // Route::get('/test', function () {
@@ -22,6 +24,9 @@ Route::get('/clients', [FeContentCtr::class, 'clients']);
 Route::get('/portfolio', [FeContentCtr::class, 'portfolio']);
 Route::get('/team', [FeContentCtr::class, 'team']);
 Route::get('/contact', [FeContentCtr::class, 'contact']);
+
+
+Route::get('article/{url}', [ArticleCtr::class, 'article']);
 
 
 // Route::get('/clients', function () {

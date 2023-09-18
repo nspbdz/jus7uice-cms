@@ -8,4 +8,21 @@ use Illuminate\Database\Eloquent\Model;
 class Widget_navbar extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'id',
+        'widget_id',
+        'navbar_id',
+    ];
+
+    public function widget()
+    {
+        return $this->belongsTo(Widget::class, 'widget_id');
+    }
+
+    public function navbar()
+    {
+        return $this->belongsTo(Navbar::class, 'navbar_id');
+    }
+
 }

@@ -16,6 +16,7 @@
                      <div class="weekly-news-active dot-style d-flex dot-style">
                          
                      @foreach($data as $items)
+                     <a href="{{$items->url}}">
                          <div class="weekly-single">
                              <div class="weekly-img">
                                  @if(isset($items->thumbnail))
@@ -28,6 +29,7 @@
                                  <span class="color1">{{$items->title}}</span>
                              </div>
                          </div>
+                         </a>
                          @endforeach
 
 

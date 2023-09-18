@@ -12,7 +12,7 @@ use App\Http\Controllers\Backend\MediaCtr;
 use App\Http\Controllers\Backend\ArticleCtr;
 use App\Http\Controllers\backend\ContentCtr;
 use App\Http\Controllers\Backend\NavbarCtr;
-
+use App\Http\Controllers\WidgetController;
 
 Route::prefix(BACKEND_PATH)->middleware(['backend.check.auth.exists'])->controller(LoginCtr::class)->group(function () {
     Route::get('login', 'getLogin')->name('login');
@@ -28,6 +28,17 @@ Route::group(['prefix' => BACKEND_PATH, 'namespace' => 'Backend\\', 'middleware'
     Route::get('/', [MainCtr::class, 'index']);
     Route::get('tester', [TesterCtr::class, 'getTester']);
 
+    Route::get('widget', [WidgetController::class, 'index']);
+    Route::get('widget.data', [WidgetController::class, 'getData']);
+    Route::get('widget.create', [WidgetController::class, 'getCreate']);
+    Route::post('widget.create', [WidgetController::class, 'store']);
+    // Route::get('widget.edit', [WidgetController::class, 'getEdit']);
+    // Route::post('widget.update', [WidgetController::class, 'update']);
+    // Route::get('widget.delete', [WidgetController::class, 'getDelete']);
+    // Route::post('widget.delete', [WidgetController::class, 'postDelete']);
+    // Route::post('widget.post-sortable', [WidgetController::class, 'position']);
+
+
     Route::get('content', [ContentCtr::class, 'index']);
     Route::get('content.data', [ContentCtr::class, 'getData']);
     Route::get('content.create', [ContentCtr::class, 'getCreate']);
@@ -36,7 +47,6 @@ Route::group(['prefix' => BACKEND_PATH, 'namespace' => 'Backend\\', 'middleware'
     Route::put('content.update/{id?}', [ContentCtr::class, 'update']);
     Route::post('content.delete', [ContentCtr::class, 'postDelete']);
     Route::get('content.delete', [ContentCtr::class, 'getDelete']);
-
 
     Route::get('article', [ArticleCtr::class, 'index']);
     Route::get('article.data', [ArticleCtr::class, 'getData']);

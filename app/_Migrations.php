@@ -179,6 +179,7 @@ class _Migrations
 			`title` varchar(100) NULL DEFAULT NULL,
 			`thumbnail` varchar(100) NULL DEFAULT NULL,
 			`content` text,
+			`url` varchar(100) NOT NULL,
 			`author_id` int(10) unsigned NULL DEFAULT '0',
 			`created_at` datetime DEFAULT NULL,
 			`updated_at` datetime DEFAULT NULL,

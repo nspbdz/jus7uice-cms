@@ -4,6 +4,18 @@
 		Description : Digunakan sebagai fungsi (non class) tambahan untuk laravel
 	*/
 	
+	
+	 function processUrlLogic($url)
+    {
+        // Mengganti spasi dengan garis bawah (_)
+        $urlWithUnderscore = str_replace(' ', '_', $url);
+
+        // Mengubah huruf besar menjadi huruf kecil
+        $finalUrl = strtolower('article/'. $urlWithUnderscore);
+
+        return $finalUrl;
+    }
+
 	# untuk membuat slug URL
 	function create_slug($input) {
 		$input = filter_var($input, FILTER_SANITIZE_STRING);
@@ -268,4 +280,3 @@
 		
 		return $_path;
 	}
-?>
