@@ -12,7 +12,7 @@ use App\Http\Controllers\Backend\MediaCtr;
 use App\Http\Controllers\Backend\ArticleCtr;
 use App\Http\Controllers\backend\ContentCtr;
 use App\Http\Controllers\Backend\NavbarCtr;
-use App\Http\Controllers\WidgetController;
+use App\Http\Controllers\WidgetCtr;
 
 Route::prefix(BACKEND_PATH)->middleware(['backend.check.auth.exists'])->controller(LoginCtr::class)->group(function () {
     Route::get('login', 'getLogin')->name('login');
@@ -28,14 +28,14 @@ Route::group(['prefix' => BACKEND_PATH, 'namespace' => 'Backend\\', 'middleware'
     Route::get('/', [MainCtr::class, 'index']);
     Route::get('tester', [TesterCtr::class, 'getTester']);
 
-    Route::get('widget', [WidgetController::class, 'index']);
-    Route::get('widget.data', [WidgetController::class, 'getData']);
-    Route::get('widget.create', [WidgetController::class, 'getCreate']);
-    Route::post('widget.create', [WidgetController::class, 'store']);
-    Route::get('widget.edit', [WidgetController::class, 'getEdit']);
-    Route::post('widget.update', [WidgetController::class, 'update']);
-    Route::get('widget.delete', [WidgetController::class, 'getDelete']);
-    Route::post('widget.delete', [WidgetController::class, 'postDelete']);
+    Route::get('widget', [WidgetCtr::class, 'index']);
+    Route::get('widget.data', [WidgetCtr::class, 'getData']);
+    Route::get('widget.create', [WidgetCtr::class, 'getCreate']);
+    Route::post('widget.create', [WidgetCtr::class, 'store']);
+    Route::get('widget.edit', [WidgetCtr::class, 'getEdit']);
+    Route::post('widget.update', [WidgetCtr::class, 'update']);
+    Route::get('widget.delete', [WidgetCtr::class, 'getDelete']);
+    Route::post('widget.delete', [WidgetCtr::class, 'postDelete']);
 
 
     Route::get('content', [ContentCtr::class, 'index']);

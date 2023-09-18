@@ -27,12 +27,7 @@ class ArticleCtr extends Controller
 
             // Menggabungkan segmen menjadi satu string
             $urlPath = implode('/', $segments); // Ini akan menghasilkan "article/test_article"
-            // dd($urlPath);
-            // Gunakan $urlPath sesuai kebutuhan Anda
-
             $data=Article::where('url', '=', $urlPath)->first();
-            // $article = Article::where('url', '=', $urlPath)->first();Ï
-            // dd($data);
 
         return view('backend.article.article', ['data' => $data]);
     }

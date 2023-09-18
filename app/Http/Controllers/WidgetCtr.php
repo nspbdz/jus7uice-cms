@@ -12,7 +12,7 @@ use Illuminate\Validation\Rule;
 use DB;
 
 
-class WidgetController extends Controller
+class WidgetCtr extends Controller
 {
     public function index()
     {
