@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Widget_navbar extends Model
+class WidgetNavbar extends Model
 {
     use HasFactory;
 
