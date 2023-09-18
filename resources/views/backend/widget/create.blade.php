@@ -2,7 +2,7 @@
 
 	<div class="form-group mb-3 row">
 		<label for="widget">Select widget:</label>
-		<select id="widget" name="widget">
+		<select id="widget" name="widget_id">
 			<option value="">Select a user</option>
 			@foreach($widget as $widgets)
 			<option value="{{ $widgets->id }}">{{ $widgets->name }}</option>
@@ -30,7 +30,7 @@
 		</div>
 	</div>
 
-	
+
 
 	<div class="form-footer">
 		<button type="submit" class="btn btn-primary">Submit</button>

@@ -84,14 +84,22 @@ class WidgetCtr extends Controller
 
 
         $data = array();
-        $widget_navbar = new Widget_navbar;
+        $widget_navbar = new WidgetNavbar;
         // $widget_navbar->widget_id = $request->widget;
-        if ($navbar_ids !== null) {
-            for ($i = 0; $i < count($navbar_ids); $i++) {
-                // $data[]=$navbar_ids[$i];
-                $widget_navbar->widget_id = $request->widget;
-                $widget_navbar->navbar_id = $navbar_ids[$i];
-                $widget_navbar->save();
+        // if ($navbar_ids !== null) {
+        //     for ($i = 0; $i < count($navbar_ids); $i++) {
+        //         // $data[]=$navbar_ids[$i];
+        //         $widget_navbar->widget_id = $request->widget;
+        //         $widget_navbar->navbar_id = $navbar_ids[$i];
+        //         $widget_navbar->save();
+        //     }
+        // }
+        if ($request->has('navbar_ids')) {
+            foreach ($request->input('navbar_ids') as $navbarId) {
+                $widgetNavbar = new WidgetNavbar;
+                $widgetNavbar->widget_id = $request->widget_id; // Gunakan ID widget yang baru saja dibuat
+                $widgetNavbar->navbar_id = $navbarId;
+                $widgetNavbar->save();
             }
         }
 
