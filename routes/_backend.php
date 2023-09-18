@@ -32,11 +32,10 @@ Route::group(['prefix' => BACKEND_PATH, 'namespace' => 'Backend\\', 'middleware'
     Route::get('widget.data', [WidgetController::class, 'getData']);
     Route::get('widget.create', [WidgetController::class, 'getCreate']);
     Route::post('widget.create', [WidgetController::class, 'store']);
-    // Route::get('widget.edit', [WidgetController::class, 'getEdit']);
-    // Route::post('widget.update', [WidgetController::class, 'update']);
-    // Route::get('widget.delete', [WidgetController::class, 'getDelete']);
-    // Route::post('widget.delete', [WidgetController::class, 'postDelete']);
-    // Route::post('widget.post-sortable', [WidgetController::class, 'position']);
+    Route::get('widget.edit', [WidgetController::class, 'getEdit']);
+    Route::post('widget.update', [WidgetController::class, 'update']);
+    Route::get('widget.delete', [WidgetController::class, 'getDelete']);
+    Route::post('widget.delete', [WidgetController::class, 'postDelete']);
 
 
     Route::get('content', [ContentCtr::class, 'index']);

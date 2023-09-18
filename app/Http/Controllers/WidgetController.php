@@ -57,7 +57,7 @@ class WidgetController extends Controller
                 })
                 ->addColumn('action', function ($row) {
                     $action = '
-    			<a href="' . url(BACKEND_PATH . 'navbar.edit?id=' . $row->id) . '" data-toggle="ajaxModal" data-title="Navbar | Edit" data-class="modal-lg">Edit</a>
+    			<a href="' . url(BACKEND_PATH . 'widget.edit?id=' . $row->id) . '" data-toggle="ajaxModal" data-title="Widget | Edit" data-class="modal-lg">Edit</a>
     		';
                     return $action;
                 })
@@ -101,9 +101,56 @@ class WidgetController extends Controller
 
     function getEdit(Request $request)
     {
-        $data = Widget::find($request->id);
-        return view('backend.administrator_edit', compact('data', 'groupList'));
+        $dataWidgetById = Widget::find($request->id);
+        // dd($dataWidgetById->id   );
+        $widget = Widget::get();
+        $widgetNavbarIds = Widget_navbar::where('widget_id', $request->id)->pluck('navbar_id')->toArray();
+        // dd($widgetNavbarIds);
+        $navbars = Navbar::all();
+
+        return view('backend.widget.edit', [
+            'dataWidgetById' => $dataWidgetById,
+            'widget' => $widget,
+            'navbars' => $navbars,
+            'selectedNavbarIds' => $widgetNavbarIds
+        ]);
     }
+
+    public function update(Request $request)
+    {
+        // dd($request->widget_id);
+        $request->validate([
+            'widget_id' => 'required|exists:widgets,id',
+            'navbar_ids' => 'array'
+        ]);
+
+        $widget = Widget::find($request->widget_id);
+
+        if (!$widget) {
+            return redirect()->route('widget.index')->with('error', 'Widget not found.');
+        }
+
+        // Hapus kaitan yang ada
+        Widget_navbar::where('widget_id', $request->widget_id)->delete();
+
+        // Tambahkan kembali kaitan berdasarkan data dari form
+        if ($request->has('navbar_ids')) {
+            foreach ($request->navbar_ids as $navbarId) {
+                $widgetNavbar = new Widget_navbar;
+                $widgetNavbar->widget_id = $request->widget_id;
+                $widgetNavbar->navbar_id = $navbarId;
+                $widgetNavbar->save();
+            }
+        }
+        return redirect()->back()->with('msg', "Berhasil diperbarui");
+    }
+
+
+    // function getEdit(Request $request)
+    // {
+    //     $data = Widget::find($request->id);
+    //     return view('backend.administrator_edit', compact('data', 'groupList'));
+    // }
 }
 
 
