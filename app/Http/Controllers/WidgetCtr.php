@@ -33,7 +33,7 @@ class WidgetCtr extends Controller
 
         if ($request->ajax()) {
 
-            $data = Widget::select('*')->where('status', 1)->orderBy('id', 'DESC')->get();
+            $data = Widget::select('*')->orderBy('id', 'DESC')->get();
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('chkbox', function ($row) {
@@ -80,23 +80,31 @@ class WidgetCtr extends Controller
     }
     function store(Request $request)
     {
+
+        // Validate the request data
+        $validator = Validator::make($request->all(), [
+            'navbar_ids' => 'required|array',
+            'widget' => 'required|numeric', // Assuming widget is a numeric field
+        ]);
+
+        // Check if the validation fails
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+
         $navbar_ids = $request->navbar_ids ?? null;
 
 
-        $data = array();
         $widget_navbar = new Widget_navbar;
         // $widget_navbar->widget_id = $request->widget;
         if ($navbar_ids !== null) {
             for ($i = 0; $i < count($navbar_ids); $i++) {
-                // $data[]=$navbar_ids[$i];
                 $widget_navbar->widget_id = $request->widget;
                 $widget_navbar->navbar_id = $navbar_ids[$i];
                 $widget_navbar->save();
             }
         }
-
-        // dd($data);
-
     }
 
     function getEdit(Request $request)
@@ -104,6 +112,7 @@ class WidgetCtr extends Controller
         $dataWidgetById = Widget::find($request->id);
         // dd($dataWidgetById->id   );
         $widget = Widget::get();
+        // dd($widget);
         $widgetNavbarIds = Widget_navbar::where('widget_id', $request->id)->pluck('navbar_id')->toArray();
         // dd($widgetNavbarIds);
         $navbars = Navbar::all();
@@ -124,7 +133,14 @@ class WidgetCtr extends Controller
             'navbar_ids' => 'array'
         ]);
 
+        $status = $request->status ?? 0;
+        // dd($status);
         $widget = Widget::find($request->widget_id);
+        if ($status !== 0) {
+            // dd('masuk');
+            $widget->status = $status;
+            $widget->save();
+        }
 
         if (!$widget) {
             return redirect()->route('widget.index')->with('error', 'Widget not found.');
@@ -142,19 +158,33 @@ class WidgetCtr extends Controller
                 $widgetNavbar->save();
             }
         }
+        if ($request->ajax()) {
+            return response()->json(['message' => ["Berhasil tersimpan"]]);
+        }
         return redirect()->back()->with('msg', "Berhasil diperbarui");
     }
 
+    function postDelete(Request $request)
+    {
+        # Validate
+        $validator = Validator::make($request->all(), [
+            'deleteItems' => 'required',
+        ]);
 
-    // function getEdit(Request $request)
-    // {
-    //     $data = Widget::find($request->id);
-    //     return view('backend.administrator_edit', compact('data', 'groupList'));
-    // }
+        if (!$validator->passes()) {
+            if ($request->ajax()) {
+                return response()->json(['error' => $validator->errors()->all()]);
+            }
+            return redirect()->back()->withErrors($validator->errors()->all());
+        }
+
+        # Upd DB
+        Widget::whereIn('id', $request->deleteItems)->update(['status' => 2]);
+
+        # Redirect
+        if ($request->ajax()) {
+            return response()->json(['message' => ["Berhasil diperbarui"]]);
+        }
+        return redirect()->back()->with('msg', "Berhasil diperbarui");
+    }
 }
-
-
-// <?php
-// 					foreach ($routeLists as $key => $val) {
-// 						echo '<label>' . html()->checkbox('route[]')->value($val)->checked(true)->class('form-check-input my_checkbox') . ' ' . $val . '</label><br />';
-// 					}

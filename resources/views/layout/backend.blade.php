@@ -477,16 +477,14 @@ $path = str_replace(BACKEND_PATH, '', Request()->path());
     <script src="{{asset('assets/js/jquery.form.min.js')}}"></script>
     <script src="{{asset('addons/bootstrap-multiselect/js/bootstrap-multiselect.js')}}"></script>
     <script src="https://cdn.datatables.net/v/bs5/dt-1.13.4/datatables.min.js"></script>
-    <<<<<<< HEAD @yield('js') <script src="{{asset('assets/js/backend.js')}}">
+    @yield('js') <script src="{{asset('assets/js/backend.js')}}">
         </script>
 
-        =======
         <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 
         @yield('js')
         <script src="{{asset('assets/js/backend.js')}}"></script>
         @stack('js')
-        >>>>>>> 80ea0a4f5afcaf74f620ac0fca6ba5fcc8332eed
 </body>
 
 </html>

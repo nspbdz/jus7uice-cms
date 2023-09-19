@@ -10,7 +10,7 @@ Navbar
 
 
 @section('page_nav_button')
-<a href="{{url(BACKEND_PATH.'navbar.create')}}" class="btn btn-primary d-none d-sm-inline-block" data-toggle="ajaxModal" data-title="Administrator Group | Add New" data-class="modal-lg">
+<a href="{{url(BACKEND_PATH.'navbar.create')}}" class="btn btn-primary d-none d-sm-inline-block" data-toggle="ajaxModal" data-title="Navbar | Add New" data-class="modal-lg">
     Add New
 </a>
 @endsection

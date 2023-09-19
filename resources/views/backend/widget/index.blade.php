@@ -10,8 +10,8 @@ Widget
 @endsection
 
 @section('page_nav_button')
-<a href="{{url(BACKEND_PATH.'widget.create')}}" class="btn btn-primary d-none d-sm-inline-block" data-toggle="ajaxModal" data-title="Administrator Group | Add New" data-class="modal-lg">
-	Add New
+<a href="{{url(BACKEND_PATH.'widget.create')}}" class="btn btn-primary d-none d-sm-inline-block" data-toggle="ajaxModal" data-title="Widget| Add widget into page" data-class="modal-lg">
+Add widget into page
 </a>
 @endsection
 

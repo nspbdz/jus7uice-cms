@@ -1,14 +1,20 @@
 <form action="{{url(BACKEND_PATH.'widget.create')}}" method="post" id="ajxForm">
 
+
 	<div class="form-group mb-3 row">
-		<label for="widget">Select widget:</label>
-		<select id="widget" name="widget">
-			<option value="">Select a user</option>
-			@foreach($widget as $widgets)
-			<option value="{{ $widgets->id }}">{{ $widgets->name }}</option>
-			@endforeach
-		</select>
-	</div>
+    <label for="widget" class="col-sm-2 col-form-label">Select widget:</label>
+    <div class="col-sm-10">
+        <div class="custom-select">
+            <select id="widget" name="widget" class="form-control">
+                <option value="">Select a user</option>
+                @foreach($widget as $widgets)
+                    <option value="{{ $widgets->id }}">{{ $widgets->name }}</option>
+                @endforeach
+            </select>
+        </div>
+    </div>
+</div>
+
 
 
 	<div class="form-group mb-3 row">
@@ -30,6 +36,7 @@
 		</div>
 	</div>
 
+	
 	
 
 	<div class="form-footer">

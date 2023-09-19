@@ -8,6 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Widget extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'id',
+        'slug',
+        'name',
+        'status',
+    ];
+    
 
     public function articles()
     {
@@ -19,6 +26,6 @@ class Widget extends Model
         return $this->belongsToMany(Navbar::class, 'widget_navbars', 'widget_id', 'navbar_id');
     }
 
-    
+
 
 }
