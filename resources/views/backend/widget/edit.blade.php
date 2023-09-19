@@ -14,7 +14,8 @@
 	<div class="form-group mb-3 row">
 		<label class="form-label col-3 col-form-label">Title</label>
 		<div class="col">
-			<input type="text" class="form-control" placeholder="Enter title" name="title" value="{{$dataWidgetById->name}}" />
+			<input type="text" class="form-control" placeholder="Enter title" name="widget_name" value="{{$dataWidgetById->name}}" />
+			<input type="hidden" name="widget_id" value="{{$dataWidgetById->id}}">
 		</div>
 	</div>
 

@@ -2,18 +2,18 @@
 
 
 	<div class="form-group mb-3 row">
-    <label for="widget" class="col-sm-2 col-form-label">Select widget:</label>
-    <div class="col-sm-10">
-        <div class="custom-select">
-            <select id="widget" name="widget" class="form-control">
-                <option value="">Select a user</option>
-                @foreach($widget as $widgets)
-                    <option value="{{ $widgets->id }}">{{ $widgets->name }}</option>
-                @endforeach
-            </select>
-        </div>
-    </div>
-</div>
+		<label for="widget" class="col-sm-2 col-form-label">Select widget:</label>
+		<div class="col-sm-10">
+			<div class="custom-select">
+				<select id="widget" name="widget" class="form-control">
+					<option value="">Select a user</option>
+					@foreach($widget as $widgets)
+					<option value="{{ $widgets->id }}">{{ $widgets->name }}</option>
+					@endforeach
+				</select>
+			</div>
+		</div>
+	</div>
 
 
 
@@ -36,8 +36,9 @@
 		</div>
 	</div>
 
-	
-	
+
+
+
 
 	<div class="form-footer">
 		<button type="submit" class="btn btn-primary">Submit</button>

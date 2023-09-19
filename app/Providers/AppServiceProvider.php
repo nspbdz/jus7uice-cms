@@ -5,11 +5,11 @@ namespace App\Providers;
 use App\Models\Content;
 use App\Models\Navbar;
 use App\Models\Widget;
-use App\Models\Widget_navbar;
+use App\Models\WidgetNavbar;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\URL; // Import URL facade
-use App\Helper\ContentHelper;  
+use App\Helper\ContentHelper;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -52,10 +52,10 @@ class AppServiceProvider extends ServiceProvider
                 'canWidgetWeeklyNews' => count($canWidgetWeeklyNews->navbars),
                 'canWidgetBanner' => count($canWidgetBanner->navbars),
                 'widget' => $widget
-                
+
             ]);
         });
 
-   
+
     }
 }

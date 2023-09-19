@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Navbar;
 use App\Models\Widget;
-use App\Models\Widget_navbar;
+use App\Models\WidgetNavbar;
 use Illuminate\Http\Request;
 use Datatables;
 use Validator;
@@ -16,11 +16,11 @@ class WidgetCtr extends Controller
 {
     public function index()
     {
-        // $widget_navbar= Widget_navbar::with('widget', 'navbar')->distinct('widget_id')->get();
-        // $uniqueWidgets = Widget_navbar::groupBy('widget_id')
+        // $widget_navbar= WidgetNavbar::with('widget', 'navbar')->distinct('widget_id')->get();
+        // $uniqueWidgets = WidgetNavbar::groupBy('widget_id')
         // ->get(['widget_id']);
 
-        // $widget_navbar= Widget_navbar::with('widget', 'navbar')->get();
+        // $widget_navbar= WidgetNavbar::with('widget', 'navbar')->get();
         // dd($uniqueWidgets);
         $posts = Widget::orderBy('id', 'desc')->get();
 
@@ -67,12 +67,12 @@ class WidgetCtr extends Controller
     }
     public function getCreate()
     {
-        // $widget_navbar = Widget_navbar::select('widget_id')->groupBy('widget_id')->get();
+        // $widget_navbar = WidgetNavbar::select('widget_id')->groupBy('widget_id')->get();
         // dd($widget_navbar);
 
         // $navbars = Navbar::get();
 
-        $widgetNavbarIds = Widget_navbar::select('widget_id')->groupBy('widget_id')->get()->pluck('widget_id');
+        $widgetNavbarIds = WidgetNavbar::select('widget_id')->groupBy('widget_id')->get()->pluck('widget_id');
         $widget = Widget::whereNotIn('id', $widgetNavbarIds)->get();
 
         $navbars = Navbar::get();
@@ -96,13 +96,14 @@ class WidgetCtr extends Controller
         $navbar_ids = $request->navbar_ids ?? null;
 
 
-        $widget_navbar = new Widget_navbar;
-        // $widget_navbar->widget_id = $request->widget;
-        if ($navbar_ids !== null) {
-            for ($i = 0; $i < count($navbar_ids); $i++) {
-                $widget_navbar->widget_id = $request->widget;
-                $widget_navbar->navbar_id = $navbar_ids[$i];
-                $widget_navbar->save();
+        $widget_navbar = new WidgetNavbar;
+   
+        if ($request->has('navbar_ids')) {
+            foreach ($request->input('navbar_ids') as $navbarId) {
+                $widgetNavbar = new WidgetNavbar;
+                $widgetNavbar->widget_id = $request->widget; // Gunakan ID widget yang baru saja dibuat
+                $widgetNavbar->navbar_id = $navbarId;
+                $widgetNavbar->save();
             }
         }
     }
@@ -112,8 +113,7 @@ class WidgetCtr extends Controller
         $dataWidgetById = Widget::find($request->id);
         // dd($dataWidgetById->id   );
         $widget = Widget::get();
-        // dd($widget);
-        $widgetNavbarIds = Widget_navbar::where('widget_id', $request->id)->pluck('navbar_id')->toArray();
+        $widgetNavbarIds = WidgetNavbar::where('widget_id', $request->id)->pluck('navbar_id')->toArray();
         // dd($widgetNavbarIds);
         $navbars = Navbar::all();
 
@@ -127,32 +127,37 @@ class WidgetCtr extends Controller
 
     public function update(Request $request)
     {
-        // dd($request->widget_id);
+
+        // dd($request);
         $request->validate([
             'widget_id' => 'required|exists:widgets,id',
-            'navbar_ids' => 'array'
+            'navbar_ids' => 'array',
+            'widget_name' => 'required|string'
         ]);
 
         $status = $request->status ?? 0;
         // dd($status);
         $widget = Widget::find($request->widget_id);
+        $widget->name = $request->widget_name;
+        
         if ($status !== 0) {
             // dd('masuk');
             $widget->status = $status;
-            $widget->save();
+            // $widget->save();
         }
+        $widget->save();
 
         if (!$widget) {
             return redirect()->route('widget.index')->with('error', 'Widget not found.');
         }
 
         // Hapus kaitan yang ada
-        Widget_navbar::where('widget_id', $request->widget_id)->delete();
+        WidgetNavbar::where('widget_id', $request->widget_id)->delete();
 
         // Tambahkan kembali kaitan berdasarkan data dari form
         if ($request->has('navbar_ids')) {
             foreach ($request->navbar_ids as $navbarId) {
-                $widgetNavbar = new Widget_navbar;
+                $widgetNavbar = new WidgetNavbar;
                 $widgetNavbar->widget_id = $request->widget_id;
                 $widgetNavbar->navbar_id = $navbarId;
                 $widgetNavbar->save();
