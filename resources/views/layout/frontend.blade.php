@@ -81,8 +81,6 @@
                     </li>
                     @endforeach
 
-
-
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav><!-- .navbar -->
@@ -98,28 +96,27 @@
         <div class="main-wrapper main-wrapper-1">
 
             <!-- Main Content -->
-
             <div class="main-content">
-                @if ($canWidgetBanner == 0)
-                @yield('content')
 
+            @if( $canWidgetBanner == null  || $canWidgetBanner->isEmpty() )
+            <!-- <p>Tidak ada data yang ditemukan.</p> -->
+            @yield('content')
 
+            @else
 
-                @else
-                <div class="row">
-                    <div class="col-md-8">
-                        @yield('content')
+            <div class="row">
+                <div class="col-md-8">
+                    @yield('content')
 
-                    </div>
-                    <div class="col-md-4">
-                        <br><br>
-                        <br><br>
-                        @widget('BannerNews')
-
-                    </div>
                 </div>
+                <div class="col-md-4">
+                    <br><br>
+                    <br><br>
+                    @widget('BannerNews')
 
-                @endif
+                </div>
+            </div>
+            @endif
             </div>
 
 
@@ -129,13 +126,15 @@
             // dd($dataWidget);
             // dd($canWidgetBanner);
             ?>
-            @if ($canWidgetWeeklyNews == 0)
-            
+            @if( $canWidgetWeeklyNews == null  || $canWidgetWeeklyNews->isEmpty() )
+            <!-- <p>Tidak ada data yang ditemukan.</p> -->
             @else
             <div>
                 @widget('WeeklyNews')
             </div>
             @endif
+
+
 
 
             <footer id="footer">

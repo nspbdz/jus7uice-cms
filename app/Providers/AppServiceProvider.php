@@ -37,10 +37,14 @@ class AppServiceProvider extends ServiceProvider
             $desiredSegment = $segments[1] ?? ''; // Ini akan mengambil segmen ke-2 atau string kosong jika tidak ada
 
             // Weekly News
-            $canWidgetWeeklyNews= ContentHelper::Availibility('weekly_news', $desiredSegment);
-
+            $canWidgetWeeklyNews = ContentHelper::Availibility('weekly_news', $desiredSegment);
+            // Memeriksa apakah 'navbars' ada dan memiliki data
+            $canWidgetWeeklyNews = ($canWidgetWeeklyNews && $canWidgetWeeklyNews->navbars) ? $canWidgetWeeklyNews->navbars : null;
+            // dd($canWidgetWeeklyNews);
             // Banner
-            $canWidgetBanner= ContentHelper::Availibility('banner', $desiredSegment);
+            $canWidgetBanner = ContentHelper::Availibility('banner', $desiredSegment);
+            $canWidgetBanner = ($canWidgetBanner && $canWidgetBanner->navbars) ? $canWidgetBanner->navbars : null;
+            
             // dd($canWidgetBanner);
             // dd(count($canWidgetBanner->navbars));
             // dd(count($canWidgetWeeklyNews->navbars));
@@ -49,13 +53,12 @@ class AppServiceProvider extends ServiceProvider
             $data = Navbar::orderBy('position', 'asc')->get();
             $view->with([
                 'data' => $data,
-                'canWidgetWeeklyNews' => count($canWidgetWeeklyNews->navbars),
-                'canWidgetBanner' => count($canWidgetBanner->navbars),
+                'canWidgetWeeklyNews' => $canWidgetWeeklyNews,
+                'canWidgetBanner' => $canWidgetBanner,
+                // 'canWidgetBanner' => count($canWidgetBanner->navbars),
                 'widget' => $widget
 
             ]);
         });
-
-
     }
 }
