@@ -28,11 +28,11 @@ class _Seeds
         if (Schema::hasTable('widget_navbars')) {
             if (DB::table('widget_navbars')->count() <= 0) {
 
-                $dataArticle = [1,2,3,4,5,6];
-                $dataWidget = [1,2,3,4,5,6];
-                
+                $dataArticle = [2,3,4,5,6];
+                $dataWidget = [2,3,4,5,6];
+
                 // dd($data[0]);
-                for ($i = 0; $i < 6; $i++) {
+                for ($i = 0; $i < count($dataArticle); $i++) {
                     DB::table('widget_navbars')->insert([
                         "id" => $i + 1,
                         "navbar_id" => $dataArticle[$i],
@@ -42,7 +42,7 @@ class _Seeds
                     ]);
                 }
 
-                for ($j = 0; $j < 6; $j++) {
+                for ($j = 0; $j < count($dataArticle); $j++) {
                     DB::table('widget_navbars')->insert([
                         "id" => 7 + $j,
                         "navbar_id" => $dataArticle[$j],
@@ -62,10 +62,10 @@ class _Seeds
      {
          if (Schema::hasTable('article_widgets')) {
              if (DB::table('article_widgets')->count() <= 0) {
- 
+
                  $dataArticle = [1,2,3,4,5,6];
                  $dataWidget = [1,2,3,4,5,6];
-                 
+
                  // dd($data[0]);
                  for ($i = 0; $i < 6; $i++) {
                      DB::table('article_widgets')->insert([
@@ -90,7 +90,7 @@ class _Seeds
                 $data = ['weekly_news', 'news', 'banner', 'test1', 'test2', 'test3'];
                 $dataUrl = json_encode(['', 'about', 'services', 'portfolio', 'team', 'contact']);
                 $dataArticle = json_encode([1,2,3,4,5]);
-                
+
                 // dd($data[0]);
                 for ($i = 0; $i < 6; $i++) {
                     DB::table('widgets')->insert([
@@ -102,7 +102,7 @@ class _Seeds
                         "status" => 1,
                     ]);
                 }
-                
+
             }
         }
     }

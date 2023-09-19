@@ -21,7 +21,7 @@ class BannerNews extends AbstractWidget
     public function run()
     {
         //
-        $data=Article::find(2);
+        $data=Article::orderBy('id', "desc")->first();
         return view('widgets.banner_news', [
             'config' => $this->config,
             'data' => $data,
