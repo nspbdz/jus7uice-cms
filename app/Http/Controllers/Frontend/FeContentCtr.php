@@ -16,7 +16,7 @@ class FeContentCtr extends Controller
     public function pages(Request $request)
     {
         $path = basename(URL::current());
-        // dd($path);
+        // dd($path); 
 
         // $path = Request::path();
         // dd($path);

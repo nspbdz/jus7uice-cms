@@ -15,7 +15,7 @@ Route::get('/helpertest', function () {
 });
 
 
-Route::get('{url}', [FeContentCtr::class, 'pages']);
+Route::get('/page/{url}', [FeContentCtr::class, 'pages']);
 
 
 Route::get('article/{url}', [ArticleCtr::class, 'article']);

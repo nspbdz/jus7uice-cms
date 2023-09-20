@@ -14,7 +14,7 @@ class PageController extends Controller
 {
     public function index()
     {
-        return view('backend.content.index');
+        return view('backend.page.index');
     }
     function getData(Request $request)
     {
@@ -35,7 +35,7 @@ class PageController extends Controller
             })
             ->addColumn('action', function ($row) {
                 $action = '
-				<a href="' . url(BACKEND_PATH . 'content.edit/' . $row->id) . '" >Edit</a>
+				<a href="' . url(BACKEND_PATH . 'page.edit/' . $row->id) . '" >Edit</a>
 			';
                 return $action;
             })
@@ -48,8 +48,8 @@ class PageController extends Controller
 
         // $groupList = [''=>'Select Group:'] + AdminGroup::where('status',1)->pluck('name','id')->toArray();
         $data = content::find($request->id);
-        return view('backend.content.create', compact('data'));
-        // return view('backend.content.create');
+        return view('backend.page.create', compact('data'));
+        // return view('backend.page.create');
     }
 
     public function store(Request $request)
@@ -68,7 +68,7 @@ class PageController extends Controller
     function getEdit(Request $request)
     {
         $data = content::find($request->id);
-        return view('backend.content.edit', compact('data'));
+        return view('backend.page.edit', compact('data'));
     }
 
     function update(Request $request)
@@ -82,7 +82,7 @@ class PageController extends Controller
         // Save the changes
         $content->save();
 
-        return view('backend.content.index')->with('success', 'Content updated successfully.');
+        return view('backend.page.index')->with('success', 'Content updated successfully.');
     }
 
     function getView(Request $request)

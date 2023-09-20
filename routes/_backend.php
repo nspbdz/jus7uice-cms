@@ -12,6 +12,7 @@ use App\Http\Controllers\Backend\MediaCtr;
 use App\Http\Controllers\Backend\ArticleCtr;
 use App\Http\Controllers\backend\ContentCtr;
 use App\Http\Controllers\Backend\NavbarCtr;
+use App\Http\Controllers\backend\PageController;
 use App\Http\Controllers\WidgetCtr;
 
 Route::prefix(BACKEND_PATH)->middleware(['backend.check.auth.exists'])->controller(LoginCtr::class)->group(function () {
@@ -46,6 +47,16 @@ Route::group(['prefix' => BACKEND_PATH, 'namespace' => 'Backend\\', 'middleware'
     Route::put('content.update/{id?}', [ContentCtr::class, 'update']);
     Route::post('content.delete', [ContentCtr::class, 'postDelete']);
     Route::get('content.delete', [ContentCtr::class, 'getDelete']);
+
+    Route::get('page', [PageController::class, 'index']);
+    Route::get('page.data', [PageController::class, 'getData']);
+    Route::get('page.create', [PageController::class, 'getCreate']);
+    Route::post('page.create', [PageController::class, 'store']);
+    Route::get('page.edit/{id?}', [PageController::class, 'getEdit']);
+    Route::put('page.update/{id?}', [PageController::class, 'update']);
+    Route::post('page.delete', [PageController::class, 'postDelete']);
+    Route::get('page.delete', [PageController::class, 'getDelete']);
+
 
     Route::get('article', [ArticleCtr::class, 'index']);
     Route::get('article.data', [ArticleCtr::class, 'getData']);

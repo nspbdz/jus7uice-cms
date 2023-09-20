@@ -75,8 +75,8 @@
                     @endforeach -->
                     @foreach($data as $item)
                     <li>
-                        <a class="nav-link scrollto {{ Request::is( $item->slug ) ? 'active' : '' }}" href="{{ $item->url }}">
-                            {{ $item->title }}
+                        <a class="nav-link scrollto {{ Request::is( $item->url ) ? 'active' : '' }}" href="{{ $item->url }}">
+                            {{ $item->page }}
                         </a>
                     </li>
                     @endforeach

@@ -332,6 +332,12 @@ $path = str_replace(BACKEND_PATH, '', Request()->path());
                                 </a>
                             </li>
 
+							<li class="nav-item">
+                                <a class="nav-link" href="{{url(BACKEND_PATH.'page')}}" target="_tester">
+                                    <span class="nav-link-title"> Page </span>
+                                </a>
+                            </li>
+
 
                             <!-- <a class="dropdown-item" href="{{url(BACKEND_PATH.'administrator.group')}}" >Adm Group</a> -->
 

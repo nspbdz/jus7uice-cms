@@ -29,8 +29,8 @@ class _Seeds
             if (DB::table('pages')->count() <= 0) {
 
                 $data = ['Home', 'About', 'Services', 'Portfolio', 'Team', 'Contact'];
-                $dataSlug = ['', 'about', 'services', 'portfolio', 'team', 'contact'];
-                $dataUrl = ['/', '/about', '/services', '/portfolio', '/team', '/contact'];
+                $dataSlug = ['home', 'about', 'services', 'portfolio', 'team', 'contact'];
+                $dataUrl = ['/home', '/about', '/services', '/portfolio', '/team', '/contact'];
 
 
                 $htmlContent = <<<EOL
@@ -47,7 +47,7 @@ class _Seeds
                         "id" => $i + 1,
                         "page" => $data[$i],
                         "slug" => $dataSlug[$i],
-                        "url" => $dataUrl[$i],
+                        "url" => "/page". $dataUrl[$i],
                         "content" => $htmlContent,
                         "position" => $i,
                         "created_at" => now(),

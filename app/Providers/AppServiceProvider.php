@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\Content;
 use App\Models\Navbar;
+use App\Models\Page;
 use App\Models\Widget;
 use App\Models\WidgetNavbar;
 use Illuminate\Support\ServiceProvider;
@@ -50,7 +51,7 @@ class AppServiceProvider extends ServiceProvider
             // dd(count($canWidgetWeeklyNews->navbars));
 
             $widget = Widget::get();
-            $data = Navbar::orderBy('position', 'asc')->get();
+            $data = Page::orderBy('position', 'asc')->get();
             $view->with([
                 'data' => $data,
                 'canWidgetWeeklyNews' => $canWidgetWeeklyNews,
