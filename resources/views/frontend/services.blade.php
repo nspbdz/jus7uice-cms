@@ -11,10 +11,9 @@
             <h2>Services</h2>
         </div>
 
-        <div>
-            {{$data->content}}
+        <div class="content">
+            {!! $data->content !!}
         </div>
-
         <!--
 
         <div class="row">

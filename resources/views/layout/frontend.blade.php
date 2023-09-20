@@ -100,7 +100,12 @@
 
             @if( $canWidgetBanner == null  || $canWidgetBanner->isEmpty() )
             <!-- <p>Tidak ada data yang ditemukan.</p> -->
-            @yield('content')
+            <div class="row">
+                <div class="col-md-12">
+                    @yield('content')
+                </div>
+               
+            </div>
 
             @else
 
@@ -139,7 +144,7 @@
 
             <footer id="footer">
 
-                <div class="footer-newsletter">
+                <!-- <div class="footer-newsletter">
                     <div class="container">
                         <div class="row justify-content-center">
                             <div class="col-lg-6">
@@ -151,7 +156,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
                 <div class="footer-top">
                     <div class="container">

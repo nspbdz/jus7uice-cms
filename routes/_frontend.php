@@ -14,40 +14,9 @@ Route::get('/helpertest', function () {
     return ContentHelp::data();
 });
 
-Route::get('/', [FeContentCtr::class, 'index']);
 
-Route::get('/test', [FeContentCtr::class, 'test']);
-
-Route::get('/about', [FeContentCtr::class, 'about']);
-Route::get('/services', [FeContentCtr::class, 'services']);
-Route::get('/clients', [FeContentCtr::class, 'clients']);
-Route::get('/portfolio', [FeContentCtr::class, 'portfolio']);
-Route::get('/team', [FeContentCtr::class, 'team']);
-Route::get('/contact', [FeContentCtr::class, 'contact']);
+Route::get('{url}', [FeContentCtr::class, 'pages']);
 
 
 Route::get('article/{url}', [ArticleCtr::class, 'article']);
 
-
-// Route::get('/clients', function () {
-//     return view('frontend/clients');
-// });
-
-
-// Route::get('/services', function () {
-//     return view('frontend/services');
-// });
-
-// Route::get('/portfolio', function () {
-//     return view('frontend/portfolio');
-// });
-
-
-// Route::get('/team', function () {
-//     return view('frontend/team');
-// });
-
-
-// Route::get('/contact', function () {
-//     return view('frontend/contact');
-// });

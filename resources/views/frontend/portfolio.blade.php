@@ -14,13 +14,13 @@
         </div>
 
         <div>
-            {{$data->content}}
+        {!! $data->content !!}
 
         </div>
         <br>
 
 
-        <ul id="portfolio-flters" class="d-flex justify-content-center" data-aos="fade-up" data-aos-delay="100">
+        <!-- <ul id="portfolio-flters" class="d-flex justify-content-center" data-aos="fade-up" data-aos-delay="100">
             <li data-filter="*" class="filter-active">All</li>
             <li data-filter=".filter-app">App</li>
             <li data-filter=".filter-card">Card</li>
@@ -119,7 +119,7 @@
                 </div>
             </div>
 
-        </div>
+        </div> -->
 
     </div>
 </section><!-- End Portfolio Section -->

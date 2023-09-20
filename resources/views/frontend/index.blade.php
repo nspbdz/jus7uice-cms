@@ -10,7 +10,8 @@
         <div class="row">
             <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1" data-aos="fade-up" data-aos-delay="200">
                 <h1>Home</h1>
-                <h2>{{$data->content}}</h2>
+                <h2> {!! $data->content !!}
+                </h2>
 
                 <!-- <h2>We are team of talented designers making websites with Bootstrap</h2> -->
                 <!-- <div class="d-flex justify-content-center justify-content-lg-start">

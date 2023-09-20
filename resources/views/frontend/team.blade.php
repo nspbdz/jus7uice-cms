@@ -12,12 +12,12 @@
         </div>
 
         <div>
-            {{$data->content}}
+        {!! $data->content !!}
 
         </div>
         <br>
 
-        <div class="row">
+        <!-- <div class="row">
 
             <div class="col-lg-6" data-aos="zoom-in" data-aos-delay="100">
                 <div class="member d-flex align-items-start">
@@ -87,7 +87,7 @@
                 </div>
             </div>
 
-        </div>
+        </div> -->
 
     </div>
 </section><!-- End Team Section -->

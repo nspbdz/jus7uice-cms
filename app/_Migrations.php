@@ -18,6 +18,8 @@ class _Migrations
 		$this->_create_table_admin_group();
 
 		$this->_create_table_user();
+		#page
+		$this->_create_table_pages();
 
 		#widget_page
 		$this->_create_table_widget_navbars();
@@ -57,12 +59,12 @@ class _Migrations
 		}
 	}
 
-		/* Tbl article_widget */
+	/* Tbl article_widget */
 
-		function _create_table_widget_navbars()
-		{
-			$table = "widget_navbars";
-			$r = "
+	function _create_table_widget_navbars()
+	{
+		$table = "widget_navbars";
+		$r = "
 				CREATE TABLE " . $table . " (
 					`id` int(10) unsigned NOT NULL AUTO_INCREMENT,
 					`widget_id` int(10) unsigned NULL DEFAULT '0',
@@ -72,11 +74,11 @@ class _Migrations
 					PRIMARY KEY (`id`)
 				) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 				";
-			if (!Schema::hasTable($table)) {
-				DB::statement($r);
-			}
+		if (!Schema::hasTable($table)) {
+			DB::statement($r);
 		}
-	
+	}
+
 
 	/* Tbl article_widget */
 
@@ -108,7 +110,6 @@ class _Migrations
 			CREATE TABLE " . $table . " (
 				`id` int(10) unsigned NOT NULL AUTO_INCREMENT,
 				`name` varchar(100) NULL DEFAULT NULL,
-				
                 `slug` varchar(100) NOT NULL,
 				`created_at` datetime DEFAULT NULL,
 				`updated_at` datetime DEFAULT NULL,
@@ -121,6 +122,32 @@ class _Migrations
 		}
 	}
 
+	/* Tbl pages */
+
+	function _create_table_pages()
+	{
+		$table = "pages";
+		$r = "
+				CREATE TABLE " . $table . " (
+					`id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+					`page` varchar(100) NULL DEFAULT NULL,
+					`content` text,
+					`url` varchar(100) NOT NULL,
+					`position` int(10) NOT NULL,
+					`slug` varchar(100) NOT NULL,
+					`author_id` int(10) unsigned NULL DEFAULT '0',
+					`created_at` datetime DEFAULT NULL,
+					`updated_at` datetime DEFAULT NULL,
+					`status` tinyint(1) unsigned NOT NULL DEFAULT '1',
+					PRIMARY KEY (`id`)
+				) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+				";
+		if (!Schema::hasTable($table)) {
+			DB::statement($r);
+		}
+	}
+
+
 
 	/* Tbl content */
 
@@ -132,7 +159,6 @@ class _Migrations
 				`id` int(10) unsigned NOT NULL AUTO_INCREMENT,
 				`title` varchar(100) NULL DEFAULT NULL,
 				`content` text,
-                `slug` varchar(100) NOT NULL,
 				`author_id` int(10) unsigned NULL DEFAULT '0',
 				`created_at` datetime DEFAULT NULL,
 				`updated_at` datetime DEFAULT NULL,
