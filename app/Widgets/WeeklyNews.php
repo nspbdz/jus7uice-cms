@@ -23,21 +23,13 @@ class WeeklyNews extends AbstractWidget
      */
     public function run(Request $request)   
     {
-        $dataWidget=Widget::with('articles')->where('slug', '=', 'weekly_news')->first();
-        // dd($dataWidget->articles);
-        $data=$dataWidget->articles ?? null;
+        // $dataWidget=Widget::with('articles')->where('slug', '=', 'weekly_news')->first();
+        // // dd($dataWidget->articles);
+        // $data=$dataWidget->articles ?? null;
 
-        // dd(json_decode($dataWidget->url));
-        // $page='';
-        // foreach(json_decode($dataWidget->url) as $items){
-        //     // dd($items);
-        //     $page=$request->is($items);
-        // }
-        // dd($page);
-        // if ($request->is('about')) {
-        //     // Your code here
-        //     dd('masuk');
-        // }
+       
+        $data=Article::orderBy('id' , 'desc')->take(5)->get();
+
         
         return view('widgets.weekly_news', [
 
