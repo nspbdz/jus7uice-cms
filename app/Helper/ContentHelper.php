@@ -18,7 +18,7 @@ class ContentHelper
     {
         // dd($desiredSegment);
         // dd($widgetSlug);
-        $dataWidget = Widget::with(['navbars' => function ($query) use ($desiredSegment) {
+        $dataWidget = Widget::with(['page' => function ($query) use ($desiredSegment) {
             $query->where('slug', '=', $desiredSegment);
         }])->where('slug', '=', $widgetSlug)->where('status', '=', 1)->first();
 

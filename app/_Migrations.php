@@ -68,7 +68,7 @@ class _Migrations
 				CREATE TABLE " . $table . " (
 					`id` int(10) unsigned NOT NULL AUTO_INCREMENT,
 					`widget_id` int(10) unsigned NULL DEFAULT '0',
-					`navbar_id` int(10) unsigned NULL DEFAULT '0',
+					`page_id` int(10) unsigned NULL DEFAULT '0',
 					`created_at` datetime DEFAULT NULL,
 					`updated_at` datetime DEFAULT NULL,
 					PRIMARY KEY (`id`)

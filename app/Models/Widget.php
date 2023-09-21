@@ -21,10 +21,16 @@ class Widget extends Model
         return $this->belongsToMany(Article::class, 'article_widgets', 'widget_id', 'article_id');
     }
 
-    public function navbars()
+    // public function navbars()
+    // {
+    //     return $this->belongsToMany(Navbar::class, 'widget_navbars', 'widget_id', 'navbar_id');
+    // }
+
+    public function page()
     {
-        return $this->belongsToMany(Navbar::class, 'widget_navbars', 'widget_id', 'navbar_id');
+        return $this->belongsToMany(Navbar::class, 'widget_navbars', 'widget_id', 'page_id');
     }
+
 
 
 

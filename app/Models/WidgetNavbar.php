@@ -12,7 +12,7 @@ class WidgetNavbar extends Model
     protected $fillable = [
         'id',
         'widget_id',
-        'navbar_id',
+        'page_id',
     ];
 
     public function widget()
@@ -23,6 +23,11 @@ class WidgetNavbar extends Model
     public function navbar()
     {
         return $this->belongsTo(Navbar::class, 'navbar_id');
+    }
+
+    public function page()
+    {
+        return $this->belongsTo(Navbar::class, 'page_id');
     }
 
 }

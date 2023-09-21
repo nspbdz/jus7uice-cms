@@ -74,7 +74,7 @@ class _Seeds
                 for ($i = 0; $i < count($dataArticle); $i++) {
                     DB::table('widget_navbars')->insert([
                         "id" => $i + 1,
-                        "navbar_id" => $dataArticle[$i],
+                        "page_id" => $dataArticle[$i],
                         "widget_id" => 1,
                         "created_at" => now(),
                         "updated_at" => now(),
@@ -84,7 +84,7 @@ class _Seeds
                 for ($j = 0; $j < count($dataArticle); $j++) {
                     DB::table('widget_navbars')->insert([
                         "id" => 7 + $j,
-                        "navbar_id" => $dataArticle[$j],
+                        "page_id" => $dataArticle[$j],
                         "widget_id" => 3,
                         "created_at" => now(),
                         "updated_at" => now(),

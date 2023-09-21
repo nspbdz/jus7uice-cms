@@ -132,14 +132,14 @@
             // dd($canWidgetBanner);
             ?>
             @if( $canWidgetWeeklyNews == null  || $canWidgetWeeklyNews->isEmpty() )
-            <!-- <p>Tidak ada data yang ditemukan.</p> -->
             @else
             <div>
                 @widget('WeeklyNews')
             </div>
             @endif
 
-
+            
+            @widget('WidgetNews')
 
 
             <footer id="footer">

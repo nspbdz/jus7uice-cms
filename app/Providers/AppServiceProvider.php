@@ -35,7 +35,7 @@ class AppServiceProvider extends ServiceProvider
             $segments = explode('/', parse_url($currentUrl, PHP_URL_PATH));
 
             // Mengambil segmen yang sesuai (misalnya, segmen ke-2)
-            $desiredSegment = $segments[1] ?? ''; // Ini akan mengambil segmen ke-2 atau string kosong jika tidak ada
+            $desiredSegment = $segments[2] ?? ''; // Ini akan mengambil segmen ke-2 atau string kosong jika tidak ada
 
             // Weekly News
             $canWidgetWeeklyNews = ContentHelper::Availibility('weekly_news', $desiredSegment);
