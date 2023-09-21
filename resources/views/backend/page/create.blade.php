@@ -6,22 +6,41 @@
 @endsection
 
 @section('page_title')
-Content Create
+Page Create
 @endsection
 
 @section('content')
 
 <div class="container-fluid">
-	<form action="{{url(BACKEND_PATH.'content.create')}}" method="post" enctype=multipart/form-data>
+	<form action="{{url(BACKEND_PATH.'page.create')}}" method="post" enctype=multipart/form-data>
 		@csrf
 		<div class="mb-3">
-			<label class="form-label">Title</label>
-			<input type="text" class="form-control" name="title" id="title" placeholder="Input placeholder" value="{{ old('title') }}">
-			@error('title')
-			<span class="text-danger">{{$message}}</span>
+			<label class="form-label">Page</label>
+			<input type="text" class="form-control" name="page" id="page" placeholder="Input placeholder" value="{{ old('page') }}">
+			@error('page')
+			<span class="text-danger">{{ $message }}</span>
 			@enderror
 		</div>
 		
+
+		<!-- <div class="form-group mb-3 ">
+			<label class="form-label col-3 col-form-label"> url </label>
+			<div class="card">
+				<div class="card-body scrollable_box">
+					@foreach($navbars as $navbar)
+					<div class="form-check">
+						<input class="form-check-input" type="checkbox" name="navbar_ids[]" value="{{ $navbar->id }}" id="navbar{{ $navbar->id }}">
+						<label class="form-check-label" for="navbar{{ $navbar->id }}">
+							{{ $navbar->title }}
+						</label>
+					</div>
+					@endforeach
+
+				</div>
+			</div>
+		</div> -->
+
+
 		<div class="mb-3">
 
 			<textarea name="content" class="tinymce" id="mytextarea">{{ old('content') }}</textarea>
@@ -40,7 +59,7 @@ Content Create
 				</label>
 			</div>
 		</div>
-	
+
 
 		<div class="card-footer text-end">
 			<a href="{{url(BACKEND_PATH.'content')}}" class="btn btn-danger">Back</a>
@@ -61,12 +80,19 @@ Content Create
 		selector: '.tinymce'
 	});
 </script>
-</head>
+
+</script>
+
+<script>
+    document.getElementById('page').addEventListener('input', function () {
+        this.value = this.value.toLowerCase();
+    });
 </script>
 
 
 
 @endpush
+
 
 
 <!-- <!DOCTYPE html>

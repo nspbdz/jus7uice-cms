@@ -6,20 +6,20 @@
 @endsection
 
 @section('page_title')
-Content Edit
+Page Edit
 @endsection
 
 @section('content')
 
 <div class="container-fluid">
 
-	<form action="{{url(BACKEND_PATH.'content.update', $data->id)}}" method="post" enctype=multipart/form-data>
+	<form action="{{url(BACKEND_PATH.'page.update', $data->id)}}" method="post" enctype=multipart/form-data>
 		@csrf
 		@method('PUT')
 		<div class="mb-3">
-			<label class="form-label">Title</label>
-			<input type="text" class="form-control" name="title" id="title" placeholder="Input placeholder" value="{{$data->title}}">
-			@error('title')
+			<label class="form-label">Page</label>
+			<input type="text" class="form-control" name="page" id="page" placeholder="Input placeholder" value="{{$data->page}}">
+			@error('page')
 			<span class="text-danger">{{$message}}</span>
 			@enderror
 		</div>
@@ -44,7 +44,7 @@ Content Edit
 			</div>
 		</div>
 		<div class="card-footer text-end">
-				<a href="{{url(BACKEND_PATH.'content')}}" class="btn btn-danger">Back</a>
+				<a href="{{url(BACKEND_PATH.'page')}}" class="btn btn-danger">Back</a>
 				<button type="submit" class="btn btn-primary ms-auto">Send data</button>
 		</div>
 	</form>

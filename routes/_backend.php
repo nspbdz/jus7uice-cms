@@ -12,7 +12,7 @@ use App\Http\Controllers\Backend\MediaCtr;
 use App\Http\Controllers\Backend\ArticleCtr;
 use App\Http\Controllers\backend\ContentCtr;
 use App\Http\Controllers\Backend\NavbarCtr;
-use App\Http\Controllers\backend\PageController;
+use App\Http\Controllers\backend\PageCtr;
 use App\Http\Controllers\WidgetCtr;
 
 Route::prefix(BACKEND_PATH)->middleware(['backend.check.auth.exists'])->controller(LoginCtr::class)->group(function () {
@@ -48,14 +48,15 @@ Route::group(['prefix' => BACKEND_PATH, 'namespace' => 'Backend\\', 'middleware'
     Route::post('content.delete', [ContentCtr::class, 'postDelete']);
     Route::get('content.delete', [ContentCtr::class, 'getDelete']);
 
-    Route::get('page', [PageController::class, 'index']);
-    Route::get('page.data', [PageController::class, 'getData']);
-    Route::get('page.create', [PageController::class, 'getCreate']);
-    Route::post('page.create', [PageController::class, 'store']);
-    Route::get('page.edit/{id?}', [PageController::class, 'getEdit']);
-    Route::put('page.update/{id?}', [PageController::class, 'update']);
-    Route::post('page.delete', [PageController::class, 'postDelete']);
-    Route::get('page.delete', [PageController::class, 'getDelete']);
+    Route::get('page', [PageCtr::class, 'index']);
+    Route::get('page.data', [PageCtr::class, 'getData']);
+    Route::get('page.create', [PageCtr::class, 'getCreate']);
+    Route::post('page.create', [PageCtr::class, 'store']);
+    Route::get('page.edit/{id?}', [PageCtr::class, 'getEdit']);
+    Route::put('page.update/{id?}', [PageCtr::class, 'update']);
+    Route::post('page.delete', [PageCtr::class, 'postDelete']);
+    Route::get('page.delete', [PageCtr::class, 'getDelete']);
+    Route::post('page.post-sortable', [PageCtr::class, 'position']);
 
 
     Route::get('article', [ArticleCtr::class, 'index']);
