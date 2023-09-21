@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreNavbarRequest;
+use App\Http\Requests\StorePageRequest;
 use App\Models\Article;
 use Illuminate\Http\Request;
 use App\Models\Navbar;
@@ -83,14 +84,14 @@ class PageCtr extends Controller
        
     }
 
-    public function store(Request $request)
+    public function store(StorePageRequest $request)
     {
 
         // Mendapatkan request->page dalam bentuk huruf kapital pertama
         $page = ucfirst($request->page);
 
         // Membuat variabel URL dengan mengganti spasi dengan garis bawah (_) dan mengkonversi ke huruf kecil (lowercase)
-        $url = '/' . str_replace(' ', '_', strtolower(request()->input('page')));
+        $url = '//page/' . str_replace(' ', '_', strtolower(request()->input('page')));
         $slug = str_replace(' ', '_', strtolower(request()->input('page')));
         // dd($slug);
 
@@ -116,14 +117,14 @@ class PageCtr extends Controller
         return view('backend.page.edit', compact('data'));
     }
 
-    public function update(Request $request)
+    public function update(StorePageRequest $request)
     {
 
          // Mendapatkan request->page dalam bentuk huruf kapital pertama
          $page = ucfirst($request->page);
 
          // Membuat variabel URL dengan mengganti spasi dengan garis bawah (_) dan mengkonversi ke huruf kecil (lowercase)
-         $url = '/' . str_replace(' ', '_', strtolower(request()->input('page')));
+         $url = '/page/' . str_replace(' ', '_', strtolower(request()->input('page')));
          $slug = str_replace(' ', '_', strtolower(request()->input('page')));
          // dd($slug);
  

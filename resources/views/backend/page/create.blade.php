@@ -23,24 +23,6 @@ Page Create
 		</div>
 		
 
-		<!-- <div class="form-group mb-3 ">
-			<label class="form-label col-3 col-form-label"> url </label>
-			<div class="card">
-				<div class="card-body scrollable_box">
-					@foreach($navbars as $navbar)
-					<div class="form-check">
-						<input class="form-check-input" type="checkbox" name="navbar_ids[]" value="{{ $navbar->id }}" id="navbar{{ $navbar->id }}">
-						<label class="form-check-label" for="navbar{{ $navbar->id }}">
-							{{ $navbar->title }}
-						</label>
-					</div>
-					@endforeach
-
-				</div>
-			</div>
-		</div> -->
-
-
 		<div class="mb-3">
 
 			<textarea name="content" class="tinymce" id="mytextarea">{{ old('content') }}</textarea>
