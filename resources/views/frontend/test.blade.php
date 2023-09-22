@@ -632,7 +632,7 @@
                                                 </div>
                                             </div>
                                         </div> 
-                                        <div class="col-lg-6 col-md-6">
+                                         <div class="col-lg-6 col-md-6">
                                             <div class="single-what-news mb-100">
                                                 <div class="what-img">
                                                     <img src="assets/img/news/whatNews3.jpg" alt="">

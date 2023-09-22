@@ -2,6 +2,7 @@
 
 namespace App\Widgets;
 
+use App\Models\Article;
 use App\Models\Page;
 use App\Models\Widget;
 use App\Models\WidgetNavbar;
@@ -70,9 +71,11 @@ class WidgetNews extends AbstractWidget
 
         $numberOfViews = 3; // Ganti dengan jumlah tampilan yang Anda inginkan
         $views = [];
+        $data= Article::take(5)->get();
 
+        // dd($data);
         for ($i = 1; $i <= $numberOfViews; $i++) {
-            $views[] = view("widgets.widget{$i}");
+            $views[] = view("widgets.widget{$i} ")->with('data', $data);;
         }
 
         return implode('', $views);

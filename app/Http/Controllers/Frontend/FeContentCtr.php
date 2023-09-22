@@ -26,5 +26,11 @@ class FeContentCtr extends Controller
         return view('frontend.pages', compact('data'));
     }
 
+    public function test()
+    {
+        return view('frontend.test');
+
+    }
+
     
 }
