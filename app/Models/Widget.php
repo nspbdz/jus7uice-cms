@@ -14,7 +14,7 @@ class Widget extends Model
         'name',
         'status',
     ];
-    
+
 
     public function articles()
     {
@@ -28,7 +28,7 @@ class Widget extends Model
 
     public function page()
     {
-        return $this->belongsToMany(Navbar::class, 'widget_navbars', 'widget_id', 'page_id');
+        return $this->belongsToMany(Navbar::class, 'widget_pages', 'widget_id', 'page_id');
     }
 
 

@@ -11,23 +11,22 @@
                             <h3>Whats New</h3>
                         </div>
                     </div>
+                    <br>
                     <div class="col-lg-9 col-md-9">
                         <div class="properties__button">
                             <!--Nav Button  -->
                             <nav>
                                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                    <!-- <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">All</a>
-                                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Lifestyle</a>
-                                    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Travel</a>
-                                    <a class="nav-item nav-link" id="nav-last-tab" data-toggle="tab" href="#nav-last" role="tab" aria-controls="nav-contact" aria-selected="false">Fashion</a>
-                                    <a class="nav-item nav-link" id="nav-Sports" data-toggle="tab" href="#nav-nav-Sport" role="tab" aria-controls="nav-contact" aria-selected="false">Sports</a>
-                                    <a class="nav-item nav-link" id="nav-technology" data-toggle="tab" href="#nav-techno" role="tab" aria-controls="nav-contact" aria-selected="false">Technology</a> -->
+                                    <!-- tambahkan category nya disini dari table category di WidgetNews -->
+                                    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true"></a>
 
                                 </div>
                             </nav>
                             <!--End Nav Button  -->
                         </div>
                     </div>
+                    <br> </br>
+                    <br> </br>
                 </div>
                 <div class="row">
                     <div class="col-12">
@@ -97,10 +96,10 @@
 <script>
     // Mengakses data dari controller dan menampilkannya
     var dataFromController = @json($data);
-    
+
     // Sekarang, Anda dapat menggunakan data tersebut dalam JavaScript
     console.log(dataFromController, 'ini data');
-    
+
     // Misalnya, jika Anda ingin menampilkan data dalam elemen HTML:
     var someElement = document.getElementById('some-element-id');
     someElement.innerHTML = dataFromController.someValue; // Gantilah 'someValue' dengan nama properti yang sesuai dalam data Anda.
