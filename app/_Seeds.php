@@ -19,7 +19,7 @@ class _Seeds
         $this->_insert_table_admin_content();
         $this->_insert_table_admin_widget();
         $this->_insert_table_admin_article_widget();
-        $this->_insert_table_admin_widget_navbar();
+        $this->_insert_table_admin_widget_page();
         $this->_insert_table_admin_page();
         $this->_insert_table_admin_article_categories();
         $this->_insert_table_admin_categories();
@@ -107,17 +107,17 @@ class _Seeds
 
     /* Admin article widget */
 
-    function _insert_table_admin_widget_navbar()
+    function _insert_table_admin_widget_page()
     {
-        if (Schema::hasTable('widget_navbars')) {
-            if (DB::table('widget_navbars')->count() <= 0) {
+        if (Schema::hasTable('widget_pages')) {
+            if (DB::table('widget_pages')->count() <= 0) {
 
                 $dataArticle = [2, 3, 4, 5, 6];
                 $dataWidget = [2, 3, 4, 5, 6];
 
                 // dd($data[0]);
                 for ($i = 0; $i < count($dataArticle); $i++) {
-                    DB::table('widget_navbars')->insert([
+                    DB::table('widget_pages')->insert([
                         "id" => $i + 1,
                         "page_id" => $dataArticle[$i],
                         "widget_id" => 1,
@@ -127,7 +127,7 @@ class _Seeds
                 }
 
                 for ($j = 0; $j < count($dataArticle); $j++) {
-                    DB::table('widget_navbars')->insert([
+                    DB::table('widget_pages')->insert([
                         "id" => 7 + $j,
                         "page_id" => $dataArticle[$j],
                         "widget_id" => 3,

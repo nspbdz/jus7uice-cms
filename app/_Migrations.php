@@ -29,7 +29,7 @@ class _Migrations
 		$this->_create_table_pages();
 
 		#widget_page
-		$this->_create_table_widget_navbars();
+		$this->_create_table_widget_pages();
 
 		#article_widget
 		$this->_create_table_article_widgets();
@@ -109,9 +109,9 @@ class _Migrations
 
 	/* Tbl article_widget */
 
-	function _create_table_widget_navbars()
+	function _create_table_widget_pages()
 	{
-		$table = "widget_navbars";
+		$table = "widget_pages";
 		$r = "
 				CREATE TABLE " . $table . " (
 					`id` int(10) unsigned NOT NULL AUTO_INCREMENT,
