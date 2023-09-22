@@ -21,6 +21,51 @@ class _Seeds
         $this->_insert_table_admin_article_widget();
         $this->_insert_table_admin_widget_navbar();
         $this->_insert_table_admin_page();
+        $this->_insert_table_admin_article_categories();
+        $this->_insert_table_admin_categories();
+
+    }
+
+    function _insert_table_admin_categories()
+    {
+        if (Schema::hasTable('categories')) {
+            if (DB::table('categories')->count() <= 0) {
+
+                $dataPage = [1,2, 3, 4, 5, 6];
+                for ($i = 0; $i < count($dataPage); $i++) {
+                    DB::table('categories')->insert([
+                        "id" => $i + 1,
+                        "name" => "category" . $i + 1 ,
+                        "created_at" => now(),
+                        "updated_at" => now(),
+                    ]);
+                }
+
+            }
+        }
+    }
+
+    function _insert_table_admin_article_categories()
+    {
+        if (Schema::hasTable('article_categories')) {
+            if (DB::table('article_categories')->count() <= 0) {
+
+                $dataPage = [1,2, 3, 4, 5, 6];
+
+                // dd($data[0]);
+                for ($i = 0; $i < count($dataPage); $i++) {
+                    DB::table('article_categories')->insert([
+                        "id" => $i + 1,
+                        "article_id" => 1,
+                        "category_id" => $dataPage[$i],
+                        "created_at" => now(),
+                        "updated_at" => now(),
+                    ]);
+                }
+
+               
+            }
+        }
     }
 
     function _insert_table_admin_page()

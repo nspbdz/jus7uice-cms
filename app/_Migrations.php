@@ -18,6 +18,13 @@ class _Migrations
 		$this->_create_table_admin_group();
 
 		$this->_create_table_user();
+
+		#page_categorie
+		$this->_create_table_article_categories();
+
+		#categorie
+		$this->_create_table_categories();
+
 		#page
 		$this->_create_table_pages();
 
@@ -58,6 +65,47 @@ class _Migrations
 			die("Failed to establish connection to the server");
 		}
 	}
+
+	/* Tbl articles */
+
+	function _create_table_categories()
+	{
+		$table = "categories";
+		$r = "
+				CREATE TABLE " . $table . " (
+					`id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+					`name` varchar(100) NULL DEFAULT NULL,
+					`created_at` datetime DEFAULT NULL,
+					`updated_at` datetime DEFAULT NULL,
+				`status` tinyint(1) unsigned NOT NULL DEFAULT '1',
+					PRIMARY KEY (`id`)
+				) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+				";
+		if (!Schema::hasTable($table)) {
+			DB::statement($r);
+		}
+	}
+
+	/* Tbl article_categories */
+
+	function _create_table_article_categories()
+	{
+		$table = "article_categories";
+		$r = "
+				CREATE TABLE " . $table . " (
+					`id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+					`category_id` int(10) unsigned NULL DEFAULT '0',
+					`article_id` int(10) unsigned NULL DEFAULT '0',
+					`created_at` datetime DEFAULT NULL,
+					`updated_at` datetime DEFAULT NULL,
+					PRIMARY KEY (`id`)
+				) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+				";
+		if (!Schema::hasTable($table)) {
+			DB::statement($r);
+		}
+	}
+
 
 	/* Tbl article_widget */
 
