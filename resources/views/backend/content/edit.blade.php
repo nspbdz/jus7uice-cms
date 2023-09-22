@@ -29,7 +29,7 @@ Content Edit
 		<div class="mb-3">
 
 			<textarea name="content" class="tinymce" id="mytextarea">{{ $data->content }}</textarea>
-			@error('tcontentitle')
+			@error('content')
 			<span class="text-danger">{{$message}}</span>
 			@enderror
 		</div>

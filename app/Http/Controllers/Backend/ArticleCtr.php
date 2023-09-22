@@ -69,7 +69,7 @@ class ArticleCtr extends Controller
 			';
                 return $action;
             })
-            ->rawColumns(['chkbox', 'title','categories', 'status', 'action'])
+            ->rawColumns(['chkbox', 'title', 'categories', 'status', 'action'])
             ->make();
     }
 
@@ -79,16 +79,16 @@ class ArticleCtr extends Controller
         $categories = Category::all();
         // $groupList = [''=>'Select Group:'] + AdminGroup::where('status',1)->pluck('name','id')->toArray();
         $data = Article::find($request->id);
-        return view('backend.article.create', compact('data','categories'));
+        return view('backend.article.create', compact('data', 'categories'));
         // return view('backend.article.create');
     }
 
     public function store(StoreArticleRequest $request)
     {
-    //     "title" => "ya123"
-    //   "category_ids" => array:2 [▶]
-    //   "content" => "<p>ya123ya123ya123ya123ya123ya123ya123</p>"
-    //   "status" => "1"
+        //     "title" => "ya123"
+        //   "category_ids" => array:2 [▶]
+        //   "content" => "<p>ya123ya123ya123ya123ya123ya123ya123</p>"
+        //   "status" => "1"
         // dd($request);
 
         $photoPath = $this->storePhoto($request->thumbnail);
@@ -120,20 +120,25 @@ class ArticleCtr extends Controller
 
     function getEdit(Request $request)
     {
-        $dataWidgetById = Widget::find($request->id);
-        $widgetPageIds = WidgetPage::where('widget_id', $request->id)->pluck('page_id')->toArray();
-        
-        $data = Article::find($request->id);
-        $pages = Page::all();
+        $dataArticleById = Article::find($request->id);
+        $articleIds = ArticleCategory::where('article_id', $request->id)->pluck('category_id')->toArray();
 
-        return view('backend.article.edit', compact('data'));
+        $article = Article::find($request->id);
+        $categories = Category::all();
+
+        // return view('backend.article.edit', compact('data'));
+        return view('backend.article.edit', [
+            'dataArticleById' => $dataArticleById,
+            'article' => $article,
+            'categories' => $categories,
+            'selectedCategoryIds' => $articleIds
+        ]);
     }
 
     function update(Request $request)
     {
-        // dd($category_ids);
+        // dd($request->id);
         $article = Article::find($request->id);
-        // dd($article);
 
         // Handle the file upload
         if ($request->hasFile('thumbnail')) {
@@ -150,17 +155,18 @@ class ArticleCtr extends Controller
             $article->thumbnail = $photoPath;
         }
 
-        // $category_ids = $request->category_ids ?? null;
-        // $articleCategory = new ArticleCategory();
-        
-        // if ($request->has('category_ids')) {
-        //     foreach ($request->input('category_ids') as $pageId) {
-        //         $articleCategory = new ArticleCategory;
-        //         $articleCategory->article_id = $request->widget; // Gunakan ID widget yang baru saja dibuat
-        //         $articleCategory->category_id = $category_ids;
-        //         $articleCategory->save();
-        //     }
-        // }
+
+        ArticleCategory::where('article_id', $request->id)->delete();
+
+
+        if ($request->has('category_ids')) {
+            foreach ($request->input('category_ids') as $categoryId) {
+                $articleCategory = new ArticleCategory;
+                $articleCategory->article_id = $article->id; // Gunakan ID widget yang baru saja dibuat
+                $articleCategory->category_id = $categoryId;
+                $articleCategory->save();
+            }
+        }
 
 
         // Update the article with the new data

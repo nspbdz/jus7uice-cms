@@ -89,7 +89,7 @@ class WidgetCtr extends Controller
 
 
         $widgetPage = new WidgetPage;
-   
+
         if ($request->has('page_ids')) {
             foreach ($request->input('page_ids') as $pageId) {
                 $widgetPage = new WidgetPage;
@@ -133,7 +133,7 @@ class WidgetCtr extends Controller
         // dd($status);
         $widget = Widget::find($request->widget_id);
         $widget->name = $request->widget_name;
-        
+
         if ($status !== 0) {
             // dd('masuk');
             $widget->status = $status;
