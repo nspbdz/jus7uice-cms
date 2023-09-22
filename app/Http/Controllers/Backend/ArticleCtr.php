@@ -120,7 +120,12 @@ class ArticleCtr extends Controller
 
     function getEdit(Request $request)
     {
+        $dataWidgetById = Widget::find($request->id);
+        $widgetPageIds = WidgetPage::where('widget_id', $request->id)->pluck('page_id')->toArray();
+        
         $data = Article::find($request->id);
+        $pages = Page::all();
+
         return view('backend.article.edit', compact('data'));
     }
 

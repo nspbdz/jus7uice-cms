@@ -24,10 +24,49 @@ Article Edit
 			@enderror
 		</div>
 
+		<!-- <div class="form-group mb-3">
+			<label class="form-label col-form-label"> Category </label>
+			<div class="card">
+				<div class="card-body scrollable_box">
+					@foreach($categories as $category)
+					<div class="form-check">
+						<input class="form-check-input" type="checkbox" name="category_ids[]" value="{{ $category->id }}" id="category{{ $category->id }}" {{ in_array($category->id, old('category_ids', $article->categories->pluck('id')->toArray())) ? 'checked' : '' }}>
+						<label class="form-check-label" for="category{{ $category->id }}">
+							{{ $category->name }}
+						</label>
+					</div>
+					@endforeach
+
+					@if ($errors->has('category_ids'))
+					<span class="text-danger">{{ $errors->first('category_ids') }}</span>
+					@endif
+				</div>
+			</div>
+		</div> -->
+
+		<div class="form-group mb-3 row">
+			<label class="form-label col-3 col-form-label">Categories</label>
+			<div class="col">
+				<div class="card">
+					<div class="card-body scrollable_box">
+						@foreach($categories as $category)
+						<div class="form-check">
+							<input class="form-check-input" type="checkbox" name="category_ids[]" value="{{ $category->id }}" id="category{{ $category->id }}" {{ in_array($category->id, $selectedCategoryIds) ? 'checked' : '' }}>
+							<label class="form-check-label" for="category{{ $category->id }}">
+								{{ $category->name }}
+							</label>
+						</div>
+						@endforeach
+					</div>
+				</div>
+			</div>
+		</div>
+
+
 		<div class="mb-3">
 			<div class="form-label">Preview Thumbnail</div>
 			@if ($data->thumbnail)
-			<img id="newThumbnailImage" src="{{ asset($data->thumbnail) }}" alt="Thumbnail" height="70px" width="100px" required >
+			<img id="newThumbnailImage" src="{{ asset($data->thumbnail) }}" alt="Thumbnail" height="70px" width="100px" required>
 			@else
 			<p>Tidak ada thumbnail yang tersedia.</p>
 			@endif
@@ -51,7 +90,7 @@ Article Edit
 			@enderror
 		</div>
 
-			<div class="mb-3">
+		<div class="mb-3">
 			<label class="form-label col-3 col-form-label pt-0">Status</label>
 			{{html()->hidden('status',0)}}
 			<div class="col">
@@ -61,8 +100,8 @@ Article Edit
 			</div>
 		</div>
 		<div class="card-footer text-end">
-				<a href="{{url(BACKEND_PATH.'article')}}" class="btn btn-danger">Back</a>
-				<button type="submit" class="btn btn-primary ms-auto">Send data</button>
+			<a href="{{url(BACKEND_PATH.'article')}}" class="btn btn-danger">Back</a>
+			<button type="submit" class="btn btn-primary ms-auto">Send data</button>
 		</div>
 	</form>
 

@@ -30,6 +30,7 @@ Article
 								<tr>
 									<th data-data="chkbox" data-orderable="false"><input class="form-check-input" type="checkbox" id="select-all" /></th>
 									<th data-data="title" data-class-name="title">Title</th>
+									<!-- <th data-data="categories" data-class-name="categories">Category</th> -->
 									<!-- <th data-data="restrical_path">Restrical Path</th> -->
 									<th data-data="status">Status</th>
 									<th data-data="action" data-class-name="text-end"></th>
