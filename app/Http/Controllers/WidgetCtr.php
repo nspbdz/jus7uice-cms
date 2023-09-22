@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Navbar;
+use App\Models\Page;
 use App\Models\Widget;
 use App\Models\WidgetNavbar;
 use Illuminate\Http\Request;
@@ -67,23 +68,20 @@ class WidgetCtr extends Controller
     }
     public function getCreate()
     {
-        // $widget_navbar = WidgetNavbar::select('widget_id')->groupBy('widget_id')->get();
-        // dd($widget_navbar);
-
-        // $navbars = Navbar::get();
-
         $widgetNavbarIds = WidgetNavbar::select('widget_id')->groupBy('widget_id')->get()->pluck('widget_id');
         $widget = Widget::whereNotIn('id', $widgetNavbarIds)->get();
 
-        $navbars = Navbar::get();
-        return view('backend.widget.create', ['widget' => $widget, 'navbars' => $navbars]);
+        // $navbars = Navbar::get();
+        $pages = Page::all();
+
+        return view('backend.widget.create', ['widget' => $widget, 'pages' => $pages]);
     }
     function store(Request $request)
     {
 
         // Validate the request data
         $validator = Validator::make($request->all(), [
-            'navbar_ids' => 'required|array',
+            'page_ids' => 'required|array',
             'widget' => 'required|numeric', // Assuming widget is a numeric field
         ]);
 
@@ -93,16 +91,16 @@ class WidgetCtr extends Controller
         }
 
 
-        $navbar_ids = $request->navbar_ids ?? null;
+        $page_ids = $request->page_ids ?? null;
 
 
         $widget_navbar = new WidgetNavbar;
    
-        if ($request->has('navbar_ids')) {
-            foreach ($request->input('navbar_ids') as $navbarId) {
+        if ($request->has('page_ids')) {
+            foreach ($request->input('page_ids') as $pageId) {
                 $widgetNavbar = new WidgetNavbar;
                 $widgetNavbar->widget_id = $request->widget; // Gunakan ID widget yang baru saja dibuat
-                $widgetNavbar->navbar_id = $navbarId;
+                $widgetNavbar->page_id = $pageId;
                 $widgetNavbar->save();
             }
         }
@@ -113,15 +111,17 @@ class WidgetCtr extends Controller
         $dataWidgetById = Widget::find($request->id);
         // dd($dataWidgetById->id   );
         $widget = Widget::get();
-        $widgetNavbarIds = WidgetNavbar::where('widget_id', $request->id)->pluck('navbar_id')->toArray();
-        // dd($widgetNavbarIds);
-        $navbars = Navbar::all();
+        // dd($widget);
+        $widgetPageIds = WidgetNavbar::where('widget_id', $request->id)->pluck('page_id')->toArray();
+        // dd($widgetPageIds);
+        // dd($widgetPageIds);
+        $pages = Page::all();
 
         return view('backend.widget.edit', [
             'dataWidgetById' => $dataWidgetById,
             'widget' => $widget,
-            'navbars' => $navbars,
-            'selectedNavbarIds' => $widgetNavbarIds
+            'pages' => $pages,
+            'selectedPageIds' => $widgetPageIds
         ]);
     }
 
@@ -131,7 +131,7 @@ class WidgetCtr extends Controller
         // dd($request);
         $request->validate([
             'widget_id' => 'required|exists:widgets,id',
-            'navbar_ids' => 'array',
+            'page_ids' => 'array',
             'widget_name' => 'required|string'
         ]);
 
@@ -155,11 +155,11 @@ class WidgetCtr extends Controller
         WidgetNavbar::where('widget_id', $request->widget_id)->delete();
 
         // Tambahkan kembali kaitan berdasarkan data dari form
-        if ($request->has('navbar_ids')) {
-            foreach ($request->navbar_ids as $navbarId) {
+        if ($request->has('page_ids')) {
+            foreach ($request->page_ids as $page_ids) {
                 $widgetNavbar = new WidgetNavbar;
                 $widgetNavbar->widget_id = $request->widget_id;
-                $widgetNavbar->navbar_id = $navbarId;
+                $widgetNavbar->page_id = $page_ids;
                 $widgetNavbar->save();
             }
         }

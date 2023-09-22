@@ -20,15 +20,15 @@
 	</div>
 
 	<div class="form-group mb-3 row">
-		<label class="form-label col-3 col-form-label">Navbar IDs</label>
+		<label class="form-label col-3 col-form-label">Pages</label>
 		<div class="col">
 			<div class="card">
 				<div class="card-body scrollable_box">
-					@foreach($navbars as $navbar)
+					@foreach($pages as $page)
 					<div class="form-check">
-						<input class="form-check-input" type="checkbox" name="navbar_ids[]" value="{{ $navbar->id }}" id="navbar{{ $navbar->id }}" {{ in_array($navbar->id, $selectedNavbarIds) ? 'checked' : '' }}>
-						<label class="form-check-label" for="navbar{{ $navbar->id }}">
-							{{ $navbar->title }}
+						<input class="form-check-input" type="checkbox" name="page_ids[]" value="{{ $page->id }}" id="page{{ $page->id }}" {{ in_array($page->id, $selectedPageIds) ? 'checked' : '' }}>
+						<label class="form-check-label" for="page{{ $page->id }}">
+							{{ $page->page }}
 						</label>
 					</div>
 					@endforeach
