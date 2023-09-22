@@ -315,11 +315,11 @@ $path = str_replace(BACKEND_PATH, '', Request()->path());
                                     <span class="nav-link-title"> Article </span>
                                 </a>
                             </li>
-                            <li class="nav-item">
+                            <!-- <li class="nav-item">
                                 <a class="nav-link" href="{{url(BACKEND_PATH.'navbar')}}" target="_tester">
                                     <span class="nav-link-title"> Navbar </span>
                                 </a>
-                            </li>
+                            </li> -->
 
 							<li class="nav-item">
                                 <a class="nav-link" href="{{url(BACKEND_PATH.'widget')}}" target="_tester">

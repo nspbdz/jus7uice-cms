@@ -12,7 +12,7 @@ Article Create
 @section('content')
 
 <div class="container-fluid">
-	<form action="{{url(BACKEND_PATH.'article.create')}}" method="post" enctype=multipart/form-data>
+	<form id="articleForm" action="{{url(BACKEND_PATH.'article.create')}}" method="post" enctype=multipart/form-data>
 		@csrf
 		<div class="mb-3">
 			<label class="form-label">Title</label>
@@ -21,6 +21,28 @@ Article Create
 			<span class="text-danger">{{$message}}</span>
 			@enderror
 		</div>
+
+		<div class="form-group mb-3">
+			<label class="form-label col-form-label"> Category </label>
+			<div class="card">
+				<div class="card-body scrollable_box">
+					@foreach($categories as $category)
+					<div class="form-check">
+						<input class="form-check-input" type="checkbox" name="category_ids[]" value="{{ $category->id }}" id="category{{ $category->id }}" {{ in_array($category->id, old('category_ids', [])) ? 'checked' : '' }}>
+						<label class="form-check-label" for="category{{ $category->id }}">
+							{{ $category->name }}
+						</label>
+					</div>
+					@endforeach
+
+					@if ($errors->has('category_ids'))
+					<span class="text-danger">{{ $errors->first('category_ids') }}</span>
+					@endif
+				</div>
+			</div>
+		</div>
+
+
 		<div class="mb-3">
 			<div class="form-label">Masukan Thumbnail</div>
 			<input type="file" name="thumbnail" id="thumbnail" class="form-control" />
@@ -43,7 +65,7 @@ Article Create
 				</label>
 			</div>
 		</div>
-	
+
 
 		<div class="card-footer text-end">
 			<a href="{{url(BACKEND_PATH.'article')}}" class="btn btn-danger">Back</a>
@@ -66,6 +88,7 @@ Article Create
 </script>
 </head>
 </script>
+<!-- required category  check -->
 
 
 

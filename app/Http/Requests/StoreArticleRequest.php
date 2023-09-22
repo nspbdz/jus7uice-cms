@@ -24,6 +24,7 @@ class StoreArticleRequest extends FormRequest
         return [
             'title' => 'required|string|max:255',
             'content' => 'required|string',
+            'category_ids' => 'required|array|min:1', // Example validation rules
             'thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Contoh: Maksimum 2MB
         ];
         

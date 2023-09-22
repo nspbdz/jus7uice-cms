@@ -25,8 +25,8 @@ class Article extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function widgets()
+    public function categories()
     {
-        return $this->belongsToMany(Widget::class, 'article_widgets', 'article_id', 'widget_id');
+        return $this->belongsToMany(Category::class, 'article_categories');
     }
 }
