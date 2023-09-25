@@ -1,6 +1,7 @@
 @if(isset($data))
 
 
+
 <section class="whats-news-area pt-50 pb-20">
     <div class="container">
         <div class="row">
@@ -18,10 +19,13 @@
                             <!--Nav Button  -->
                             <nav>
                                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true" onclick="showCategory('all', 'all')">All</a>
+
                                     <!-- tambahkan category nya disini dari table category di WidgetNews -->
                                     @foreach($categories as $row)
-                                    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">{{$row->name}}</a>
+                                    <a class="nav-item nav-link" id="category-{{ $row->id }}" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true" onclick="showCategory({{ $row->id }}, this)">{{$row->name}}</a>
                                     @endforeach
+
 
                                 </div>
                             </nav>
@@ -38,9 +42,12 @@
                             <!-- card one -->
                             <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                                 <div class="whats-news-caption">
-                                    <div class="row">
-                                        @foreach($data as $items)
-
+                                    <div id="result" class="row">
+                                        @php
+                                        $specialDataCount = count($specialData);
+                                        @endphp
+                                        @foreach($specialData as $index => $items)
+                                        @if($index >= $specialDataCount - 4)
                                         <div class="col-lg-6 col-md-6">
                                             <a href="{{$items->url}}">
                                                 <div class="single-what-news mb-100">
@@ -49,76 +56,12 @@
                                                     </div>
                                                     <div class="what-cap">
                                                         <span class="color1">{{$items->title}}</span>
-                                                        <!-- <h4 id="content"><a href="#"> {!! $items->content !!}
-                                                            </a></h4> -->
                                                     </div>
                                                 </div>
                                             </a>
                                         </div>
+                                        @endif
                                         @endforeach
-
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="single-what-news mb-100">
-                                                <div class="what-img">
-                                                    <img id="img-data" src="" alt="">
-                                                </div>
-                                                <div class="what-cap">
-                                                    <span id="title-data" class="color1"> </span>
-                                                    
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!-- <a href="{{$items->url}}">
-                               <div class="weekly2-single">
-                                   <div class="weekly2-img">
-                                       @if(isset($items->thumbnail))
-                                       <img src="{{ asset($items->thumbnail) }}" height="150px" alt="">
-                                       @else
-                                       <img src="{{ asset('path_to_default_image.jpg') }}" width="350px" height="200px" alt="Default Image">
-                                       @endif
-                                   </div>
-                                   <div class="weekly2-caption">
-                                       <span class="color1">{{$items->title}}</span>
-                                       <p>{{ $items->created_at->format('d M Y') }}</p>
-                                       <h4><a href="#">{{$items->title}}</a></h4>
-                                   </div>
-                               </div>
-                           </a> -->
-
-                                        <!-- <div class="col-lg-6 col-md-6">
-                                            <div class="single-what-news mb-100">
-                                                <div class="what-img">
-                                                    <img src="assets/img/news/whatNews2.jpg" alt="">
-                                                </div>
-                                                <div class="what-cap">
-                                                    <span class="color1">Night party</span>
-                                                    <h4><a href="#">Welcome To The Best Model Winner Contest</a></h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="single-what-news mb-100">
-                                                <div class="what-img">
-                                                    <img src="assets/img/news/whatNews3.jpg" alt="">
-                                                </div>
-                                                <div class="what-cap">
-                                                    <span class="color1">Night party</span>
-                                                    <h4><a href="#">Welcome To The Best Model Winner Contest</a></h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="single-what-news mb-100">
-                                                <div class="what-img">
-                                                    <img src="assets/img/news/whatNews4.jpg" alt="">
-                                                </div>
-                                                <div class="what-cap">
-                                                    <span class="color1">Night party</span>
-                                                    <h4><a href="#">Welcome To The Best Model Winner Contest</a></h4>
-                                                </div>
-                                            </div>
-                                        </div> -->
                                     </div>
                                 </div>
                             </div>
@@ -134,12 +77,65 @@
 </section>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
+    function showCategory(categoryId, clickedElement) {
+        console.log(categoryId, 'categoryId');
+        // Remove the 'active' class from all category links
+        $(".nav-item.nav-link").removeClass("active");
+
+        // Add the 'active' class to the clicked category link
+        $(clickedElement).addClass("active");
+
+        $("#result").empty();
+        var dataFromController = @json($specialData);
+        // Fungsi untuk menyaring artikel berdasarkan category_id
+        function filterArticlesByCategory(categoryId) {
+            if (categoryId === "all") {
+                return dataFromController;
+            } else {
+                return dataFromController.filter(article => article.category_id === categoryId);
+            }
+        }
+
+
+        // Contoh penggunaan: Menyaring artikel dengan category_id 1
+        const filteredArticles = filterArticlesByCategory(categoryId);
+
+        // Hasil akan berisi artikel-artikel dengan category_id 1
+        console.log(filteredArticles);
+
+
+
+        console.log('Kategori yang dipilih:', categoryId);
+        // Loop melalui data dan membuat elemen HTML untuk setiap item
+        $.each(filteredArticles, function(index, item) {
+            // console.log(item.category_id);
+
+            var imageUrl = "{{ env('APP_URL') }}" + item.thumbnail;
+
+            var html = '<div class="col-lg-6 col-md-6">' +
+                '<div class="single-what-news mb-100">' +
+                '<div class="what-img">' +
+                '<img src="' + imageUrl + '" alt="">' +
+                '</div>' +
+                '<div class="what-cap">' +
+                '<span class="color1">' + item.title + '</span>' +
+                '</div>' +
+                '</div>' +
+                '</div>';
+
+            // Tambahkan elemen HTML yang baru dibuat ke dalam elemen dengan ID "result"
+            $("#result").append(html);
+
+        });
+    }
+</script>
+
+<script>
     // Mengakses data dari controller dan menampilkannya
     var dataFromController = @json($data);
-    console.log(dataFromController.length, 'adataFromController.length')
+    // console.log(dataFromController.length, 'adataFromController.length')
 
     // Sekarang, Anda dapat menggunakan data tersebut dalam JavaScript
-    console.log(dataFromController, 'ini data');
 
     // Misalnya, jika Anda ingin menampilkan data dalam elemen HTML:
     // var someElement = document.getElementById('title-data');
