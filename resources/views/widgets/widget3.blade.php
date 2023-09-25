@@ -47,8 +47,7 @@
                                         $specialDataCount = count($specialData);
                                         @endphp
                                         @foreach($specialData as $index => $items)
-                                        @if($index >= $specialDataCount - 4)
-                                        <div class="col-lg-6 col-md-6">
+                                        @if($index < 4) <div class="col-lg-6 col-md-6">
                                             <a href="{{$items->url}}">
                                                 <div class="single-what-news mb-100">
                                                     <div class="what-img">
@@ -59,20 +58,20 @@
                                                     </div>
                                                 </div>
                                             </a>
-                                        </div>
-                                        @endif
-                                        @endforeach
                                     </div>
+                                    @endif
+                                    @endforeach
                                 </div>
                             </div>
-
                         </div>
-                        <!-- End Nav Card -->
+
                     </div>
+                    <!-- End Nav Card -->
                 </div>
             </div>
-
         </div>
+
+    </div>
     </div>
 </section>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -87,6 +86,9 @@
 
         $("#result").empty();
         var dataFromController = @json($specialData);
+        if (dataFromController.length > 4) {
+            dataFromController = dataFromController.slice(0, 4);
+        }
         // Fungsi untuk menyaring artikel berdasarkan category_id
         function filterArticlesByCategory(categoryId) {
             if (categoryId === "all") {
@@ -133,14 +135,9 @@
 <script>
     // Mengakses data dari controller dan menampilkannya
     var dataFromController = @json($data);
-    // console.log(dataFromController.length, 'adataFromController.length')
-
-    // Sekarang, Anda dapat menggunakan data tersebut dalam JavaScript
-
-    // Misalnya, jika Anda ingin menampilkan data dalam elemen HTML:
-    // var someElement = document.getElementById('title-data');
-    // someElement.innerHTML = dataFromController.title; // Gantilah 'someValue' dengan nama properti yang sesuai dalam data Anda.
-    // Mendapatkan elemen container
+    if (dataFromController.length > 4) {
+        dataFromController = dataFromController.slice(0, 4);
+    }
     var imgElement = document.getElementById('img-data');
     var titleElement = document.getElementById('title-data');
 

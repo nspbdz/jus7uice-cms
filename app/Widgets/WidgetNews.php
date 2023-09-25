@@ -49,6 +49,7 @@ class WidgetNews extends AbstractWidget
         $specialData= DB::table('articles')
         ->join('article_categories', 'articles.id', '=', 'article_categories.article_id')
         ->select('articles.*', 'article_categories.category_id')
+        ->orderBy('articles.id', 'desc')
         ->get();
     
         $categories = Category::take(4)->get();
