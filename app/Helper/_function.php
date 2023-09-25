@@ -11,7 +11,7 @@
         $urlWithUnderscore = str_replace(' ', '_', $url);
 
         // Mengubah huruf besar menjadi huruf kecil
-        $finalUrl = strtolower('article/'. $urlWithUnderscore);
+        $finalUrl = strtolower('/article/'. $urlWithUnderscore);
 
         return $finalUrl;
     }

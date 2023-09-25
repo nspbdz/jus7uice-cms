@@ -87,11 +87,6 @@ class ArticleCtr extends Controller
 
     public function store(StoreArticleRequest $request)
     {
-        //     "title" => "ya123"
-        //   "category_ids" => array:2 [▶]
-        //   "content" => "<p>ya123ya123ya123ya123ya123ya123ya123</p>"
-        //   "status" => "1"
-        // dd($request);
 
         $photoPath = $this->storePhoto($request->thumbnail);
 

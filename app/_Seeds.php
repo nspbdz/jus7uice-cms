@@ -249,7 +249,7 @@ class _Seeds
                 DB::table('articles')->insert([
                     "id" => 1,
                     "title" => 'test article',
-                    "url" => 'article/test_article',
+                    "url" => '/article/test_article',
                     "thumbnail" => 'test.jpg', // Gantilah dengan nama file thumbnail yang sesuai
                     "author_id" => 1, // Gantilah dengan ID penulis yang sesuai
                     "created_at" =>    date("Y-m-d H:i:s"),
