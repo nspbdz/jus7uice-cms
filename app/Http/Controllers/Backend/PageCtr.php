@@ -91,7 +91,7 @@ class PageCtr extends Controller
         $page = ucfirst($request->page);
 
         // Membuat variabel URL dengan mengganti spasi dengan garis bawah (_) dan mengkonversi ke huruf kecil (lowercase)
-        $url = '//page/' . str_replace(' ', '_', strtolower(request()->input('page')));
+        $url = '/page/' . str_replace(' ', '_', strtolower(request()->input('page')));
         $slug = str_replace(' ', '_', strtolower(request()->input('page')));
         // dd($slug);
 

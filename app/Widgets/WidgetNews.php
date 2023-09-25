@@ -3,6 +3,7 @@
 namespace App\Widgets;
 
 use App\Models\Article;
+use App\Models\Category;
 use App\Models\Page;
 use App\Models\Widget;
 // use App\Models\WidgetNavbar;
@@ -46,37 +47,33 @@ class WidgetNews extends AbstractWidget
     public function run()
     {
         $path = basename(URL::current());
+        // dd($path);
         $page = Page::where('slug', '=', $path)->first();
+        // dd($page);
         // $widgetNavbarData = WidgetPage::where('page_id', $page->id)->get();
         // dd($widgetNavbarData);
         // Widget::whereIn('id', $request->deleteItems)->update(['status' => 2]);
-        $widgetNavbarData = WidgetPage::where('page_id', $page->id)->pluck('widget_id')->toArray();
+        if($page !== null)
+        {
+            $widgetNavbarData = WidgetPage::where('page_id', $page->id)->pluck('widget_id')->toArray();
+            $widgetData = Widget::whereIn('id', $widgetNavbarData)->get();
+        }   
         // dd($widgetNavbarData);
 
         // $widgetData = Widget::whereIn('id', $widgetNavbarData)->pluck('slug')->toArray();
         // dd($widgetData);
-        $widgetData = Widget::whereIn('id', $widgetNavbarData)->get();
 
         $views = [];
-        // foreach ($widgetData as $item) {
-        //     // Membuat nama tampilan yang unik dengan menggabungkan string
-        //     $viewName = 'widgets.' . $item->slug;
-        //     // dd($viewName);
-
-        //     $view = view($viewName, [
-        //         'config' => $this->config,
-        //         'data' => $item,
-        //     ]);
-        //     $views[] = $view;
-        // }
-
         $numberOfViews = 3; // Ganti dengan jumlah tampilan yang Anda inginkan
         $views = [];
-        $data= Article::take(5)->get();
+        $data= Article::take(4)->get();
+        $categories = Category::take(4)->get();
         // ambil dan kirim semua category disini lalu di compact 
         // dd($data);
         for ($i = 1; $i <= $numberOfViews; $i++) {
-            $views[] = view("widgets.widget{$i} ")->with('data', $data);;
+            $views[] = view("widgets.widget{$i} ")
+            ->with('data', $data )
+            ->with('categories', $categories);
         }
 
         return implode('', $views);

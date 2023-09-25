@@ -24,12 +24,14 @@ class ArticleCtr extends Controller
     public function article(Request $request)
     {
 
-        // Mengambil segmen ke-1 dan seterusnya (indeks dimulai dari 0)
-        $segments = $request->segments();
+        $request = Request::capture();
+        $path = '/' . $request->path();
 
-        // Menggabungkan segmen menjadi satu string
-        $urlPath = implode('/', $segments); // Ini akan menghasilkan "article/test_article"
-        $data = Article::where('url', '=', $urlPath)->first();
+        // dd($path);
+
+        $data = Article::where('url', '=', $path)->first();
+        // dd($data);
+
 
         return view('backend.article.article', ['data' => $data]);
     }
