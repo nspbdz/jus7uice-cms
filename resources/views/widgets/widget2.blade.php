@@ -1,4 +1,39 @@
 @if(isset($data))
+<style>
+    /* Gaya untuk tampilan desktop */
+    .weekly-img {
+        width: 200px; /* Sesuaikan dengan lebar wrap yang Anda inginkan */
+        height: 200px; /* Sesuaikan dengan tinggi wrap yang Anda inginkan */
+        overflow: hidden; /* Mengatasi gambar yang melebihi ukuran wrap */
+    }
+
+    .weekly-img img {
+        width: 100%; /* Gambar akan mengisi lebar wrap */
+        height: 100%; /* Gambar akan mengisi tinggi wrap */
+        object-fit: cover; /* Mengatasi gambar yang mungkin berbeda aspek rasio dengan wrap */
+    }
+
+    /* Gaya untuk tampilan mobile */
+    @media (max-width: 768px) {
+        .weekly-img {
+            width: 100%; /* Gambar mengisi lebar layar penuh */
+            height: auto; /* Tinggi gambar disesuaikan dengan aspek rasio */
+            overflow: hidden; /* Mengatasi gambar yang melebihi ukuran wrap */
+        }
+
+        .weekly-img img {
+            width: 100%; /* Gambar mengisi lebar layar penuh */
+            height: auto; /* Tinggi gambar disesuaikan dengan aspek rasio */
+            object-fit: cover; /* Mengatasi gambar yang mungkin berbeda aspek rasio dengan wrap */
+        }
+          /* Gaya khusus untuk tampilan mobile */
+          .weekly-caption {
+            padding: 10px; /* Sesuaikan dengan padding yang Anda inginkan untuk mobile */
+            font-size: 14px; /* Sesuaikan dengan ukuran font yang Anda inginkan untuk mobile */
+        }
+    }
+</style>
+
 <div class="weekly-news-area pt-50">
     <div class="container">
         <div class="weekly-wrapper">
@@ -33,33 +68,7 @@
 
                         @endforeach
 
-                        <!-- <div class="weekly-single active">
-                            <div class="weekly-img">
-                                <img src="{{asset('frontendTemplate/aznews-master/assets/img/news/weeklyNews1.jpg')}}" alt="">
-                            </div>
-                            <div class="weekly-caption">
-                                <span class="color1">Strike</span>
-                                <h4><a href="#">Welcome To The Best Model Winner Contest</a></h4>
-                            </div>
-                        </div>
-                        <div class="weekly-single">
-                            <div class="weekly-img">
-                                <img src="{{asset('frontendTemplate/aznews-master/assets/img/news/weeklyNews3.jpg')}}" alt="">
-                            </div>
-                            <div class="weekly-caption">
-                                <span class="color1">Strike</span>
-                                <h4><a href="#">Welcome To The Best Model Winner Contest</a></h4>
-                            </div>
-                        </div>
-                        <div class="weekly-single">
-                            <div class="weekly-img">
-                                <img src="{{asset('frontendTemplate/aznews-master/assets/img/news/weeklyNews1.jpg')}}" alt="">
-                            </div>
-                            <div class="weekly-caption">
-                                <span class="color1">Strike</span>
-                                <h4><a href="#">Welcome To The Best Model Winner Contest</a></h4>
-                            </div>
-                        </div> -->
+                      
                     </div>
                 </div>
             </div>

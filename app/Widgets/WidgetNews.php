@@ -46,11 +46,15 @@ class WidgetNews extends AbstractWidget
         $views = [];
         $data= Article::take(4)->get();
         // $specialData= Article::get();
-        $specialData= DB::table('articles')
+        $specialData = DB::table('articles')
         ->join('article_categories', 'articles.id', '=', 'article_categories.article_id')
         ->select('articles.*', 'article_categories.category_id')
+        ->distinct('article_categories.article_id') // Menambahkan distinct untuk memastikan data yang unik berdasarkan articles.id
         ->orderBy('articles.id', 'desc')
         ->get();
+    
+
+        // dd($specialData);
     
         $categories = Category::take(4)->get();
         // ambil dan kirim semua category disini lalu di compact 

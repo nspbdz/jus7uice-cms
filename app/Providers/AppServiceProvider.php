@@ -40,11 +40,14 @@ class AppServiceProvider extends ServiceProvider
             // Weekly News
             $canWidgetWeeklyNews = ContentHelper::Availibility('weekly_news', $desiredSegment);
             // Memeriksa apakah 'navbars' ada dan memiliki data
+            // dd($canWidgetWeeklyNews);
+
             $canWidgetWeeklyNews = ($canWidgetWeeklyNews && $canWidgetWeeklyNews->navbars) ? $canWidgetWeeklyNews->navbars : null;
             // dd($canWidgetWeeklyNews);
             // Banner
             $canWidgetBanner = ContentHelper::Availibility('banner', $desiredSegment);
-            $canWidgetBanner = ($canWidgetBanner && $canWidgetBanner->navbars) ? $canWidgetBanner->navbars : null;
+            // dd($canWidgetBanner);
+            // $canWidgetBanner = ($canWidgetBanner && $canWidgetBanner->navbars) ? $canWidgetBanner->navbars : null;
             
             // dd($canWidgetBanner);
             // dd(count($canWidgetBanner->navbars));

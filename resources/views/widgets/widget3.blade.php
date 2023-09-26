@@ -47,7 +47,8 @@
                                         $specialDataCount = count($specialData);
                                         @endphp
                                         @foreach($specialData as $index => $items)
-                                        @if($index < 4) <div class="col-lg-6 col-md-6">
+                                        @if($index < 4) 
+                                        <div class="col-lg-6 col-md-6">
                                             <a href="{{$items->url}}">
                                                 <div class="single-what-news mb-100">
                                                     <div class="what-img">
@@ -68,10 +69,14 @@
                     </div>
                     <!-- End Nav Card -->
                 </div>
+
             </div>
         </div>
+        <div class="col-lg-4">
+            
+            @widget('BannerNews')
 
-    </div>
+        </div>
     </div>
 </section>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -132,7 +137,7 @@
     }
 </script>
 
-<script>
+<!-- <script>
     // Mengakses data dari controller dan menampilkannya
     var dataFromController = @json($data);
     if (dataFromController.length > 4) {
@@ -143,7 +148,6 @@
 
     // Loop melalui dataFromController dan memasukkan data ke dalam elemen-elemen HTML
     for (var i = 0; i < dataFromController.length; i++) {
-        // console.log(dataFromController[i], 'dataFromController[i].thumbnail')
         imgElement.src = dataFromController[i].thumbnail;
         titleElement.innerHTML = dataFromController[i].title;
     }
@@ -160,7 +164,7 @@
             contentElement.html(limitedContent + '...'); // Menambahkan elipsis jika terpotong
         }
     });
-</script>
+</script> -->
 
 <!-- Whats New End -->
 

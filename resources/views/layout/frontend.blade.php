@@ -97,18 +97,6 @@
 
             <!-- Main Content -->
             <div class="main-content">
-
-            @if( $canWidgetBanner == null  || $canWidgetBanner->isEmpty() )
-            <!-- <p>Tidak ada data yang ditemukan.</p> -->
-            <div class="row">
-                <div class="col-md-12">
-                    @yield('content')
-                </div>
-               
-            </div>
-
-            @else
-
             <div class="row">
                 <div class="col-md-8">
                     @yield('content')
@@ -121,7 +109,8 @@
 
                 </div>
             </div>
-            @endif
+
+          
             </div>
 
 
