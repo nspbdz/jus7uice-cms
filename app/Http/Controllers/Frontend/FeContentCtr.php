@@ -16,13 +16,8 @@ class FeContentCtr extends Controller
     public function pages(Request $request)
     {
         $path = basename(URL::current());
-        // dd($path); 
-
-        // $path = Request::path();
-        // dd($path);
         
         $data = Page::where('slug', '=', $path)->first();
-        // dd($data);
         return view('frontend.pages', compact('data'));
     }
 

@@ -15,8 +15,8 @@ class _Seeds
         $this->_insert_table_admin();
         $this->_insert_table_admin_group();
         $this->_insert_table_admin_article();
-        $this->_insert_table_admin_navbar();
-        $this->_insert_table_admin_content();
+        // $this->_insert_table_admin_navbar();
+        // $this->_insert_table_admin_content();
         $this->_insert_table_admin_widget();
         $this->_insert_table_admin_article_widget();
         $this->_insert_table_admin_widget_page();
@@ -192,53 +192,53 @@ class _Seeds
 
     /* Admin navbar */
 
-    function _insert_table_admin_navbar()
-    {
-        if (Schema::hasTable('navbars')) {
-            if (DB::table('navbars')->count() <= 0) {
+    // function _insert_table_admin_navbar()
+    // {
+    //     if (Schema::hasTable('navbars')) {
+    //         if (DB::table('navbars')->count() <= 0) {
 
-                $data = ['Home', 'About', 'Services', 'Portfolio', 'Team', 'Contact'];
-                $dataSlug = ['', 'about', 'services', 'portfolio', 'team', 'contact'];
-                $dataUrl = ['/', '/about', '/services', '/portfolio', '/team', '/contact'];
-                // dd($data[0]);
-                for ($i = 0; $i < 6; $i++) {
-                    DB::table('navbars')->insert([
-                        "id" => $i + 1,
-                        "title" => $data[$i],
-                        "slug" => $dataSlug[$i],
-                        "url" => $dataUrl[$i],
-                        "position" => $i,
-                        "created_at" => now(),
-                        "updated_at" => now(),
-                        "status" => 1,
-                    ]);
-                }
-            }
-        }
-    }
+    //             $data = ['Home', 'About', 'Services', 'Portfolio', 'Team', 'Contact'];
+    //             $dataSlug = ['', 'about', 'services', 'portfolio', 'team', 'contact'];
+    //             $dataUrl = ['/', '/about', '/services', '/portfolio', '/team', '/contact'];
+    //             // dd($data[0]);
+    //             for ($i = 0; $i < 6; $i++) {
+    //                 DB::table('navbars')->insert([
+    //                     "id" => $i + 1,
+    //                     "title" => $data[$i],
+    //                     "slug" => $dataSlug[$i],
+    //                     "url" => $dataUrl[$i],
+    //                     "position" => $i,
+    //                     "created_at" => now(),
+    //                     "updated_at" => now(),
+    //                     "status" => 1,
+    //                 ]);
+    //             }
+    //         }
+    //     }
+    // }
 
     /* Admin content */
 
-    function _insert_table_admin_content()
-    {
-        if (Schema::hasTable('contents')) {
-            if (DB::table('contents')->count() <= 0) {
-                $dataSlug = ['', 'about', 'services', 'portfolio', 'team', 'contact'];
-                for ($i = 0; $i < 6; $i++) {
-                    DB::table('contents')->insert([
-                        "id" => $i + 1,
-                        "title" => 'title' . $i,
-                        "content" => 'content' . $i,
-                        "slug" => $dataSlug[$i],
-                        "author_id" => 1, // Gantilah dengan ID penulis yang sesuai
-                        "created_at" => now(),
-                        "updated_at" => now(),
-                        "status" => 1,
-                    ]);
-                }
-            }
-        }
-    }
+    // function _insert_table_admin_content()
+    // {
+    //     if (Schema::hasTable('contents')) {
+    //         if (DB::table('contents')->count() <= 0) {
+    //             $dataSlug = ['', 'about', 'services', 'portfolio', 'team', 'contact'];
+    //             for ($i = 0; $i < 6; $i++) {
+    //                 DB::table('contents')->insert([
+    //                     "id" => $i + 1,
+    //                     "title" => 'title' . $i,
+    //                     "content" => 'content' . $i,
+    //                     "slug" => $dataSlug[$i],
+    //                     "author_id" => 1, // Gantilah dengan ID penulis yang sesuai
+    //                     "created_at" => now(),
+    //                     "updated_at" => now(),
+    //                     "status" => 1,
+    //                 ]);
+    //             }
+    //         }
+    //     }
+    // }
 
     /* Admin article */
 

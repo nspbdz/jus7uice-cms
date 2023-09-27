@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Navbar;
 use App\Models\Page;
 use App\Models\Widget;
 use App\Models\WidgetPage;
@@ -65,7 +64,6 @@ class WidgetCtr extends Controller
         $widgetPageIds = WidgetPage::select('widget_id')->groupBy('widget_id')->get()->pluck('widget_id');
         $widget = Widget::whereNotIn('id', $widgetPageIds)->get();
 
-        // $navbars = Navbar::get();
         $pages = Page::all();
 
         return view('backend.widget.create', ['widget' => $widget, 'pages' => $pages]);

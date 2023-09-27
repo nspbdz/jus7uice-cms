@@ -315,32 +315,19 @@ $path = str_replace(BACKEND_PATH, '', Request()->path());
                                     <span class="nav-link-title"> Article </span>
                                 </a>
                             </li>
-                            <!-- <li class="nav-item">
-                                <a class="nav-link" href="{{url(BACKEND_PATH.'navbar')}}" target="_tester">
-                                    <span class="nav-link-title"> Navbar </span>
-                                </a>
-                            </li> -->
 
 							<li class="nav-item">
                                 <a class="nav-link" href="{{url(BACKEND_PATH.'widget')}}" target="_tester">
                                     <span class="nav-link-title"> Widget </span>
                                 </a>
                             </li>
-							<li class="nav-item">
-                                <a class="nav-link" href="{{url(BACKEND_PATH.'content')}}" target="_tester">
-                                    <span class="nav-link-title"> Content </span>
-                                </a>
-                            </li>
+							
 
 							<li class="nav-item">
                                 <a class="nav-link" href="{{url(BACKEND_PATH.'page')}}" target="_tester">
                                     <span class="nav-link-title"> Page </span>
                                 </a>
                             </li>
-
-
-                            <!-- <a class="dropdown-item" href="{{url(BACKEND_PATH.'administrator.group')}}" >Adm Group</a> -->
-
 
 
                         </ul>

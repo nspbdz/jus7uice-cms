@@ -3,8 +3,6 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreNavbarRequest;
-use App\Models\Article;
 use Illuminate\Http\Request;
 use App\Models\Navbar;
 use Datatables;
@@ -31,26 +29,7 @@ class NavbarCtr extends Controller
         // return view('backend.navbar.index');
     }
 
-    // function getData(Request $request)
-    // {
-    //     $orderColumn = $request['order'][0]['column'] ?? null;
-    //     $orderCol = $request['columns'][(int)$orderColumn]['name'] ?? null;
-    //     $orderDir = $request['order'][0]['dir'] ?? null;
-    //     $search = $request['search']['value'] ?? null;
-    //     $limit = request('length');
-    //     $start = request('start');
-    //     $navbars = new Navbar();
-    //     $recordsFiltered = $navbars->countCampaign($search);
-    //     $data = $navbars->datatables($limit, $start, $search, $orderCol, $orderDir);
-    //     $recordsTotal = $navbars->countCampaign();
-
-    //     return response()->json([
-    //         'draw' => intval(request('draw')),
-    //         'recordsTotal' => intval($recordsTotal),
-    //         'recordsFiltered' => $recordsFiltered,
-    //         'data' => $data,
-    //     ]);
-    // }
+    
 
     function getData(Request $request)
     {
@@ -96,7 +75,7 @@ class NavbarCtr extends Controller
         return view('backend.navbar.create');
     }
 
-    public function store(StoreNavbarRequest $request)
+    public function store(Request $request)
     {
         // DD($request->thumbnail);
 
@@ -122,7 +101,7 @@ class NavbarCtr extends Controller
         return view('backend.navbar.edit', compact('data'));
     }
 
-    public function update(StoreNavbarRequest $request)
+    public function update(Request $request)
     {
 
         $article = Navbar::findOrFail($request->id);

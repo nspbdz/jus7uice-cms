@@ -3,11 +3,9 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreNavbarRequest;
 use App\Http\Requests\StorePageRequest;
 use App\Models\Article;
 use Illuminate\Http\Request;
-use App\Models\Navbar;
 use App\Models\Page;
 use Datatables;
 use Validator;
