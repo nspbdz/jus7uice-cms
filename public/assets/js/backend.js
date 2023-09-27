@@ -35,6 +35,7 @@ $(document).ready(function() {
 		"iCookieDuration": 60*10, // in second // Aku set 10 menit saja
 		"scrollX": true,
 		"scrollY": false,
+		"bDestroy":true,
 		// "colReorder": true,
 		"fnDrawCallback": function() {
             
