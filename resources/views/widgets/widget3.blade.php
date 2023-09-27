@@ -137,34 +137,6 @@
     }
 </script>
 
-<!-- <script>
-    // Mengakses data dari controller dan menampilkannya
-    var dataFromController = @json($data);
-    if (dataFromController.length > 4) {
-        dataFromController = dataFromController.slice(0, 4);
-    }
-    var imgElement = document.getElementById('img-data');
-    var titleElement = document.getElementById('title-data');
-
-    // Loop melalui dataFromController dan memasukkan data ke dalam elemen-elemen HTML
-    for (var i = 0; i < dataFromController.length; i++) {
-        imgElement.src = dataFromController[i].thumbnail;
-        titleElement.innerHTML = dataFromController[i].title;
-    }
-
-    // str limit
-    $(document).ready(function() {
-        var contentElement = $('#content');
-        console.log(contentElement, 'contentElement')
-        var content = contentElement.html();
-        var words = content.split(' ');
-
-        if (words.length > 80) {
-            var limitedContent = words.slice(0, 80).join(' ');
-            contentElement.html(limitedContent + '...'); // Menambahkan elipsis jika terpotong
-        }
-    });
-</script> -->
 
 <!-- Whats New End -->
 

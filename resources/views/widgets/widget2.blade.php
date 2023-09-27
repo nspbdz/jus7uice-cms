@@ -41,7 +41,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-tittle mb-30">
-                        <h3>Weekly Top News</h3>
+                        <h3>Montly Top News</h3>
                     </div>
                 </div>
             </div>
