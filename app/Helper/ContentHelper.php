@@ -6,7 +6,7 @@ namespace App\Helper;
 use App\Models\Content;
 use App\Models\Widget;
 use Illuminate\Support\Arr;
-
+use DB;
 class ContentHelper
 {
     public static function data()
@@ -14,14 +14,16 @@ class ContentHelper
         return "aaaa";
     }
 
-    public static function Availibility($widgetSlug, $desiredSegment)
+    public static function Availibility($widgetSlug, $path)
     {
-        // dd($desiredSegment);
-        // dd($widgetSlug);
-        $dataWidget = Widget::with(['page' => function ($query) use ($desiredSegment) {
-            $query->where('slug', '=', $desiredSegment);
-        }])->where('slug', '=', $widgetSlug)->where('status', '=', 1)->first();
+        $widgetPages = DB::table('widget_pages')
+        ->join('widgets', 'widget_pages.widget_id', '=', 'widgets.id')
+        ->join('pages', 'widget_pages.page_id', '=', 'pages.id')
+        ->select('widgets.*', 'pages.*')
+        ->where('pages.slug', '=', $path)
+        ->where('widgets.slug', '=', $widgetSlug)
+        ->first();
 
-        return $dataWidget;
+        return $widgetPages;
     }
 }

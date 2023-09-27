@@ -28,7 +28,7 @@ class Widget extends Model
 
     public function page()
     {
-        return $this->belongsToMany(Navbar::class, 'widget_pages', 'widget_id', 'page_id');
+        return $this->belongsToMany(Page::class, 'widget_pages', 'widget_id', 'page_id');
     }
 
 

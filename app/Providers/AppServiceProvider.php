@@ -28,30 +28,10 @@ class AppServiceProvider extends ServiceProvider
     {
         View::composer('layout.frontend', function ($view) {
 
-            // Mengambil URL saat ini menggunakan URL::current()
-            $currentUrl = URL::current();
+            $path = basename(URL::current());
 
-            // Membagi URL menjadi segmen-segmen
-            $segments = explode('/', parse_url($currentUrl, PHP_URL_PATH));
-
-            // Mengambil segmen yang sesuai (misalnya, segmen ke-2)
-            $desiredSegment = $segments[2] ?? ''; // Ini akan mengambil segmen ke-2 atau string kosong jika tidak ada
-
-            // Weekly News
-            $canWidgetWeeklyNews = ContentHelper::Availibility('weekly_news', $desiredSegment);
-            // Memeriksa apakah 'navbars' ada dan memiliki data
-            // dd($canWidgetWeeklyNews);
-
-            $canWidgetWeeklyNews = ($canWidgetWeeklyNews && $canWidgetWeeklyNews->navbars) ? $canWidgetWeeklyNews->navbars : null;
-            // dd($canWidgetWeeklyNews);
-            // Banner
-            $canWidgetBanner = ContentHelper::Availibility('banner', $desiredSegment);
-            // dd($canWidgetBanner);
-            // $canWidgetBanner = ($canWidgetBanner && $canWidgetBanner->navbars) ? $canWidgetBanner->navbars : null;
-            
-            // dd($canWidgetBanner);
-            // dd(count($canWidgetBanner->navbars));
-            // dd(count($canWidgetWeeklyNews->navbars));
+            $canWidgetBanner = ContentHelper::Availibility('banner', $path);
+            $canWidgetWeeklyNews = ContentHelper::Availibility('weekly_news', $path);
 
             $widget = Widget::get();
             $data = Page::orderBy('position', 'asc')->get();
@@ -59,7 +39,6 @@ class AppServiceProvider extends ServiceProvider
                 'data' => $data,
                 'canWidgetWeeklyNews' => $canWidgetWeeklyNews,
                 'canWidgetBanner' => $canWidgetBanner,
-                // 'canWidgetBanner' => count($canWidgetBanner->navbars),
                 'widget' => $widget
 
             ]);
