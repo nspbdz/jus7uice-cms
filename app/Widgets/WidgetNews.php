@@ -55,6 +55,7 @@ class WidgetNews extends AbstractWidget
     
 
         // dd($specialData);
+        
     
         $categories = Category::take(4)->get();
         // ambil dan kirim semua category disini lalu di compact 

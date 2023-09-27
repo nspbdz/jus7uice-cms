@@ -30,9 +30,9 @@ class AppServiceProvider extends ServiceProvider
 
             $path = basename(URL::current());
 
-            $canWidgetBanner = ContentHelper::Availibility('banner', $path);
-            $canWidgetWeeklyNews = ContentHelper::Availibility('weekly_news', $path);
-
+            $canWidgetBanner = ContentHelper::AvailibilityBanner($path);
+            $canWidgetWeeklyNews = ContentHelper::AvailibilityWidget($path);
+            // dd($canWidgetWeeklyNews);
             $widget = Widget::get();
             $data = Page::orderBy('position', 'asc')->get();
             $view->with([

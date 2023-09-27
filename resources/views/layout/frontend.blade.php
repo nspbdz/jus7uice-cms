@@ -134,12 +134,12 @@
             @if( $canWidgetWeeklyNews == null )
             @else
             <div>
-                @widget('WeeklyNews')
+            @widget('WidgetNews')
+
             </div>
             @endif
 
             
-            @widget('WidgetNews')
 
 
             <footer id="footer">
