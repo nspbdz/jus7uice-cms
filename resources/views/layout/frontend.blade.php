@@ -70,16 +70,14 @@
             ?>
             <nav id="navbar" class="navbar">
                 <ul>
-                    <!-- @foreach($data as $items )
-                    <li><a class="nav-link scrollto active" href="${items->url}">{{$items->title}}</a></li>
-                    @endforeach -->
                     @foreach($data as $item)
                     <li>
-                        <a class="nav-link scrollto {{ Request::is( $item->url ) ? 'active' : '' }}" href="{{ $item->url }}">
+                        <a class="nav-link scrollto {{ request()->is(trim($item->url, '/')) ? 'active' : '' }}" href="{{ $item->url }}">
                             {{ $item->page }}
                         </a>
                     </li>
                     @endforeach
+
 
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
@@ -98,30 +96,30 @@
             <!-- Main Content -->
             <div class="main-content">
 
-            @if( $canWidgetBanner == null  )
-            <!-- <p>Tidak ada data yang ditemukan.</p> -->
-            <div class="row">
-                <div class="col-md-12">
-                    @yield('content')
-                </div>
-               
-            </div>
-
-            @else
-
-            <div class="row">
-                <div class="col-md-8">
-                    @yield('content')
+                @if( $canWidgetBanner == null )
+                <!-- <p>Tidak ada data yang ditemukan.</p> -->
+                <div class="row">
+                    <div class="col-md-12">
+                        @yield('content')
+                    </div>
 
                 </div>
-                <div class="col-md-4">
-                    <br><br>
-                    <br><br>
-                    @widget('BannerNews')
 
+                @else
+
+                <div class="row">
+                    <div class="col-md-8">
+                        @yield('content')
+
+                    </div>
+                    <div class="col-md-4">
+                        <br><br>
+                        <br><br>
+                        @widget('BannerNews')
+
+                    </div>
                 </div>
-            </div>
-            @endif
+                @endif
             </div>
 
 
@@ -134,11 +132,11 @@
             @if( $canWidgetWeeklyNews == null )
             @else
             <div>
-            @widget('WidgetNews')
+                @widget('WidgetNews')
             </div>
             @endif
 
-            
+
 
 
             <footer id="footer">
